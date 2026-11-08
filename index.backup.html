@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JamesCR — Dịch Vụ Etsy & Săn Mã Giảm Giá Chuyên Nghiệp</title>
+  <meta name="description" content="JamesCR cung cấp dịch vụ mở shop Etsy, tối ưu SEO, quản lý shop và nhóm săn mã giảm giá độc quyền. Đồng hành cùng 500+ sellers thành công.">
+  <meta name="keywords" content="etsy, dịch vụ etsy, mở shop etsy, seo etsy, mã giảm giá, coupon, jamescr">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0A0A0A;
+      --bg-card: #111111;
+      --bg-card-hover: #1A1A1A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent-blue: #3B82F6;
+      --accent-purple: #8B5CF6;
+      --accent-cyan: #06B6D4;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(255, 255, 255, 0.12);
+      --glow-blue: rgba(59, 130, 246, 0.15);
+      --glow-purple: rgba(139, 92, 246, 0.10);
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (min-width: 768px) {
+      .container { padding: 0 32px; }
+    }
+
+    /* ========== SCROLL ANIMATIONS ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ========== GLOW EFFECTS ========== */
+    .glow-effect {
+      box-shadow: 0 0 80px var(--glow-blue), 0 0 160px var(--glow-purple);
+    }
+    .glow-effect-strong {
+      box-shadow: 0 0 100px rgba(59, 130, 246, 0.25), 0 0 200px rgba(139, 92, 246, 0.15);
+    }
+
+    /* ========== GLASS CARD ========== */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      transition: all 0.3s ease-out;
+    }
+    .glass-card:hover {
+      border-color: var(--border-hover);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
+    }
+    @media (min-width: 768px) {
+      .glass-card { border-radius: 24px; }
+    }
+
+    /* ========== GRADIENT TEXT ========== */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gradient-text-blue {
+      background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 50%, #06B6D4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease-out;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: #2563EB;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--border-hover);
+    }
+    .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+    .btn-large {
+      padding: 16px 36px;
+      font-size: 16px;
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 16px 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border-subtle);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .nav-links {
+      display: none;
+      gap: 32px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-phone {
+      display: none;
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .nav-cta {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .nav-links { display: flex; }
+      .nav-cta { display: inline-flex; }
+      .nav-phone { display: block; }
+      .hamburger { display: none !important; }
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: #fff; }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      max-width: 900px;
+      margin: 0 auto 24px;
+    }
+    .hero p {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-visual {
+      margin-top: 80px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .hero-card {
+      width: 100%;
+      max-width: 740px;
+      height: 340px;
+      border-radius: 24px;
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      background: linear-gradient(180deg, rgba(59,130,246,0.06) 0%, rgba(0,0,0,0.9) 100%);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 120px rgba(59, 130, 246, 0.2), 0 0 240px rgba(139, 92, 246, 0.08), 0 4px 60px rgba(0,0,0,0.5);
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.2) 0%, transparent 60%);
+    }
+    .hero-card::after {
+      content: '';
+      position: absolute;
+      top: -1px; left: 20%; right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59,130,246,0.6), rgba(139,92,246,0.4), transparent);
+    }
+    .hero-card-inner {
+      position: absolute;
+      inset: 1px;
+      border-radius: 23px;
+      background: linear-gradient(180deg, #0c1a30 0%, #060c18 60%, #030608 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .hero-card-glow {
+      width: 280px;
+      height: 160px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1e40af, #3b82f6, #06b6d4);
+      filter: blur(60px);
+      opacity: 0.5;
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glowPulse 4s ease-in-out infinite alternate;
+    }
+    @keyframes glowPulse {
+      0% { opacity: 0.35; filter: blur(60px); }
+      100% { opacity: 0.55; filter: blur(50px); }
+    }
+    .hero-card-scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(59, 130, 246, 0.02) 2px,
+        rgba(59, 130, 246, 0.02) 4px
+      );
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-card-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .hero-card-label {
+      position: relative;
+      z-index: 2;
+      font-size: 14px;
+      color: var(--text-secondary);
+      padding: 8px 20px;
+      border: 1px solid rgba(59,130,246,0.25);
+      border-radius: 8px;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+    }
+    @media (min-width: 768px) {
+      .hero { padding: 180px 0 120px; }
+      .hero-card { height: 400px; }
+    }
+
+    /* Hero tab bar (mimicking the reference) */
+    .hero-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+    .hero-tab {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 8px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s;
+      cursor: default;
+      font-weight: 500;
+    }
+    .hero-tab.active {
+      color: #fff;
+      border-bottom-color: #fff;
+    }
+
+    /* ========== SOCIAL PROOF ========== */
+    .social-proof {
+      padding: 60px 0;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .proof-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .proof-item .proof-number {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .proof-item .proof-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ========== SECTION COMMON ========== */
+    .section {
+      padding: 96px 0;
+    }
+    @media (min-width: 768px) {
+      .section { padding: 128px 0; }
+    }
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-blue);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .section-desc {
+      font-size: clamp(15px, 1.5vw, 18px);
+      color: var(--text-secondary);
+      max-width: 600px;
+      line-height: 1.6;
+    }
+    .section-header {
+      margin-bottom: 64px;
+    }
+    .section-header-center {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+    .section-header-center .section-desc {
+      margin: 0 auto;
+    }
+
+    /* ========== SERVICES GRID ========== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    }
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .service-card {
+      padding: 32px;
+    }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 22px;
+    }
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .service-link {
+      font-size: 14px;
+      color: var(--accent-blue);
+      font-weight: 500;
+      transition: gap 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .service-link:hover { gap: 8px; }
+
+    /* ========== FEATURE HIGHLIGHT ========== */
+    .feature-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 96px;
+    }
+    .feature-row:last-child { margin-bottom: 0; }
+    @media (min-width: 768px) {
+      .feature-row { grid-template-columns: 1fr 1fr; gap: 64px; }
+      .feature-row.reverse .feature-text { order: 2; }
+      .feature-row.reverse .feature-visual { order: 1; }
+    }
+    .feature-text h3 {
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .feature-text p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .feature-list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    .feature-list-item .check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(59, 130, 246, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: var(--accent-blue);
+    }
+    .feature-visual-box {
+      border-radius: 20px;
+      border: 1px solid var(--border-subtle);
+      background: #0a0a0a;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+    .feature-visual-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.2;
+    }
+    .feature-glow-1 { background: var(--accent-blue); top: 20%; left: 20%; }
+    .feature-glow-2 { background: var(--accent-purple); bottom: 20%; right: 20%; }
+    .feature-placeholder {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .feature-placeholder-icon {
+      font-size: 48px;
+      opacity: 0.6;
+    }
+    .feature-placeholder-text {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ========== 3D DECORATIVE ELEMENT ========== */
+    .decoration-section {
+      padding: 80px 0;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    .decoration-3d {
+      display: flex;
+      gap: 20px;
+      perspective: 800px;
+    }
+    .decoration-block {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      transform: rotateY(-20deg) rotateX(10deg);
+      transition: transform 0.5s ease;
+    }
+    .decoration-block:nth-child(1) {
+      background: linear-gradient(135deg, #1e3a5f, #1e40af);
+      box-shadow: 0 20px 60px rgba(30, 64, 175, 0.3);
+    }
+    .decoration-block:nth-child(2) {
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      box-shadow: 0 20px 60px rgba(59, 130, 246, 0.3);
+      transform: rotateY(-10deg) rotateX(5deg) translateY(-20px);
+    }
+    @media (min-width: 768px) {
+      .decoration-block { width: 120px; height: 120px; }
+    }
+
+    /* ========== COUPON GROUPS ========== */
+    .coupon-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .coupon-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .coupon-card {
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .coupon-card.featured {
+      border-color: rgba(59, 130, 246, 0.3);
+      background: rgba(59, 130, 246, 0.03);
+    }
+    .coupon-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+    }
+    .coupon-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .coupon-badge.free {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+    .coupon-badge.vip {
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--accent-blue);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+    .coupon-badge.premium {
+      background: rgba(139, 92, 246, 0.1);
+      color: var(--accent-purple);
+      border: 1px solid rgba(139, 92, 246, 0.2);
+    }
+    .coupon-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .coupon-card .members {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .coupon-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .coupon-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .coupon-feature .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      flex-shrink: 0;
+    }
+
+    /* ========== STATS ========== */
+    .stats-section {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat-item .stat-number {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-item .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ========== TESTIMONIALS ========== */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .testimonial-card {
+      padding: 28px;
+    }
+    .testimonial-stars {
+      color: #FBBF24;
+      font-size: 14px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ========== FAQ ========== */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .faq-question {
+      width: 100%;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--text-secondary); }
+    .faq-icon {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+    .faq-answer p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ========== CTA BOTTOM ========== */
+    .cta-section {
+      padding: 128px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.05) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-section p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-visual {
+      margin-top: 80px;
+      position: relative;
+      z-index: 1;
+    }
+    .cta-bar {
+      max-width: 600px;
+      margin: 0 auto;
+      height: 56px;
+      border-radius: 12px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      gap: 12px;
+    }
+    .cta-bar-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+    .cta-bar-text {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    .footer-brand h3 {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .footer-brand p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 300px;
+    }
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-col a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+    .footer-copyright {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .footer-socials {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .footer-socials a:hover {
+      border-color: var(--border-hover);
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* ========== DOT PATTERN ========== */
+    .dot-pattern {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* ========== PLATFORM LOGOS BAR ========== */
+    .platforms-bar {
+      padding: 80px 0;
+      text-align: center;
+    }
+    .platforms-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+    .platforms-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .platform-item {
+      font-size: 18px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: -0.01em;
+      transition: color 0.3s;
+    }
+    .platform-item:hover { color: rgba(255,255,255,0.4); }
+    @media (min-width: 768px) {
+      .platforms-row { gap: 56px; }
+      .platform-item { font-size: 22px; }
+    }
+
+    /* ========== NOT JUST ETSY GRID ========== */
+    .platform-features-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 768px) {
+      .platform-features-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .platform-features-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .platform-feature-card {
+      padding: 24px;
+      text-align: center;
+    }
+    .platform-feature-card .pf-value {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .platform-feature-card .pf-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* ========== COMMUNITY ========== */
+    .community-section {
+      background: #0a0a0a;
+      padding: 96px 0;
+    }
+    @media (min-width: 768px) {
+      .community-section { padding: 128px 0; }
+    }
+
+    /* ========== RESPONSIVE HELPERS ========== */
+    @media (max-width: 767px) {
+      .hide-mobile { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      .hide-desktop { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== NAVBAR ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">JamesCR</a>
+      <div class="nav-links">
+        <a href="#services">Dịch Vụ</a>
+        <a href="#coupons">Nhóm Giảm Giá</a>
+        <a href="#about">Về Chúng Tôi</a>
+        <a href="#contact">Liên Hệ</a>
+      </div>
+      <div class="nav-right">
+        <a href="tel:0877569869" class="nav-phone">0877.569.869</a>
+        <a href="https://t.me/jamescr123" target="_blank" class="btn btn-primary nav-cta" style="padding: 10px 24px; font-size: 14px;">Liên Hệ Ngay</a>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">Dịch Vụ</a>
+    <a href="#coupons" onclick="closeMenu()">Nhóm Giảm Giá</a>
+    <a href="#about" onclick="closeMenu()">Về Chúng Tôi</a>
+    <a href="#contact" onclick="closeMenu()">Liên Hệ</a>
+    <a href="tel:0877569869" style="color: var(--text-muted); font-size: 16px;">📞 0877.569.869</a>
+    <a href="https://t.me/jamescr123" target="_blank" class="btn btn-primary" onclick="closeMenu()">Liên Hệ Telegram</a>
+  </div>
+
+  <!-- ======== HERO ======== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="reveal">
+        <div class="hero-badge">✨ Trusted by 500+ sellers trên Etsy</div>
+      </div>
+      <h1 class="reveal reveal-delay-1">
+        Nâng tầm kinh doanh Etsy<br>
+        <span class="gradient-text-blue">với dịch vụ chuyên nghiệp</span>
+      </h1>
+      <p class="reveal reveal-delay-2">
+        JamesCR cung cấp trọn gói dịch vụ Etsy — từ mở shop, tối ưu SEO đến quản lý vận hành. Kèm theo hội săn mã giảm giá sàn TMĐT độc quyền.
+      </p>
+      <div class="hero-buttons reveal reveal-delay-3">
+        <a href="#services" class="btn btn-primary btn-large">Khám Phá Dịch Vụ</a>
+        <a href="#coupons" class="btn btn-outline btn-large">Tham Gia Nhóm →</a>
+      </div>
+
+      <!-- Tabs -->
+      <div class="hero-tabs reveal reveal-delay-4">
+        <span class="hero-tab active">Mở Shop</span>
+        <span class="hero-tab">SEO Etsy</span>
+        <span class="hero-tab">Mockup</span>
+        <span class="hero-tab">Quản Lý</span>
+        <span class="hero-tab">Mã Giảm Giá</span>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="hero-visual reveal reveal-delay-5">
+        <div class="hero-card glow-effect">
+          <div class="hero-card-inner">
+            <div class="hero-card-glow"></div>
+            <div class="hero-card-label">JamesCR Dashboard</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SOCIAL PROOF ======== -->
+  <section class="social-proof reveal">
+    <div class="container">
+      <div class="proof-grid">
+        <div class="proof-item">
+          <div class="proof-number gradient-text-blue" data-count="500" data-suffix="+">0</div>
+          <div class="proof-label">Shops đã hỗ trợ</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-number gradient-text-blue" data-count="10000" data-suffix="+">0</div>
+          <div class="proof-label">Mã giảm giá chia sẻ</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-number gradient-text-blue">4.9/5</div>
+          <div class="proof-label">Đánh giá trung bình</div>
+        </div>
+        <div class="proof-item">
+          <div class="proof-number gradient-text-blue" data-count="3" data-suffix="+">0</div>
+          <div class="proof-label">Năm kinh nghiệm</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SERVICES ======== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Dịch vụ</div>
+        <h2 class="section-title">Dịch Vụ Etsy<br>Toàn Diện</h2>
+        <p class="section-desc">Từ A đến Z, chúng tôi đồng hành cùng bạn trên mọi bước đường xây dựng và phát triển shop Etsy thành công.</p>
+      </div>
+      <div class="services-grid">
+        <div class="glass-card service-card reveal">
+          <div class="service-icon">🏪</div>
+          <h3>Mở Shop Etsy</h3>
+          <p>Hỗ trợ đăng ký, cấu hình shop hoàn chỉnh. Tối ưu profile, banner, policies để shop chuyên nghiệp ngay từ ngày đầu.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="glass-card service-card reveal reveal-delay-1">
+          <div class="service-icon">🔍</div>
+          <h3>Tối Ưu Listing & SEO</h3>
+          <p>Nghiên cứu keyword, tối ưu title, tags, description. Giúp sản phẩm của bạn xuất hiện trên trang đầu tìm kiếm Etsy.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="glass-card service-card reveal reveal-delay-2">
+          <div class="service-icon">🎨</div>
+          <h3>Thiết Kế Mockup & Branding</h3>
+          <p>Tạo mockup sản phẩm chuyên nghiệp, thiết kế logo, banner và hình ảnh thương hiệu nổi bật trên marketplace.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="glass-card service-card reveal reveal-delay-3">
+          <div class="service-icon">⚙️</div>
+          <h3>Quản Lý & Vận Hành Shop</h3>
+          <p>Quản lý đơn hàng, chăm sóc khách hàng, xử lý review. Đảm bảo shop hoạt động trơn tru và tăng trưởng bền vững.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="glass-card service-card reveal reveal-delay-4">
+          <div class="service-icon">📊</div>
+          <h3>Tư Vấn Chiến Lược Etsy</h3>
+          <p>Phân tích data, đề xuất chiến lược giá, sản phẩm và marketing. Giúp shop tăng doanh thu một cách chiến lược.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="glass-card service-card reveal reveal-delay-5">
+          <div class="service-icon">🛡️</div>
+          <h3>Xử Lý Vi Phạm & Kháng Cáo</h3>
+          <p>Hỗ trợ xử lý khi shop bị vi phạm chính sách, bị suspend. Tư vấn kháng cáo và khôi phục shop nhanh chóng.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FEATURE HIGHLIGHTS ======== -->
+  <section class="section dot-pattern" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-label">Tại sao chọn chúng tôi</div>
+        <h2 class="section-title">Xây dựng shop Etsy<br>cùng chuyên gia</h2>
+      </div>
+
+      <!-- Feature 1 -->
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <h3>Dịch vụ SEO Etsy<br>hàng đầu Việt Nam</h3>
+          <p>Đội ngũ chuyên gia giàu kinh nghiệm trong nghiên cứu keyword và tối ưu listing. Sản phẩm của bạn sẽ được đẩy lên top tìm kiếm trên Etsy một cách tự nhiên và bền vững.</p>
+          <div class="feature-list">
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Nghiên cứu keyword chuyên sâu</span>
+            </div>
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Tối ưu title, tags, description</span>
+            </div>
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Phân tích đối thủ cạnh tranh</span>
+            </div>
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Báo cáo ranking định kỳ</span>
+            </div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-visual-box">
+            <div class="feature-visual-inner">
+              <div class="feature-glow feature-glow-1"></div>
+              <div class="feature-glow feature-glow-2"></div>
+              <div class="feature-placeholder">
+                <div class="feature-placeholder-icon">📈</div>
+                <div class="feature-placeholder-text">SEO Analytics Dashboard</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-row reverse reveal">
+        <div class="feature-text">
+          <h3>Thiết kế mockup<br>chuyên nghiệp</h3>
+          <p>Hình ảnh sản phẩm đẹp, chuyên nghiệp giúp tăng tỉ lệ click và chuyển đổi. Chúng tôi cung cấp mockup chất lượng cao, phù hợp với từng ngành hàng trên Etsy.</p>
+          <div class="feature-list">
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Mockup chất lượng cao cho mọi ngành</span>
+            </div>
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Branding kit đồng bộ</span>
+            </div>
+            <div class="feature-list-item">
+              <span class="check">✓</span>
+              <span>Hỗ trợ A/B testing hình ảnh</span>
+            </div>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-visual-box">
+            <div class="feature-visual-inner">
+              <div class="feature-glow feature-glow-1" style="background: var(--accent-purple);"></div>
+              <div class="feature-glow feature-glow-2" style="background: var(--accent-cyan);"></div>
+              <div class="feature-placeholder">
+                <div class="feature-placeholder-icon">🎨</div>
+                <div class="feature-placeholder-text">Design Studio</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== 3D DECORATION ======== -->
+  <div class="decoration-section reveal">
+    <div class="decoration-3d">
+      <div class="decoration-block"></div>
+      <div class="decoration-block"></div>
+    </div>
+  </div>
+
+  <!-- ======== PLATFORMS BAR ======== -->
+  <section class="platforms-bar reveal" id="platforms">
+    <div class="container">
+      <div class="section-header-center">
+        <div class="section-label">Không chỉ Etsy</div>
+        <h2 class="section-title">Hỗ trợ đa nền tảng</h2>
+      </div>
+      <div class="platforms-row">
+        <span class="platform-item">Etsy</span>
+        <span class="platform-item">Shopee</span>
+        <span class="platform-item">Lazada</span>
+        <span class="platform-item">TikTok Shop</span>
+        <span class="platform-item">Tiki</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== PLATFORM FEATURE CARDS ======== -->
+  <section class="section">
+    <div class="container">
+      <div class="platform-features-grid">
+        <div class="glass-card platform-feature-card reveal">
+          <div class="pf-value gradient-text-blue">99.9%</div>
+          <div class="pf-label">Tỉ lệ hài lòng</div>
+        </div>
+        <div class="glass-card platform-feature-card reveal reveal-delay-1">
+          <div class="pf-value gradient-text-blue">24/7</div>
+          <div class="pf-label">Hỗ trợ liên tục</div>
+        </div>
+        <div class="glass-card platform-feature-card reveal reveal-delay-2">
+          <div class="pf-value gradient-text-blue">1-on-1</div>
+          <div class="pf-label">Tư vấn riêng</div>
+        </div>
+        <div class="glass-card platform-feature-card reveal reveal-delay-3">
+          <div class="pf-value gradient-text-blue">100%</div>
+          <div class="pf-label">Cam kết chất lượng</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== COUPON GROUPS ======== -->
+  <section class="section" id="coupons">
+    <div class="container">
+      <div class="section-header-center reveal">
+        <div class="section-label">Nhóm giảm giá</div>
+        <h2 class="section-title">Nhóm Săn Mã Giảm Giá<br>Độc Quyền</h2>
+        <p class="section-desc">Tham gia cộng đồng hàng nghìn thành viên, cập nhật mã giảm giá mới nhất từ các sàn TMĐT hàng đầu Việt Nam.</p>
+      </div>
+      <div class="coupon-grid">
+        <!-- Free -->
+        <div class="glass-card coupon-card reveal">
+          <span class="coupon-badge free">Miễn Phí</span>
+          <h3>Nhóm Cộng Đồng</h3>
+          <div class="members">👥 2,000+ thành viên</div>
+          <div class="coupon-features">
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm giá cơ bản hàng ngày</div>
+            <div class="coupon-feature"><span class="dot"></span> Thông báo flash sale</div>
+            <div class="coupon-feature"><span class="dot"></span> Chia sẻ deal hot từ thành viên</div>
+            <div class="coupon-feature"><span class="dot"></span> Hỗ trợ cộng đồng</div>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;">Tham Gia Miễn Phí</a>
+        </div>
+        <!-- VIP -->
+        <div class="glass-card coupon-card featured reveal reveal-delay-1">
+          <span class="coupon-badge vip">Phổ biến nhất</span>
+          <h3>Nhóm VIP</h3>
+          <div class="members">👥 800+ thành viên</div>
+          <div class="coupon-features">
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm giá độc quyền VIP</div>
+            <div class="coupon-feature"><span class="dot"></span> Cập nhật real-time 24/7</div>
+            <div class="coupon-feature"><span class="dot"></span> Hướng dẫn săn deal hiệu quả</div>
+            <div class="coupon-feature"><span class="dot"></span> Hỗ trợ riêng từ admin</div>
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm sâu từ đối tác</div>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Tham Gia VIP</a>
+        </div>
+        <!-- Premium -->
+        <div class="glass-card coupon-card reveal reveal-delay-2">
+          <span class="coupon-badge premium">Premium</span>
+          <h3>Nhóm Premium</h3>
+          <div class="members">👥 200+ thành viên</div>
+          <div class="coupon-features">
+            <div class="coupon-feature"><span class="dot"></span> Tất cả quyền lợi VIP</div>
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm giá "khủng" độc quyền</div>
+            <div class="coupon-feature"><span class="dot"></span> Tư vấn mua sắm 1-1</div>
+            <div class="coupon-feature"><span class="dot"></span> Hoàn tiền cashback thêm</div>
+            <div class="coupon-feature"><span class="dot"></span> Ưu tiên nhận deal giới hạn</div>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;">Liên Hệ Tư Vấn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== STATS ======== -->
+  <section class="section stats-section reveal">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-count="500" data-suffix="+">0</div>
+          <div class="stat-label">Shops đã mở</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="10000" data-suffix="+">0</div>
+          <div class="stat-label">Mã giảm giá đã chia sẻ</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.9<span style="font-size: 0.6em; color: var(--text-muted);">/5</span></div>
+          <div class="stat-label">Đánh giá trung bình</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="3" data-suffix="+">0</div>
+          <div class="stat-label">Năm kinh nghiệm</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TESTIMONIALS ======== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header-center reveal">
+        <div class="section-label">Đánh giá</div>
+        <h2 class="section-title">Khách Hàng Nói Gì</h2>
+        <p class="section-desc">Hàng trăm sellers đã tin tưởng JamesCR. Đây là những chia sẻ từ cộng đồng của chúng tôi.</p>
+      </div>
+      <div class="testimonial-grid">
+        <div class="glass-card testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"JamesCR đã giúp tôi mở shop Etsy và tối ưu SEO cực kỳ chuyên nghiệp. Chỉ sau 2 tháng, shop đã có những đơn hàng đầu tiên. Highly recommend!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">T</div>
+            <div>
+              <div class="testimonial-name">Trần Minh Tuấn</div>
+              <div class="testimonial-role">Etsy Seller — Digital Art</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Nhóm săn mã giảm giá VIP quá đỉnh! Tôi đã tiết kiệm được hàng triệu đồng mỗi tháng nhờ các mã độc quyền từ nhóm. Cảm ơn anh Duy!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">L</div>
+            <div>
+              <div class="testimonial-name">Lê Thị Hồng</div>
+              <div class="testimonial-role">Thành viên VIP</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Dịch vụ xử lý vi phạm rất nhanh và hiệu quả. Shop tôi bị suspend nhưng nhờ team JamesCR đã khôi phục thành công trong 3 ngày."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">P</div>
+            <div>
+              <div class="testimonial-name">Phạm Văn Đức</div>
+              <div class="testimonial-role">Etsy Seller — Print on Demand</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Mockup và branding từ JamesCR giúp shop tôi nhìn chuyên nghiệp hơn hẳn. Tỉ lệ click tăng 40% sau khi đổi ảnh mới. Rất đáng đầu tư!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">N</div>
+            <div>
+              <div class="testimonial-name">Nguyễn Thảo Linh</div>
+              <div class="testimonial-role">Etsy Seller — T-shirt Design</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Anh Duy tư vấn rất tận tâm, kiến thức sâu về Etsy. Từ chiến lược giá đến chọn niche, mọi thứ đều được phân tích chi tiết."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">H</div>
+            <div>
+              <div class="testimonial-name">Hoàng Anh Khoa</div>
+              <div class="testimonial-role">Etsy Seller — SVG Files</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Tham gia nhóm Premium được 6 tháng, mỗi tháng tiết kiệm trung bình 2-3 triệu. Deal luôn cập nhật nhanh, admin nhiệt tình."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Mai Phương Thúy</div>
+              <div class="testimonial-role">Thành viên Premium</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== COMMUNITY / ABOUT ======== -->
+  <section class="community-section">
+    <div class="container">
+      <div class="feature-row reveal">
+        <div class="feature-text">
+          <div class="section-label">Cộng đồng</div>
+          <h3>Xây dựng cộng đồng<br>đang phát triển cùng nhau</h3>
+          <p>JamesCR không chỉ là dịch vụ — đó là một cộng đồng. Hàng nghìn sellers và người mua sắm thông minh cùng chia sẻ kinh nghiệm, hỗ trợ nhau phát triển.</p>
+          <div style="margin-top: 24px;">
+            <a href="https://t.me/jamescr123" target="_blank" class="btn btn-primary">Tham Gia Cộng Đồng →</a>
+          </div>
+        </div>
+        <div class="feature-visual">
+          <div class="feature-visual-box" style="background: #080808;">
+            <div class="feature-visual-inner">
+              <div class="feature-glow feature-glow-1" style="background: #22c55e;"></div>
+              <div class="feature-glow feature-glow-2"></div>
+              <div class="feature-placeholder">
+                <div class="feature-placeholder-icon">🤝</div>
+                <div class="feature-placeholder-text">3,000+ Members Community</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FAQ ======== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header-center reveal">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Dịch vụ mở shop Etsy bao gồm những gì?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Dịch vụ mở shop Etsy bao gồm: đăng ký tài khoản Etsy, thiết lập shop profile hoàn chỉnh, cấu hình payment & shipping, thiết kế banner & logo, tạo shop policies, và hướng dẫn đăng sản phẩm đầu tiên. Chúng tôi đồng hành cùng bạn cho đến khi shop sẵn sàng hoạt động.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Tôi chưa biết gì về Etsy, có sử dụng dịch vụ được không?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Hoàn toàn được! Dịch vụ của chúng tôi phù hợp với cả người mới bắt đầu. Đội ngũ sẽ hướng dẫn bạn từ những bước cơ bản nhất, từ hiểu nền tảng Etsy đến cách vận hành shop hiệu quả.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Nhóm săn mã giảm giá hoạt động như thế nào?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Nhóm hoạt động trên Telegram. Admin và các thành viên sẽ liên tục cập nhật mã giảm giá, deal hot từ các sàn TMĐT (Shopee, Lazada, Tiki, TikTok Shop). Nhóm VIP và Premium có thêm mã độc quyền từ đối tác và hỗ trợ riêng.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Thời gian tối ưu SEO cho shop Etsy là bao lâu?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Thông thường, sau 2-4 tuần tối ưu SEO, bạn sẽ bắt đầu thấy sự cải thiện về thứ hạng tìm kiếm. Kết quả rõ rệt thường đến sau 1-3 tháng tùy thuộc vào độ cạnh tranh của ngành hàng và chất lượng sản phẩm.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Shop bị vi phạm/suspend thì xử lý được không?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Có, chúng tôi đã xử lý thành công hàng trăm trường hợp shop bị vi phạm hoặc suspend. Đội ngũ sẽ phân tích nguyên nhân, soạn thư kháng cáo chuyên nghiệp và hỗ trợ bạn trong toàn bộ quá trình khôi phục shop.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-5">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Làm sao để liên hệ tư vấn?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Bạn có thể liên hệ trực tiếp qua Telegram <strong>@jamescr123</strong> hoặc gọi hotline <strong>0877.569.869</strong>. Đội ngũ sẽ phản hồi trong vòng 30 phút trong giờ làm việc (8h - 22h hàng ngày).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA BOTTOM ======== -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <h2 class="reveal">Sẵn sàng bắt đầu<br>hành trình Etsy?</h2>
+      <p class="reveal reveal-delay-1">Liên hệ ngay hôm nay để nhận tư vấn miễn phí và ưu đãi đặc biệt dành cho khách hàng mới.</p>
+      <div class="cta-buttons reveal reveal-delay-2">
+        <a href="https://t.me/jamescr123" target="_blank" class="btn btn-primary btn-large">Nhắn Telegram Ngay</a>
+        <a href="tel:0877569869" class="btn btn-outline btn-large">📞 0877.569.869</a>
+      </div>
+      <div class="cta-visual reveal reveal-delay-3">
+        <div class="cta-bar">
+          <div class="cta-bar-dot"></div>
+          <span class="cta-bar-text">jamescr.com — Đồng hành cùng bạn trên Etsy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>JamesCR</h3>
+          <p>Dịch vụ Etsy chuyên nghiệp và hội săn mã giảm giá sàn TMĐT hàng đầu. Điều hành bởi Nguyễn Hữu Duy.</p>
+          <p style="margin-top: 12px; color: var(--text-muted); font-size: 13px;">📞 0877.569.869</p>
+        </div>
+        <div class="footer-col">
+          <h4>Dịch Vụ</h4>
+          <ul>
+            <li><a href="#services">Mở Shop Etsy</a></li>
+            <li><a href="#services">SEO Etsy</a></li>
+            <li><a href="#services">Thiết Kế Mockup</a></li>
+            <li><a href="#services">Quản Lý Shop</a></li>
+            <li><a href="#services">Xử Lý Vi Phạm</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Nhóm Giảm Giá</h4>
+          <ul>
+            <li><a href="#coupons">Nhóm Cộng Đồng</a></li>
+            <li><a href="#coupons">Nhóm VIP</a></li>
+            <li><a href="#coupons">Nhóm Premium</a></li>
+            <li><a href="#coupons">Shopee Deals</a></li>
+            <li><a href="#coupons">Lazada Deals</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Liên Hệ</h4>
+          <ul>
+            <li><a href="tel:0877569869">📞 0877.569.869</a></li>
+            <li><a href="https://t.me/jamescr123" target="_blank">✈️ @jamescr123</a></li>
+            <li><a href="#faq">Câu hỏi thường gặp</a></li>
+            <li><a href="#about">Về chúng tôi</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copyright">© 2024 JamesCR. All rights reserved. Điều hành bởi Nguyễn Hữu Duy.</div>
+        <div class="footer-socials">
+          <a href="https://t.me/jamescr123" target="_blank" title="Telegram">✈</a>
+          <a href="#" title="Facebook">f</a>
+          <a href="#" title="TikTok">♪</a>
+          <a href="tel:0877569869" title="Phone">📞</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== JAVASCRIPT ======== -->
+  <script>
+    // === Navbar Scroll ===
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // === Mobile Menu ===
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('active');
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // === Scroll Reveal ===
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Counter Animation ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          el.textContent = current.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) statsObserver.observe(statsSection);
+
+    // === FAQ Toggle ===
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      // Toggle current
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // === Hero Tab interaction ===
+    document.querySelectorAll('.hero-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.hero-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
