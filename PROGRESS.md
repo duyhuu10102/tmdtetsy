@@ -80,3 +80,5 @@ Bản trước được sao lưu: `index.v3-backup.html`
 | 34 | Ưu tiên Etsy + PingPong: hero, nút chính, menu, 2 ô dịch vụ "Chủ lực"/"Giá tốt" ở hàng đầu, khối giới thiệu, FAQ, testimonials; nhóm deal lùi xuống thứ yếu |
 | 35 | Rải link: FB (29) cho tư vấn/Etsy, Telegram (18) cho báo giá PingPong/hỗ trợ nhanh, Zalo (17) cho nhóm deal, hotline (7); icon MXH trên navbar, thẻ liên hệ ở CTA, nhãn bento thành link, link trong FAQ, footer |
 | 36 | Cụm nút liên hệ nổi (desktop) → thanh liên hệ cố định đáy màn hình (mobile); tiêu đề ngắt dòng cân đối |
+| 37 | Bỏ chữ "chủ lực"/"thế mạnh" trên giao diện (ưu tiên thể hiện qua bố cục); đánh giá khách hàng rút ngắn 1 câu, giọng tự nhiên — vẫn là nội dung mẫu, cần thay bằng đánh giá thật |
+| 38 | Bỏ phần đánh giá khách hàng (mẫu) + dải stats cũ → khối "Nhiệt tình & Tử tế": điểm 4.9/5 với sao tô dần khi cuộn, 2 thẻ giá trị, dải số liệu 2,000+ / 10,000+ / 3+ (số thật có sẵn trong HTML, JS chỉ chạy hiệu ứng đếm) |

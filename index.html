@@ -703,82 +703,43 @@
       border: 1px solid var(--border-subtle);
     }
 
-    /* ========== STATS ========== */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px;
-      text-align: center;
+    /* ========== TRUST (motto + rating + stats) ========== */
+    .trust-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) { .trust-grid { grid-template-columns: 1.15fr 1fr; } }
+    .rating-card {
+      display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+      padding: 32px; border-radius: 14px; border: 1px solid var(--border-subtle);
+      background: radial-gradient(ellipse 70% 60% at 20% 0%, rgba(251, 191, 36, 0.10), transparent 60%), #050505;
     }
-    @media (min-width: 768px) {
-      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    @media (min-width: 768px) { .rating-card { padding: 44px; } }
+    .rating-stars { position: relative; width: max-content; margin-bottom: 20px; }
+    .rs-row { display: flex; gap: 6px; }
+    .rs-row svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .rs-base svg { fill: #27272a; }
+    .rs-fill { position: absolute; inset: 0 auto 0 0; overflow: hidden; width: 0; transition: width 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s; }
+    .rs-fill svg { fill: #fbbf24; filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.45)); }
+    .reveal.visible .rs-fill, .no-motion .rs-fill { width: 98.3%; } /* 4.9 of 5 stars */
+    .no-motion .rs-fill { transition: none; }
+    .rating-score { font-size: clamp(72px, 10vw, 112px); font-weight: 600; letter-spacing: -0.06em; line-height: 1; }
+    .rating-score small { font-size: 0.32em; font-weight: 500; letter-spacing: -0.02em; color: var(--text-muted); margin-left: 6px; }
+    .rating-meta { margin-top: 14px; font-size: 15px; color: var(--text-secondary); max-width: 380px; line-height: 1.6; }
+    .rating-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rating-badges span {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #d4d4d8;
+      padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border-hover); background: rgba(255,255,255,0.03);
     }
-    .stat-item .stat-number {
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 600;
-      letter-spacing: -0.045em;
-      line-height: 1;
-      margin-bottom: 8px;
+    .values { display: grid; gap: 16px; }
+    .value-card { padding: 28px; border-radius: 14px; border: 1px solid var(--border-subtle); background: #050505; }
+    .value-card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .value-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+    .trust-stats {
+      margin-top: 16px; display: grid; grid-template-columns: 1fr; gap: 1px;
+      background: var(--border-subtle); border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden;
     }
-    .stat-item .stat-label {
-      font-size: 14px;
-      color: var(--text-muted);
-    }
-
-    /* ========== TESTIMONIALS ========== */
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    @media (min-width: 768px) {
-      .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    .testimonial-card {
-      padding: 28px;
-    }
-    .testimonial-stars {
-      color: #e4e4e7;
-      font-size: 14px;
-      margin-bottom: 16px;
-      letter-spacing: 2px;
-    }
-    .testimonial-text {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .testimonial-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #1c1c1c;
-      border: 1px solid var(--border-hover);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      font-weight: 600;
-      color: #e4e4e7;
-    }
-    .testimonial-name {
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .testimonial-role {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
+    @media (min-width: 640px) { .trust-stats { grid-template-columns: repeat(3, 1fr); } }
+    .trust-stats .stat-item { background: #000; padding: 28px 20px; text-align: center; }
+    .stat-item .stat-number { font-size: clamp(32px, 4.5vw, 48px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; margin-bottom: 8px; }
+    .stat-item .stat-label { font-size: 13px; color: var(--text-muted); }
     /* ========== FAQ ========== */
     .faq-list {
       border-top: 1px solid var(--border-subtle);
@@ -1241,13 +1202,6 @@
     .deal-cat h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
     .deal-cat p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
-    /* Stats: soft glow under the numbers */
-    .stats-grid { position: relative; isolation: isolate; }
-    .stats-grid::before {
-      content: ''; position: absolute; left: 10%; right: 10%; top: 0; height: 100%;
-      background: radial-gradient(ellipse at center, rgba(59,130,246,0.10), transparent 70%);
-      pointer-events: none; z-index: -1;
-    }
 
     @media (prefers-reduced-motion: reduce) {
       .hero-aurora i, .marquee-track, .deal-card, .shimmer-text, .badge-dot { animation: none !important; }
@@ -1480,8 +1434,8 @@
   <section class="section" id="services">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Etsy &amp; PingPong<br>Hai dịch vụ chủ lực</h2>
-        <p class="section-desc">Mở shop Etsy và thu PingPong giá tốt là thế mạnh chính — đi kèm các dịch vụ hỗ trợ vận hành shop trọn vẹn.</p>
+        <h2 class="section-title">Dịch vụ Etsy<br>&amp; thu PingPong</h2>
+        <p class="section-desc">Mở shop Etsy, thu PingPong giá tốt và các dịch vụ hỗ trợ vận hành shop trọn vẹn.</p>
         <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Nhận tư vấn</a>
       </div>
       <div class="app-mock reveal reveal-scale" aria-hidden="true">
@@ -1512,7 +1466,6 @@
       </div>
       <div class="services-grid" data-stagger>
         <div class="service-card svc-half svc-highlight spot reveal">
-          <span class="svc-badge">Chủ lực</span>
           <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg></div>
           <h3>Mở Shop Etsy</h3>
           <p>Hỗ trợ đăng ký shop có tỷ lệ live cao, cấu hình shop hoàn chỉnh. Tối ưu profile, banner, policies. Bảo hành shop lâu dài, hỗ trợ hết công suất.</p>
@@ -1704,109 +1657,49 @@
     </div>
   </section>
 
-  <!-- ======== STATS ======== -->
-  <section class="section stats-section reveal">
-    <div class="container">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <div class="stat-number" data-count="2000" data-suffix="+">0</div>
-          <div class="stat-label">Shops đã mở</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-count="10000" data-suffix="+">0</div>
-          <div class="stat-label">Mã giảm giá đã chia sẻ</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">4.9<span style="font-size: 0.6em; color: var(--text-muted);">/5</span></div>
-          <div class="stat-label">Đánh giá trung bình</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" data-count="3" data-suffix="+">0</div>
-          <div class="stat-label">Năm kinh nghiệm</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ======== TESTIMONIALS ======== -->
-  <section class="section">
+  <!-- ======== TRUST: motto + rating + stats ======== -->
+  <section class="section" id="trust">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Khách Hàng Nói Gì</h2>
-        <p class="section-desc">Hàng trăm sellers đã tin tưởng DHDglobal. Đây là những chia sẻ từ cộng đồng của chúng tôi.</p>
-        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Xem thêm trên Facebook</a>
+        <h2 class="section-title">Nhiệt tình &amp; Tử tế</h2>
+        <p class="section-desc">Châm ngôn làm việc của DHDglobal — với từng shop Etsy, từng giao dịch PingPong và từng thành viên trong nhóm.</p>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Trò chuyện với DHDglobal</a>
       </div>
-      <div class="testimonial-grid" data-stagger>
-        <div class="glass-card testimonial-card spot reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"DHDglobal hỗ trợ mình mở shop Etsy, shop live ổn định ngay từ đầu và được bảo hành lâu dài. Sau 2 tháng đã có những đơn hàng đầu tiên."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">T</div>
-            <div>
-              <div class="testimonial-name">Trần Minh Tuấn</div>
-              <div class="testimonial-role">Etsy Seller — Digital Art</div>
+      <div class="trust-grid">
+        <div class="rating-card spot reveal reveal-scale">
+          <div>
+            <div class="rating-stars" role="img" aria-label="Đánh giá 4.9 trên 5 sao">
+              <div class="rs-row rs-base"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg></div>
+              <div class="rs-row rs-fill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg></div>
             </div>
+            <div class="rating-score">4.9<small>/5</small></div>
+            <p class="rating-meta">Điểm đánh giá trung bình từ hơn 500 sellers đã đồng hành cùng DHDglobal.</p>
+          </div>
+          <div class="rating-badges">
+            <span><i class="badge-dot"></i>Phản hồi trong 30 phút</span>
+            <span>Hỗ trợ 8h – 22h hằng ngày</span>
           </div>
         </div>
-        <div class="glass-card testimonial-card spot reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Bán $ PingPong ở đây giá tốt, giao dịch nhanh gọn và minh bạch. Mình gắn bó mấy tháng nay rồi, rất yên tâm."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">N</div>
-            <div>
-              <div class="testimonial-name">Nguyễn Thảo Linh</div>
-              <div class="testimonial-role">Etsy Seller — T-shirt Design</div>
-            </div>
+        <div class="values" data-stagger>
+          <div class="value-card spot reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.2.4-2.3 1-3.3.3 1.5 1.3 2.8 2.5 2.8z"/></svg></div>
+            <h3>Nhiệt tình</h3>
+            <p>Nhắn là trả lời, hỗ trợ hết công suất. Đồng hành đến khi shop chạy ổn và giao dịch hoàn tất.</p>
+          </div>
+          <div class="value-card spot reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/></svg></div>
+            <h3>Tử tế</h3>
+            <p>Minh bạch từ báo giá đến quy trình. Nói rõ trước khi làm, giữ đúng lời hứa với khách.</p>
           </div>
         </div>
-        <div class="glass-card testimonial-card spot reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Dịch vụ xử lý vi phạm rất nhanh và hiệu quả. Shop tôi bị suspend nhưng nhờ team DHDglobal đã khôi phục thành công trong 3 ngày."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">P</div>
-            <div>
-              <div class="testimonial-name">Phạm Văn Đức</div>
-              <div class="testimonial-role">Etsy Seller — Print on Demand</div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card testimonial-card spot reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Anh Duy tư vấn rất tận tâm, kiến thức sâu về Etsy. Bán PingPong cũng được báo giá nhanh, rõ ràng, không phải chờ lâu."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">H</div>
-            <div>
-              <div class="testimonial-name">Hoàng Anh Khoa</div>
-              <div class="testimonial-role">Etsy Seller — SVG Files</div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card testimonial-card spot reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Nhóm deal hời quá đỉnh! Mã Shopee, TikTok Shop cập nhật liên tục, mỗi tháng mình tiết kiệm được kha khá. Cảm ơn anh Duy!"</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">L</div>
-            <div>
-              <div class="testimonial-name">Lê Thị Hồng</div>
-              <div class="testimonial-role">Thành viên nhóm cộng đồng</div>
-            </div>
-          </div>
-        </div>
-        <div class="glass-card testimonial-card spot reveal">
-          <div class="testimonial-stars">★★★★★</div>
-          <p class="testimonial-text">"Săn được AirPods bóc hộp giá hời và rất nhiều voucher đồ uống 0đ từ nhóm. Deal lên nhanh, admin nhiệt tình."</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">M</div>
-            <div>
-              <div class="testimonial-name">Mai Phương Thúy</div>
-              <div class="testimonial-role">Thành viên nhóm cộng đồng</div>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div class="trust-stats stats-section reveal" data-stagger>
+        <div class="stat-item"><div class="stat-number" data-count="2000" data-suffix="+">2,000+</div><div class="stat-label">Shops Etsy đã mở</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="10000" data-suffix="+">10,000+</div><div class="stat-label">Mã giảm giá đã chia sẻ</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="3" data-suffix="+">3+</div><div class="stat-label">Năm kinh nghiệm</div></div>
       </div>
     </div>
   </section>
-
   <!-- ======== COMMUNITY ======== -->
   <section class="section" id="community">
     <div class="container">
@@ -2146,8 +2039,10 @@
         requestAnimationFrame(update);
       });
     }
+    // Real numbers are in the HTML (no-JS / SEO safe); reset to 0 only when we will animate them.
     const statsSection = document.querySelector('.stats-section');
-    if (statsSection) {
+    if (statsSection && !reduceMotion) {
+      document.querySelectorAll('[data-count]').forEach(el => { el.textContent = '0' + (el.dataset.suffix || ''); });
       const statsObserver = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) { animateCounters(); statsObserver.disconnect(); }
       }, { threshold: 0.3 });
