@@ -56,3 +56,27 @@ Screenshots: `C:\Users\Admin\AppData\Local\Temp\claude\838757565bfd39b2\2896b4d2
 | 22 | Font Inter → Be Vietnam Pro; line-height tiêu đề 1.08–1.1 → 1.18–1.2 cho dấu chồng | `22-font-logo-view.png` |
 | 23 | Hover nút: nhấc 1px + vệt sáng lướt qua + viền/glow nhẹ; bấm thu nhỏ 0.97; chip/link/social cùng hiệu ứng | `23-hover-view.png` |
 | 24 | "Liên Hệ Ngay" → Facebook; "Tham gia nhóm/cộng đồng" + "Tham Gia Miễn Phí" → nhóm Zalo; footer: thêm Facebook + Zalo, bỏ TikTok; menu mobile thêm "Liên Hệ Ngay"; stats 500+ → 2,000+ shops đã mở | `24-*.png` |
+
+## Phiên bản 3 — Jamesglobal (2026-11-26)
+Bản trước đó được sao lưu: `index.v2-backup.html`
+
+| # | Thay đổi |
+|---|---|
+| 25 | Đổi thương hiệu JamesCR → Jamesglobal (logo + logo mark gradient, title, meta, toàn bộ nội dung); © 2026 |
+| 26 | Dịch vụ: cập nhật "Mở Shop Etsy" (tỷ lệ live cao, bảo hành lâu dài); bỏ "Tối Ưu Listing & SEO" và "Thiết Kế Mockup & Branding"; thêm "Thu Mua USD Payoneer"; lưới 3 + 2 trên desktop |
+| 27 | Feature highlight đổi theo dịch vụ mới: các bước mở shop sáng dần khi cuộn tới + widget quy đổi USD Payoneer |
+| 28 | Nhóm giảm giá: chỉ còn 1 nhóm cộng đồng (Zalo) — mã sàn TMĐT, đồ điện tử bóc hộp, voucher đồ ăn/uống; viền gradient xoay |
+| 29 | Đồng bộ nội dung liên quan: bento, testimonials, community, FAQ, CTA chips, footer |
+| 30 | Hiệu ứng: thanh tiến trình cuộn, aurora hero, shimmer tiêu đề, parallax ô prompt, typewriter, marquee logo, reveal blur/scale, stagger, spotlight theo chuột, chấm "live" |
+| 31 | Sửa xung đột transition (ô dịch vụ hiện đột ngột, mất delay tiêu đề); kiểm tra mobile 375px không tràn ngang; không lỗi JS |
+
+## Phiên bản 4 — DHDglobal (2026-11-26)
+Bản trước được sao lưu: `index.v3-backup.html`
+
+| # | Thay đổi |
+|---|---|
+| 32 | Đổi thương hiệu → DHDglobal; logo mới: chữ "D" lồng kinh tuyến/xích đạo (globe) trên nền gradient + chữ "DHD" đậm/"global" nhạt; favicon cùng biểu tượng |
+| 33 | Payoneer → PingPong (Pipo) ở mọi nơi |
+| 34 | Ưu tiên Etsy + PingPong: hero, nút chính, menu, 2 ô dịch vụ "Chủ lực"/"Giá tốt" ở hàng đầu, khối giới thiệu, FAQ, testimonials; nhóm deal lùi xuống thứ yếu |
+| 35 | Rải link: FB (29) cho tư vấn/Etsy, Telegram (18) cho báo giá PingPong/hỗ trợ nhanh, Zalo (17) cho nhóm deal, hotline (7); icon MXH trên navbar, thẻ liên hệ ở CTA, nhãn bento thành link, link trong FAQ, footer |
+| 36 | Cụm nút liên hệ nổi (desktop) → thanh liên hệ cố định đáy màn hình (mobile); tiêu đề ngắt dòng cân đối |

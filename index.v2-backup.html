@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JamesCR — Dịch Vụ Etsy & Săn Mã Giảm Giá Chuyên Nghiệp</title>
+  <meta name="description" content="JamesCR cung cấp dịch vụ mở shop Etsy, tối ưu SEO, quản lý shop và nhóm săn mã giảm giá độc quyền. Đồng hành cùng 500+ sellers thành công.">
+  <meta name="keywords" content="etsy, dịch vụ etsy, mở shop etsy, seo etsy, mã giảm giá, coupon, jamescr">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0A0A0A;
+      --bg-card: #111111;
+      --bg-card-hover: #1A1A1A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent-blue: #3B82F6;
+      --accent-purple: #8B5CF6;
+      --accent-cyan: #06B6D4;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(255, 255, 255, 0.12);
+      --glow-blue: rgba(59, 130, 246, 0.15);
+      --glow-purple: rgba(139, 92, 246, 0.10);
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1104px; /* 1040px content + 2×32px padding — narrow column like reference */
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (min-width: 768px) {
+      .container { padding: 0 32px; }
+    }
+
+    /* ========== SCROLL ANIMATIONS ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation: none !important; }
+    }
+    .no-motion .reveal { opacity: 1; transform: none; transition: none; }
+    .no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; }
+
+    /* ========== GLOW EFFECTS ========== */
+    .glow-effect {
+      box-shadow: 0 0 80px var(--glow-blue), 0 0 160px var(--glow-purple);
+    }
+    .glow-effect-strong {
+      box-shadow: 0 0 100px rgba(59, 130, 246, 0.25), 0 0 200px rgba(139, 92, 246, 0.15);
+    }
+
+    /* ========== GLASS CARD ========== */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      transition: all 0.3s ease-out;
+    }
+    .glass-card:hover {
+      border-color: var(--border-hover);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
+    }
+    @media (min-width: 768px) {
+      .glass-card { border-radius: 14px; }
+    }
+
+    /* ========== GRADIENT TEXT ========== */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Reference is monochrome: accent color reserved for glows only */
+    .gradient-text-blue {
+      background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 44px; /* touch target */
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    /* Subtle hover: 1px lift + soft light sweep across the pill; press = slight shrink */
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+      transform: translateX(-120%);
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:hover::after { transform: translateX(120%); }
+    .btn:active { transform: translateY(0) scale(0.97); transition-duration: 0.1s; }
+    .btn:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.6); outline-offset: 2px; }
+    .btn-primary {
+      background: #fff;
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: #f4f4f5;
+      box-shadow: 0 6px 24px rgba(255, 255, 255, 0.12), 0 0 0 4px rgba(255, 255, 255, 0.06);
+    }
+    .btn-primary::after {
+      background: linear-gradient(105deg, transparent 35%, rgba(113, 113, 122, 0.18) 50%, transparent 65%);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid transparent;
+    }
+    .btn-outline::after {
+      background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.12) 50%, transparent 70%);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+    .btn-large {
+      padding: 12px 24px;
+      font-size: 15px;
+    }
+    /* Same feel on chip / text-link style buttons */
+    .cta-chips a, .hero-side-link, .service-link, .footer-socials a {
+      transition: color 0.3s ease-out, background 0.3s ease-out, border-color 0.3s ease-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), gap 0.3s ease-out;
+    }
+    .cta-chips a:hover, .footer-socials a:hover { transform: translateY(-1px); }
+    .hero-side-link:hover { transform: translateX(3px); }
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .btn::after, .cta-chips a, .hero-side-link, .footer-socials a { transition: none; }
+      .btn:hover, .cta-chips a:hover, .hero-side-link:hover, .footer-socials a:hover { transform: none; }
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border-subtle);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-logo {
+      font-size: 22px; /* +30% */
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .nav-links {
+      display: none;
+      gap: 24px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-phone {
+      display: none;
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .nav-cta {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .nav-links { display: flex; }
+      .nav-cta { display: inline-flex; }
+      .nav-phone { display: block; }
+      .hamburger { display: none !important; }
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: #fff; }
+    .mobile-menu .btn { font-size: 16px; min-width: 220px; }
+    .mobile-menu .btn-primary, .mobile-menu .btn-primary:hover { color: #000; }
+    .mobile-menu .btn-outline { color: #fff; }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 120px 0 40px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.18; /* room for stacked Vietnamese diacritics (ệ, ồ, ữ) */
+      letter-spacing: -0.035em;
+      max-width: 760px;
+      margin: 0 0 16px;
+    }
+    .hero p {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 0 28px;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hero-side-link {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s ease-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-side-link:hover { color: #fff; }
+    .hero-visual {
+      margin-top: 40px;
+      position: relative;
+    }
+    /* Wide dark stage framing the glowing prompt card (reference hero) */
+    .hero-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 320px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(37, 99, 235, 0.16) 0%, rgba(0, 0, 0, 0) 70%), #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 24px;
+    }
+    .hero-prompt-wrap {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hero-prompt-top {
+      display: flex;
+      gap: 10px;
+    }
+    .hero-select, .hero-icon-btn {
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #e4e4e7;
+    }
+    .hero-select { flex: 1; justify-content: space-between; padding: 0 14px; }
+    .hero-select span { color: var(--text-muted); }
+    .hero-icon-btn { width: 40px; justify-content: center; color: var(--text-secondary); font-size: 18px; }
+    .hero-prompt {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1.5px solid rgba(96, 165, 250, 0.9);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.45) 0%, rgba(30, 58, 138, 0.35) 100%);
+      box-shadow:
+        0 0 24px rgba(59, 130, 246, 0.7),
+        0 0 80px rgba(37, 99, 235, 0.45),
+        0 0 160px rgba(37, 99, 235, 0.25),
+        inset 0 0 30px rgba(96, 165, 250, 0.25);
+      transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+    }
+    .hero-prompt:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 28px rgba(59, 130, 246, 0.8),
+        0 0 100px rgba(37, 99, 235, 0.5),
+        0 0 180px rgba(37, 99, 235, 0.3),
+        inset 0 0 30px rgba(96, 165, 250, 0.3);
+    }
+    .hero-prompt-text {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .hero-caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: #fff;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+      animation: caretBlink 1s steps(1) infinite;
+    }
+    @keyframes caretBlink { 50% { opacity: 0; } }
+    .hero-prompt-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .hero-prompt-tools { display: flex; gap: 6px; }
+    .hero-prompt-tools span {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .hero-prompt-tools span:last-child { background: #fff; color: #000; }
+    @media (min-width: 768px) {
+      .hero { padding: 140px 0 48px; }
+    }
+
+    /* ========== SOCIAL PROOF ========== */
+    .social-proof {
+      padding: 24px 0 40px;
+    }
+    .logo-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 20px 48px;
+    }
+    .logo-item {
+      font-size: 19px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+      transition: color 0.3s;
+    }
+    .logo-item:hover { color: #fff; }
+    .proof-row {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .proof-sep {
+      width: 1px;
+      height: 12px;
+      background: var(--border-hover);
+    }
+
+    /* ========== SECTION COMMON ========== */
+    /* Top-only padding → one consistent gap between sections (reference: very large gaps) */
+    .section {
+      padding: 112px 0 0;
+    }
+    @media (min-width: 768px) {
+      .section { padding: 176px 0 0; }
+    }
+    .section-title {
+      font-size: clamp(28px, 3.6vw, 40px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+      margin-bottom: 12px;
+    }
+    .section-title:last-child { margin-bottom: 0; }
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+    /* Left-aligned header; optional small action pinned right (reference style) */
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 0;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+    .section-header > .section-action {
+      justify-self: start;
+      margin-top: 20px;
+    }
+    @media (min-width: 768px) {
+      .section-header { grid-template-columns: 1fr auto; column-gap: 24px; }
+      .section-header > .section-title,
+      .section-header > .section-desc { grid-column: 1; }
+      .section-header > .section-action { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; justify-self: end; }
+    }
+    .section-action {
+      min-height: 32px;
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+
+    /* ========== SERVICES GRID ========== */
+    /* Large product mockup above the services strip */
+    .app-mock {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #111;
+      overflow: hidden;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 360px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    @media (min-width: 768px) {
+      .app-mock { grid-template-columns: 180px 1fr 200px; min-height: 460px; }
+    }
+    .app-mock-side, .app-mock-panel { display: none; padding: 14px; background: #141414; }
+    @media (min-width: 768px) {
+      .app-mock-side { display: block; border-right: 1px solid var(--border-subtle); }
+      .app-mock-panel { display: block; border-left: 1px solid var(--border-subtle); }
+    }
+    .app-mock-title { color: #e4e4e7; font-weight: 600; font-size: 12px; margin-bottom: 14px; }
+    .app-mock-item { padding: 6px 8px; border-radius: 6px; margin-bottom: 2px; }
+    .app-mock-item.active { background: rgba(255,255,255,0.06); color: #e4e4e7; }
+    .app-mock-canvas { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .app-mock-bar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: #0c2a47; color: #bfdbfe; }
+    .app-mock-bar i { width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; display: inline-block; }
+    .app-mock-hero { flex: 1; min-height: 160px; border-radius: 8px; background: linear-gradient(180deg, #0b3a66 0%, #08345c 60%, #0a2540 100%); display: flex; align-items: flex-end; padding: 16px; }
+    .app-mock-hero span { color: #e0f2fe; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+    .app-mock-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .app-mock-grid div { aspect-ratio: 1; border-radius: 6px; background: #1c1c1c; }
+    .app-mock-grid div:nth-child(2) { background: linear-gradient(135deg, #1e3a5f, #0b3a66); }
+    .app-mock-score { font-size: 32px; font-weight: 600; color: #fff; letter-spacing: -0.03em; line-height: 1; margin: 8px 0 4px; }
+    .app-mock-meter { height: 4px; border-radius: 4px; background: #262626; margin: 10px 0 16px; overflow: hidden; }
+    .app-mock-meter b { display: block; height: 100%; width: 92%; background: #fff; }
+    .app-mock-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-subtle); }
+    .app-mock-row em { font-style: normal; color: #e4e4e7; }
+
+    /* Services: one bordered block, cells divided by hairlines (no gaps) */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .service-card {
+      padding: 28px;
+      background: #000;
+      transition: background 0.3s ease-out;
+    }
+    .service-card:hover { background: #0a0a0a; }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #e4e4e7;
+    }
+    .service-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .service-link {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 500;
+      transition: gap 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .service-link:hover { gap: 8px; }
+
+    /* ========== FEATURE HIGHLIGHT ========== */
+    .feature-visual-box {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #0a0a0a;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+
+    /* Reference layout: big visual on top, caption below with link on the right */
+    .feature-block { margin-bottom: 96px; }
+    .feature-block:last-child { margin-bottom: 0; }
+    .feature-block .feature-visual-box {
+      aspect-ratio: auto;
+      min-height: 280px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    @media (min-width: 768px) {
+      .feature-block .feature-visual-box { min-height: 400px; padding: 40px; }
+    }
+    .feature-caption {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    @media (min-width: 768px) {
+      .feature-caption { flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 40px; }
+    }
+    .feature-caption h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .feature-caption p { font-size: 14px; color: var(--text-secondary); max-width: 480px; line-height: 1.6; }
+    .feature-caption .service-link { flex-shrink: 0; color: var(--text-secondary); }
+    .feature-caption .service-link:hover { color: #fff; }
+
+    /* Mock: keyword table (grayscale UI) */
+    .fv-table { width: 100%; max-width: 720px; font-size: 12px; color: var(--text-muted); }
+    .fv-row { display: grid; grid-template-columns: 2fr 1.2fr 1fr 0.8fr; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border-subtle); }
+    .fv-row span:last-child { text-align: right; }
+    .fv-head { color: #52525b; text-transform: uppercase; letter-spacing: 0.06em; font-size: 10px; }
+    .fv-active { background: rgba(255,255,255,0.05); border-radius: 6px; color: #e4e4e7; border-bottom-color: transparent; }
+
+    /* Mock: tilted glowing tiles */
+    .fv-tiles { position: relative; width: 260px; height: 180px; }
+    .fv-tile {
+      position: absolute;
+      width: 96px; height: 120px;
+      border-radius: 12px;
+      border: 1px solid rgba(96,165,250,0.5);
+      background: linear-gradient(160deg, #1e40af 0%, #0c4a6e 60%, #082f49 100%);
+      box-shadow: 0 0 40px rgba(59,130,246,0.35);
+    }
+    .fv-tile:nth-child(1) { left: 0; top: 40px; transform: rotate(-14deg); }
+    .fv-tile:nth-child(2) { left: 90px; top: 0; transform: rotate(6deg); }
+    .fv-tile:nth-child(3) { left: 160px; top: 50px; transform: rotate(18deg); opacity: 0.85; }
+
+    /* ========== COUPON GROUPS ========== */
+    .coupon-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .coupon-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .coupon-card {
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .coupon-card.featured {
+      border-color: rgba(255, 255, 255, 0.18);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
+      box-shadow: 0 0 60px rgba(59, 130, 246, 0.08);
+    }
+    .coupon-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 15%; right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    }
+    .coupon-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+    .coupon-badge.vip {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+    .coupon-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .coupon-card .members {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .coupon-features {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .coupon-feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .coupon-feature .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* ========== STATS ========== */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .stat-item .stat-number {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 600;
+      letter-spacing: -0.045em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-item .stat-label {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* ========== TESTIMONIALS ========== */
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    @media (min-width: 768px) {
+      .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .testimonial-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .testimonial-card {
+      padding: 28px;
+    }
+    .testimonial-stars {
+      color: #e4e4e7;
+      font-size: 14px;
+      margin-bottom: 16px;
+      letter-spacing: 2px;
+    }
+    .testimonial-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #1c1c1c;
+      border: 1px solid var(--border-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 600;
+      color: #e4e4e7;
+    }
+    .testimonial-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .testimonial-role {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* ========== FAQ ========== */
+    .faq-list {
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .faq-question {
+      width: 100%;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: left;
+      min-height: 44px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--text-secondary); }
+    .faq-icon {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+    .faq-answer p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ========== CTA BOTTOM ========== */
+    .cta-section {
+      padding: 128px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .cta-section { padding: 176px 0 160px; }
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      max-width: 100%;
+      height: 360px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.05) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+    .cta-prompt {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 560px;
+      min-height: 120px;
+      margin: 0 auto;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border-hover);
+      background: #161616;
+      text-align: left;
+      transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    .cta-prompt:hover {
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 0 60px rgba(59,130,246,0.12);
+    }
+    .cta-prompt-text { font-size: 15px; color: var(--text-muted); }
+    .cta-prompt-bar { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
+    .cta-send { width: 28px; height: 28px; border-radius: 8px; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; }
+    .cta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 600px;
+      margin: 16px auto 0;
+    }
+    .cta-chips a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.3s ease-out;
+    }
+    .cta-chips a:hover { color: #fff; border-color: var(--border-hover); }
+    .cta-phone {
+      display: inline-block;
+      margin-top: 28px;
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .cta-phone:hover { color: #fff; }
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 24px;
+      margin-bottom: 64px;
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-col a, .footer-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      line-height: 1.5;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+    .footer-brandline { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .footer-copyright {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-socials {
+      display: flex;
+      gap: 4px;
+    }
+    .footer-socials a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .footer-socials a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+    /* ========== ECOSYSTEM BENTO ========== */
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .bento { grid-template-columns: repeat(3, 1fr); }
+      .bento-span-2 { grid-column: span 2; }
+    }
+    .bento-cell {
+      background: #000;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 260px;
+    }
+    .bento-visual {
+      flex: 1;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .bento-label { font-size: 13px; color: var(--text-secondary); }
+    .bv-list, .bv-feed, .bv-chat { width: 100%; }
+    .bv-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-subtle); }
+    .bv-item span { color: #e4e4e7; }
+    .bv-item em { font-style: normal; }
+    .bv-item em.on { color: #fff; }
+    .bv-feed-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; padding: 10px 12px; border-radius: 8px; }
+    .bv-feed-row b { font-size: 10px; letter-spacing: 0.08em; color: #71717a; font-weight: 600; }
+    .bv-feed-row span { color: #d4d4d8; }
+    .bv-feed-row i { font-style: normal; color: #52525b; }
+    .bv-hl { background: rgba(255,255,255,0.05); }
+    .bv-chat { display: flex; flex-direction: column; gap: 8px; }
+    .bv-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; background: #1c1c1c; color: #d4d4d8; line-height: 1.45; }
+    .bv-me { align-self: flex-end; background: #fff; color: #000; }
+    .bv-clock, .bv-big { text-align: center; }
+    .bv-clock span { display: block; font-size: 40px; font-weight: 600; color: #fff; letter-spacing: -0.04em; line-height: 1; }
+    .bv-big { position: relative; }
+    .bento-big .bento-visual {
+      background: radial-gradient(ellipse 90% 70% at 70% 0%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 60%), #0a0a0a;
+    }
+    .bv-big span { display: block; font-size: 52px; font-weight: 600; color: #fff; letter-spacing: -0.05em; line-height: 1; }
+    .bv-clock small, .bv-big small { display: block; margin-top: 8px; font-size: 12px; }
+    /* ========== COMMUNITY ========== */
+    .community-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0; min-height: 0; }
+    .community-shot {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #121212;
+      overflow: hidden;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .cs-topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); }
+    .cs-dots { display: flex; gap: 6px; }
+    .cs-dots i { width: 9px; height: 9px; border-radius: 50%; background: #2a2a2a; }
+    .cs-url { padding: 4px 14px; border-radius: 6px; background: #1a1a1a; }
+    .cs-body { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 16px; min-height: 360px; }
+    @media (min-width: 768px) { .cs-body { grid-template-columns: 1fr 260px; padding: 24px; } }
+    .cs-feed { display: flex; flex-direction: column; gap: 10px; }
+    .cs-post { padding: 12px 14px; border-radius: 10px; background: #181818; max-width: 520px; }
+    .cs-post b { display: block; color: #e4e4e7; font-weight: 600; margin-bottom: 4px; }
+    .cs-post p { color: #a1a1aa; line-height: 1.5; }
+    .cs-side { display: none; flex-direction: column; gap: 12px; }
+    @media (min-width: 768px) { .cs-side { display: flex; } }
+    .cs-card { padding: 14px; border-radius: 10px; background: #181818; border: 1px solid var(--border-subtle); }
+    .cs-card-title { color: #e4e4e7; font-weight: 600; margin-bottom: 10px; }
+    .cs-member, .cs-group { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; }
+    .cs-member { justify-content: flex-start; }
+    .cs-member i { width: 26px; height: 26px; border-radius: 50%; background: #262626; color: #e4e4e7; font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .cs-member span, .cs-group span { color: #d4d4d8; }
+    .cs-member small, .cs-group small { display: block; color: #71717a; font-size: 11px; }
+    .cs-group em { font-style: normal; padding: 3px 10px; border-radius: 999px; background: #262626; color: #d4d4d8; }
+    .cs-group em.on { background: #fff; color: #000; }
+
+    /* ========== RESPONSIVE HELPERS ========== */
+    @media (max-width: 767px) {
+      .hide-mobile { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      .hide-desktop { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== NAVBAR ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-left">
+        <a href="#" class="nav-logo">JamesCR</a>
+        <div class="nav-links">
+          <a href="#services">Dịch Vụ</a>
+          <a href="#coupons">Nhóm Giảm Giá</a>
+          <a href="#about">Về Chúng Tôi</a>
+          <a href="#contact">Liên Hệ</a>
+        </div>
+      </div>
+      <div class="nav-right">
+        <a href="tel:0877569869" class="nav-phone">0877.569.869</a>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary nav-cta" style="min-height: 34px; padding: 6px 16px; font-size: 13px;">Liên Hệ Ngay</a>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">Dịch Vụ</a>
+    <a href="#coupons" onclick="closeMenu()">Nhóm Giảm Giá</a>
+    <a href="#about" onclick="closeMenu()">Về Chúng Tôi</a>
+    <a href="#contact" onclick="closeMenu()">Liên Hệ</a>
+    <a href="tel:0877569869" style="color: var(--text-muted); font-size: 16px;">0877.569.869</a>
+    <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary" onclick="closeMenu()">Liên Hệ Ngay</a>
+    <a href="https://t.me/jamescr123" target="_blank" class="btn btn-outline" onclick="closeMenu()">Telegram @jamescr123</a>
+  </div>
+
+  <!-- ======== HERO ======== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="reveal">
+        <div class="hero-badge">✨ Trusted by 500+ sellers trên Etsy</div>
+      </div>
+      <h1 class="reveal reveal-delay-1">
+        Nâng tầm kinh doanh Etsy<br>
+        với dịch vụ chuyên nghiệp
+      </h1>
+      <p class="reveal reveal-delay-2">
+        JamesCR cung cấp trọn gói dịch vụ Etsy — từ mở shop, tối ưu SEO đến quản lý vận hành. Kèm theo hội săn mã giảm giá sàn TMĐT độc quyền.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <div class="hero-buttons">
+          <a href="#services" class="btn btn-primary">Khám Phá Dịch Vụ</a>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-outline">Tham Gia Nhóm</a>
+        </div>
+        <a href="https://t.me/jamescr123" target="_blank" class="hero-side-link">Nhắn Telegram @jamescr123 →</a>
+      </div>
+
+      <!-- Hero Visual -->
+      <div class="hero-visual reveal reveal-delay-4">
+        <div class="hero-stage">
+          <div class="hero-prompt-wrap">
+            <div class="hero-prompt-top" aria-hidden="true">
+              <div class="hero-select">Dịch vụ Etsy <span>▾</span></div>
+              <div class="hero-icon-btn">+</div>
+            </div>
+            <a href="https://t.me/jamescr123" target="_blank" class="hero-prompt" aria-label="Nhắn JamesCR qua Telegram để được tư vấn">
+              <div class="hero-prompt-text">Mình muốn mở shop Etsy bán digital art<span class="hero-caret"></span></div>
+              <div class="hero-prompt-bar">
+                <span>Tư vấn 1-1 · Miễn phí ▾</span>
+                <span class="hero-prompt-tools" aria-hidden="true">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SOCIAL PROOF ======== -->
+  <section class="social-proof reveal" aria-label="Nền tảng hỗ trợ">
+    <div class="container">
+      <div class="logo-row">
+        <span class="logo-item" style="font-family: Georgia, serif; font-style: italic; font-size: 22px;">Etsy</span>
+        <span class="logo-item" style="letter-spacing: 0.02em;">Shopee</span>
+        <span class="logo-item" style="font-weight: 800; letter-spacing: -0.04em;">Lazada</span>
+        <span class="logo-item">TikTok&nbsp;Shop</span>
+        <span class="logo-item" style="font-weight: 800; letter-spacing: 0.06em;">TIKI</span>
+      </div>
+      <div class="proof-row">
+        <span>Đã hỗ trợ 500+ sellers</span>
+        <span class="proof-sep" aria-hidden="true"></span>
+        <span>4.9★ đánh giá</span>
+        <span class="proof-sep" aria-hidden="true"></span>
+        <span>3 năm kinh nghiệm</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SERVICES ======== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Dịch Vụ Etsy<br>Toàn Diện</h2>
+        <p class="section-desc">Từ A đến Z, chúng tôi đồng hành cùng bạn trên mọi bước đường xây dựng và phát triển shop Etsy thành công.</p>
+        <a href="https://t.me/jamescr123" target="_blank" class="btn btn-outline section-action">Nhận tư vấn</a>
+      </div>
+      <div class="app-mock reveal" aria-hidden="true">
+        <div class="app-mock-side">
+          <div class="app-mock-title">JamesCR Studio</div>
+          <div class="app-mock-item active">Tổng quan shop</div>
+          <div class="app-mock-item">Listings (128)</div>
+          <div class="app-mock-item">Đơn hàng</div>
+          <div class="app-mock-item">SEO &amp; Keywords</div>
+          <div class="app-mock-item">Mockup</div>
+          <div class="app-mock-item">Báo cáo</div>
+        </div>
+        <div class="app-mock-canvas">
+          <div class="app-mock-bar"><i></i> yourshop.etsy.com</div>
+          <div class="app-mock-hero"><span>Handmade Digital Art Prints</span></div>
+          <div class="app-mock-grid"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <div class="app-mock-panel">
+          <div class="app-mock-title">Điểm SEO listing</div>
+          <div class="app-mock-score">92</div>
+          <div>/100 · Tốt</div>
+          <div class="app-mock-meter"><b></b></div>
+          <div class="app-mock-row">Title <em>✓</em></div>
+          <div class="app-mock-row">13 tags <em>✓</em></div>
+          <div class="app-mock-row">Mô tả <em>✓</em></div>
+          <div class="app-mock-row">Ảnh mockup <em>10/10</em></div>
+        </div>
+      </div>
+      <div class="services-grid">
+        <div class="service-card reveal">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg></div>
+          <h3>Mở Shop Etsy</h3>
+          <p>Hỗ trợ đăng ký, cấu hình shop hoàn chỉnh. Tối ưu profile, banner, policies để shop chuyên nghiệp ngay từ ngày đầu.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-1">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+          <h3>Tối Ưu Listing & SEO</h3>
+          <p>Nghiên cứu keyword, tối ưu title, tags, description. Giúp sản phẩm của bạn xuất hiện trên trang đầu tìm kiếm Etsy.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-2">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 100 18c1 0 1.5-.8 1.5-1.5 0-.4-.2-.8-.4-1.1-.3-.3-.4-.6-.4-1 0-.8.7-1.4 1.5-1.4H16a5 5 0 005-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg></div>
+          <h3>Thiết Kế Mockup & Branding</h3>
+          <p>Tạo mockup sản phẩm chuyên nghiệp, thiết kế logo, banner và hình ảnh thương hiệu nổi bật trên marketplace.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-3">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></div>
+          <h3>Quản Lý & Vận Hành Shop</h3>
+          <p>Quản lý đơn hàng, chăm sóc khách hàng, xử lý review. Đảm bảo shop hoạt động trơn tru và tăng trưởng bền vững.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-4">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-9"/></svg></div>
+          <h3>Tư Vấn Chiến Lược Etsy</h3>
+          <p>Phân tích data, đề xuất chiến lược giá, sản phẩm và marketing. Giúp shop tăng doanh thu một cách chiến lược.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="service-card reveal reveal-delay-5">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Xử Lý Vi Phạm & Kháng Cáo</h3>
+          <p>Hỗ trợ xử lý khi shop bị vi phạm chính sách, bị suspend. Tư vấn kháng cáo và khôi phục shop nhanh chóng.</p>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FEATURE HIGHLIGHTS ======== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Xây dựng shop Etsy<br>cùng chuyên gia</h2>
+        <a href="#services" class="btn btn-outline section-action">Xem tất cả dịch vụ</a>
+      </div>
+
+      <!-- Feature 1: SEO -->
+      <div class="feature-block reveal">
+        <div class="feature-visual-box" aria-hidden="true">
+          <div class="fv-table">
+            <div class="fv-row fv-head"><span>Keyword</span><span>Lượt tìm/tháng</span><span>Cạnh tranh</span><span>Thứ hạng</span></div>
+            <div class="fv-row fv-active"><span>digital art print</span><span>48,200</span><span>Trung bình</span><span>#3 ↑</span></div>
+            <div class="fv-row"><span>printable wall art</span><span>36,900</span><span>Cao</span><span>#7 ↑</span></div>
+            <div class="fv-row"><span>minimalist poster</span><span>21,400</span><span>Thấp</span><span>#2 ↑</span></div>
+            <div class="fv-row"><span>boho nursery decor</span><span>12,800</span><span>Thấp</span><span>#5 ↑</span></div>
+            <div class="fv-row"><span>custom pet portrait</span><span>9,600</span><span>Trung bình</span><span>#11 ↑</span></div>
+          </div>
+        </div>
+        <div class="feature-caption">
+          <div>
+            <h3>Dịch vụ SEO Etsy hàng đầu Việt Nam</h3>
+            <p>Nghiên cứu keyword chuyên sâu, tối ưu title, tags, description, phân tích đối thủ và báo cáo ranking định kỳ — đẩy sản phẩm lên top tìm kiếm một cách tự nhiên, bền vững.</p>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+      </div>
+
+      <!-- Feature 2: Mockup (tilted glowing tiles, like the reference) -->
+      <div class="feature-block reveal">
+        <div class="feature-visual-box" aria-hidden="true">
+          <div class="fv-tiles">
+            <div class="fv-tile"></div>
+            <div class="fv-tile"></div>
+            <div class="fv-tile"></div>
+          </div>
+        </div>
+        <div class="feature-caption">
+          <div>
+            <h3>Thiết kế mockup chuyên nghiệp</h3>
+            <p>Mockup chất lượng cao cho mọi ngành hàng, branding kit đồng bộ và A/B testing hình ảnh — tăng tỉ lệ click và chuyển đổi trên Etsy.</p>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== ECOSYSTEM BENTO (reference: "Not just vibes, a full platform") ======== -->
+  <section class="section" id="platforms">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Không chỉ Etsy,<br>một hệ sinh thái trọn vẹn</h2>
+        <p class="section-desc">Từ shop Etsy đến săn deal trên Shopee, Lazada, TikTok Shop, Tiki — mọi thứ bạn cần ở cùng một nơi.</p>
+      </div>
+      <div class="bento reveal">
+        <div class="bento-cell">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-list">
+              <div class="bv-item"><span>Etsy</span><em class="on">Đang hoạt động</em></div>
+              <div class="bv-item"><span>Shopee</span><em>Deal mới</em></div>
+              <div class="bv-item"><span>Lazada</span><em>Deal mới</em></div>
+              <div class="bv-item"><span>TikTok Shop</span><em>Deal mới</em></div>
+              <div class="bv-item"><span>Tiki</span><em>Deal mới</em></div>
+            </div>
+          </div>
+          <div class="bento-label">Đa nền tảng →</div>
+        </div>
+        <div class="bento-cell bento-span-2">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-feed">
+              <div class="bv-feed-row"><b>SHOPEE</b><span>Voucher 50K đơn từ 299K</span><i>2 phút trước</i></div>
+              <div class="bv-feed-row bv-hl"><b>LAZADA</b><span>Mã freeship toàn sàn 11.11</span><i>5 phút trước</i></div>
+              <div class="bv-feed-row"><b>TIKTOK</b><span>Giảm 30% tối đa 100K</span><i>12 phút trước</i></div>
+              <div class="bv-feed-row"><b>TIKI</b><span>Hoàn xu 15% đơn điện tử</span><i>20 phút trước</i></div>
+            </div>
+          </div>
+          <div class="bento-label">Mã giảm giá real-time →</div>
+        </div>
+        <div class="bento-cell">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-chat">
+              <div class="bv-msg">Shop mình bị giảm traffic, cần làm gì?</div>
+              <div class="bv-msg bv-me">Mình sẽ audit 20 listing top và gửi kế hoạch SEO trong hôm nay.</div>
+            </div>
+          </div>
+          <div class="bento-label">Tư vấn 1-on-1 →</div>
+        </div>
+        <div class="bento-cell">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-clock"><span>24/7</span><small>Hỗ trợ liên tục</small></div>
+          </div>
+          <div class="bento-label">Hỗ trợ →</div>
+        </div>
+        <div class="bento-cell bento-big">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-big"><span>99.9%</span><small>Khách hàng hài lòng</small></div>
+          </div>
+          <div class="bento-label">Chất lượng →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======== COUPON GROUPS ======== -->
+  <section class="section" id="coupons">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Nhóm Săn Mã Giảm Giá<br>Độc Quyền</h2>
+        <p class="section-desc">Tham gia cộng đồng hàng nghìn thành viên, cập nhật mã giảm giá mới nhất từ các sàn TMĐT hàng đầu Việt Nam.</p>
+        <a href="https://t.me/jamescr123" target="_blank" class="btn btn-outline section-action">Mở Telegram</a>
+      </div>
+      <div class="coupon-grid">
+        <!-- Free -->
+        <div class="glass-card coupon-card reveal">
+          <span class="coupon-badge free">Miễn Phí</span>
+          <h3>Nhóm Cộng Đồng</h3>
+          <div class="members">2,000+ thành viên</div>
+          <div class="coupon-features">
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm giá cơ bản hàng ngày</div>
+            <div class="coupon-feature"><span class="dot"></span> Thông báo flash sale</div>
+            <div class="coupon-feature"><span class="dot"></span> Chia sẻ deal hot từ thành viên</div>
+            <div class="coupon-feature"><span class="dot"></span> Hỗ trợ cộng đồng</div>
+          </div>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-outline" style="width: 100%; justify-content: center;">Tham Gia Miễn Phí</a>
+        </div>
+        <!-- VIP -->
+        <div class="glass-card coupon-card featured reveal reveal-delay-1">
+          <span class="coupon-badge vip">Phổ biến nhất</span>
+          <h3>Nhóm VIP</h3>
+          <div class="members">800+ thành viên</div>
+          <div class="coupon-features">
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm giá độc quyền VIP</div>
+            <div class="coupon-feature"><span class="dot"></span> Cập nhật real-time 24/7</div>
+            <div class="coupon-feature"><span class="dot"></span> Hướng dẫn săn deal hiệu quả</div>
+            <div class="coupon-feature"><span class="dot"></span> Hỗ trợ riêng từ admin</div>
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm sâu từ đối tác</div>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Tham Gia VIP</a>
+        </div>
+        <!-- Premium -->
+        <div class="glass-card coupon-card reveal reveal-delay-2">
+          <span class="coupon-badge premium">Premium</span>
+          <h3>Nhóm Premium</h3>
+          <div class="members">200+ thành viên</div>
+          <div class="coupon-features">
+            <div class="coupon-feature"><span class="dot"></span> Tất cả quyền lợi VIP</div>
+            <div class="coupon-feature"><span class="dot"></span> Mã giảm giá "khủng" độc quyền</div>
+            <div class="coupon-feature"><span class="dot"></span> Tư vấn mua sắm 1-1</div>
+            <div class="coupon-feature"><span class="dot"></span> Hoàn tiền cashback thêm</div>
+            <div class="coupon-feature"><span class="dot"></span> Ưu tiên nhận deal giới hạn</div>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" class="btn btn-outline" style="width: 100%; justify-content: center;">Liên Hệ Tư Vấn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== STATS ======== -->
+  <section class="section stats-section reveal">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number" data-count="2000" data-suffix="+">0</div>
+          <div class="stat-label">Shops đã mở</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="10000" data-suffix="+">0</div>
+          <div class="stat-label">Mã giảm giá đã chia sẻ</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">4.9<span style="font-size: 0.6em; color: var(--text-muted);">/5</span></div>
+          <div class="stat-label">Đánh giá trung bình</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-count="3" data-suffix="+">0</div>
+          <div class="stat-label">Năm kinh nghiệm</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TESTIMONIALS ======== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Khách Hàng Nói Gì</h2>
+        <p class="section-desc">Hàng trăm sellers đã tin tưởng JamesCR. Đây là những chia sẻ từ cộng đồng của chúng tôi.</p>
+        <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-outline section-action">Tham gia cộng đồng</a>
+      </div>
+      <div class="testimonial-grid">
+        <div class="glass-card testimonial-card reveal">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"JamesCR đã giúp tôi mở shop Etsy và tối ưu SEO cực kỳ chuyên nghiệp. Chỉ sau 2 tháng, shop đã có những đơn hàng đầu tiên. Highly recommend!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">T</div>
+            <div>
+              <div class="testimonial-name">Trần Minh Tuấn</div>
+              <div class="testimonial-role">Etsy Seller — Digital Art</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Nhóm săn mã giảm giá VIP quá đỉnh! Tôi đã tiết kiệm được hàng triệu đồng mỗi tháng nhờ các mã độc quyền từ nhóm. Cảm ơn anh Duy!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">L</div>
+            <div>
+              <div class="testimonial-name">Lê Thị Hồng</div>
+              <div class="testimonial-role">Thành viên VIP</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Dịch vụ xử lý vi phạm rất nhanh và hiệu quả. Shop tôi bị suspend nhưng nhờ team JamesCR đã khôi phục thành công trong 3 ngày."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">P</div>
+            <div>
+              <div class="testimonial-name">Phạm Văn Đức</div>
+              <div class="testimonial-role">Etsy Seller — Print on Demand</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Mockup và branding từ JamesCR giúp shop tôi nhìn chuyên nghiệp hơn hẳn. Tỉ lệ click tăng 40% sau khi đổi ảnh mới. Rất đáng đầu tư!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">N</div>
+            <div>
+              <div class="testimonial-name">Nguyễn Thảo Linh</div>
+              <div class="testimonial-role">Etsy Seller — T-shirt Design</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Anh Duy tư vấn rất tận tâm, kiến thức sâu về Etsy. Từ chiến lược giá đến chọn niche, mọi thứ đều được phân tích chi tiết."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">H</div>
+            <div>
+              <div class="testimonial-name">Hoàng Anh Khoa</div>
+              <div class="testimonial-role">Etsy Seller — SVG Files</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"Tham gia nhóm Premium được 6 tháng, mỗi tháng tiết kiệm trung bình 2-3 triệu. Deal luôn cập nhật nhanh, admin nhiệt tình."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">M</div>
+            <div>
+              <div class="testimonial-name">Mai Phương Thúy</div>
+              <div class="testimonial-role">Thành viên Premium</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== COMMUNITY ======== -->
+  <section class="section" id="community">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Một cộng đồng<br>luôn đồng hành cùng bạn</h2>
+        <p class="section-desc">Hàng nghìn sellers và người mua sắm thông minh cùng chia sẻ kinh nghiệm, hỗ trợ nhau phát triển.</p>
+        <div class="section-action community-actions">
+          <a href="tel:0877569869" class="btn btn-outline section-action">Gọi 0877.569.869</a>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-primary section-action">Tham gia cộng đồng</a>
+        </div>
+      </div>
+      <div class="community-shot reveal" aria-hidden="true">
+        <div class="cs-topbar"><span class="cs-dots"><i></i><i></i><i></i></span><span class="cs-url">t.me/jamescr123</span><span></span></div>
+        <div class="cs-body">
+          <div class="cs-feed">
+            <div class="cs-post"><b>JamesCR</b><p>📌 Tổng hợp mã giảm giá Shopee 11.11 — cập nhật liên tục trong ngày.</p></div>
+            <div class="cs-post"><b>Minh Tuấn</b><p>Shop Etsy của mình vừa lên top 3 keyword "digital art print" 🎉 cảm ơn team!</p></div>
+            <div class="cs-post"><b>Thảo Linh</b><p>Ai cần mockup áo thun mẫu mới thì inbox admin nha.</p></div>
+          </div>
+          <div class="cs-side">
+            <div class="cs-card">
+              <div class="cs-card-title">Thành viên nổi bật</div>
+              <div class="cs-member"><i>T</i><span>Trần Minh Tuấn<small>Etsy Seller</small></span></div>
+              <div class="cs-member"><i>L</i><span>Lê Thị Hồng<small>Thành viên VIP</small></span></div>
+              <div class="cs-member"><i>H</i><span>Hoàng Anh Khoa<small>Etsy Seller</small></span></div>
+            </div>
+            <div class="cs-card">
+              <div class="cs-card-title">Nhóm</div>
+              <div class="cs-group"><span>Cộng Đồng<small>2,000+ thành viên</small></span><em>Miễn phí</em></div>
+              <div class="cs-group"><span>VIP<small>800+ thành viên</small></span><em class="on">Tham gia</em></div>
+              <div class="cs-group"><span>Premium<small>200+ thành viên</small></span><em>Liên hệ</em></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ======== FAQ ======== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Dịch vụ mở shop Etsy bao gồm những gì?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Dịch vụ mở shop Etsy bao gồm: đăng ký tài khoản Etsy, thiết lập shop profile hoàn chỉnh, cấu hình payment & shipping, thiết kế banner & logo, tạo shop policies, và hướng dẫn đăng sản phẩm đầu tiên. Chúng tôi đồng hành cùng bạn cho đến khi shop sẵn sàng hoạt động.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Tôi chưa biết gì về Etsy, có sử dụng dịch vụ được không?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Hoàn toàn được! Dịch vụ của chúng tôi phù hợp với cả người mới bắt đầu. Đội ngũ sẽ hướng dẫn bạn từ những bước cơ bản nhất, từ hiểu nền tảng Etsy đến cách vận hành shop hiệu quả.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Nhóm săn mã giảm giá hoạt động như thế nào?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Nhóm hoạt động trên Telegram. Admin và các thành viên sẽ liên tục cập nhật mã giảm giá, deal hot từ các sàn TMĐT (Shopee, Lazada, Tiki, TikTok Shop). Nhóm VIP và Premium có thêm mã độc quyền từ đối tác và hỗ trợ riêng.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Thời gian tối ưu SEO cho shop Etsy là bao lâu?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Thông thường, sau 2-4 tuần tối ưu SEO, bạn sẽ bắt đầu thấy sự cải thiện về thứ hạng tìm kiếm. Kết quả rõ rệt thường đến sau 1-3 tháng tùy thuộc vào độ cạnh tranh của ngành hàng và chất lượng sản phẩm.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Shop bị vi phạm/suspend thì xử lý được không?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Có, chúng tôi đã xử lý thành công hàng trăm trường hợp shop bị vi phạm hoặc suspend. Đội ngũ sẽ phân tích nguyên nhân, soạn thư kháng cáo chuyên nghiệp và hỗ trợ bạn trong toàn bộ quá trình khôi phục shop.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-5">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Làm sao để liên hệ tư vấn?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Bạn có thể liên hệ trực tiếp qua Telegram <strong>@jamescr123</strong> hoặc gọi hotline <strong>0877.569.869</strong>. Đội ngũ sẽ phản hồi trong vòng 30 phút trong giờ làm việc (8h - 22h hàng ngày).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA BOTTOM (reference: "Your next idea starts here") ======== -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <h2 class="reveal">Sẵn sàng bắt đầu?</h2>
+      <p class="reveal reveal-delay-1">Đăng ký hôm nay, nhận ưu đãi đặc biệt cho khách hàng mới.</p>
+      <a href="https://t.me/jamescr123" target="_blank" class="cta-prompt reveal reveal-delay-2" aria-label="Nhắn JamesCR qua Telegram">
+        <span class="cta-prompt-text">Shop Etsy của bạn đang cần hỗ trợ gì?</span>
+        <span class="cta-prompt-bar">
+          <span>Telegram @jamescr123</span>
+          <span class="cta-send" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+        </span>
+      </a>
+      <div class="cta-chips reveal reveal-delay-3">
+        <a href="https://t.me/jamescr123" target="_blank">Mở shop Etsy</a>
+        <a href="https://t.me/jamescr123" target="_blank">Tối ưu SEO listing</a>
+        <a href="https://t.me/jamescr123" target="_blank">Kháng cáo shop bị suspend</a>
+        <a href="https://t.me/jamescr123" target="_blank">Tham gia nhóm VIP</a>
+      </div>
+      <a href="tel:0877569869" class="cta-phone reveal reveal-delay-3">Hoặc gọi 0877.569.869</a>
+    </div>
+  </section>
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Về JamesCR</h4>
+          <ul>
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#community">Cộng đồng</a></li>
+            <li><a href="#platforms">Hệ sinh thái</a></li>
+            <li><span class="footer-note">Điều hành bởi<br>Nguyễn Hữu Duy</span></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Dịch Vụ</h4>
+          <ul>
+            <li><a href="#services">Mở Shop Etsy</a></li>
+            <li><a href="#services">SEO Etsy</a></li>
+            <li><a href="#services">Thiết Kế Mockup</a></li>
+            <li><a href="#services">Quản Lý Shop</a></li>
+            <li><a href="#services">Tư Vấn Chiến Lược</a></li>
+            <li><a href="#services">Xử Lý Vi Phạm</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Nhóm Giảm Giá</h4>
+          <ul>
+            <li><a href="#coupons">Nhóm Cộng Đồng</a></li>
+            <li><a href="#coupons">Nhóm VIP</a></li>
+            <li><a href="#coupons">Nhóm Premium</a></li>
+            <li><a href="#platforms">Shopee Deals</a></li>
+            <li><a href="#platforms">Lazada Deals</a></li>
+            <li><a href="#platforms">TikTok Shop Deals</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Hỗ Trợ</h4>
+          <ul>
+            <li><a href="#faq">Câu hỏi thường gặp</a></li>
+            <li><a href="#contact">Nhận tư vấn</a></li>
+            <li><a href="https://t.me/jamescr123" target="_blank">Báo lỗi / Góp ý</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Liên Hệ</h4>
+          <ul>
+            <li><a href="tel:0877569869">0877.569.869</a></li>
+            <li><a href="https://t.me/jamescr123" target="_blank">Telegram @jamescr123</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Nhóm Zalo deal hời</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-brandline">
+          <a href="#" class="nav-logo">JamesCR</a>
+          <span class="footer-copyright">© 2024 JamesCR. All rights reserved.</span>
+        </div>
+        <div class="footer-socials">
+          <a href="https://t.me/jamescr123" target="_blank" aria-label="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></a>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" aria-label="Nhóm Zalo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-9 8.4 9 9 0 01-3.9-.9L3 20l1.3-3.9A8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z"/><path d="M8 9.5h4l-4 5h4M15 9.5v5"/></svg></a>
+          <a href="tel:0877569869" aria-label="Gọi điện"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- ======== JAVASCRIPT ======== -->
+  <script>
+    // === Navbar Scroll ===
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // === Mobile Menu ===
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('active');
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // === Scroll Reveal ===
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Counter Animation ===
+    // ?static in URL = disable motion (used for screenshot comparisons)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]static\b/.test(location.search);
+    if (reduceMotion) document.documentElement.classList.add('no-motion');
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        if (reduceMotion) { el.textContent = target.toLocaleString('en-US') + suffix; return; }
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(now) {
+          const elapsed = now - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const current = Math.round(eased * target);
+          el.textContent = current.toLocaleString() + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animateCounters();
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection) statsObserver.observe(statsSection);
+
+    // === FAQ Toggle ===
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      // Toggle current
+      if (!wasOpen) item.classList.add('open');
+    }  </script>
+</body>
+</html>
