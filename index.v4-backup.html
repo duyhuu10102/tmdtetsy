@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DHDglobal — Dịch Vụ Etsy &amp; Thu PingPong Giá Tốt</title>
+  <meta name="description" content="DHDglobal: dịch vụ mở shop Etsy tỷ lệ live cao, bảo hành lâu dài và thu PingPong (Pipo) giá tốt. Kèm nhóm săn deal hời miễn phí. Đồng hành cùng 500+ sellers.">
+  <meta name="keywords" content="dhdglobal, etsy, dịch vụ etsy, mở shop etsy, pingpong, thu pingpong, pipo, deal hời, mã giảm giá">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%233b82f6'/%3E%3Cstop offset='.55' stop-color='%236366f1'/%3E%3Cstop offset='1' stop-color='%2306b6d4'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='8' fill='url(%23g)'/%3E%3Cg fill='none' stroke='white' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 7.5h6.5a8.5 8.5 0 010 17H9z' stroke-width='2.4'/%3E%3Cpath d='M9 16h14.6' stroke-width='1.5'/%3E%3Cpath d='M15.5 7.6c2.6 2.2 3.9 5 3.9 8.4s-1.3 6.2-3.9 8.4' stroke-width='1.5'/%3E%3C/g%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ========== CSS VARIABLES ========== */
+    :root {
+      --bg-primary: #000000;
+      --bg-secondary: #0A0A0A;
+      --bg-card: #111111;
+      --bg-card-hover: #1A1A1A;
+      --text-primary: #FFFFFF;
+      --text-secondary: #A1A1AA;
+      --text-muted: #71717A;
+      --accent-blue: #3B82F6;
+      --accent-purple: #8B5CF6;
+      --accent-cyan: #06B6D4;
+      --border-subtle: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(255, 255, 255, 0.12);
+      --glow-blue: rgba(59, 130, 246, 0.15);
+      --glow-purple: rgba(139, 92, 246, 0.10);
+    }
+
+    /* ========== UTILITY ========== */
+    .container {
+      max-width: 1104px; /* 1040px content + 2×32px padding — narrow column like reference */
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    @media (min-width: 768px) {
+      .container { padding: 0 32px; }
+    }
+
+    /* ========== SCROLL ANIMATIONS ========== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      *, *::before, *::after { animation: none !important; }
+    }
+    .no-motion .reveal { opacity: 1; transform: none; transition: none; }
+    .no-motion *, .no-motion *::before, .no-motion *::after { animation: none !important; }
+
+    /* ========== GLOW EFFECTS ========== */
+    .glow-effect {
+      box-shadow: 0 0 80px var(--glow-blue), 0 0 160px var(--glow-purple);
+    }
+    .glow-effect-strong {
+      box-shadow: 0 0 100px rgba(59, 130, 246, 0.25), 0 0 200px rgba(139, 92, 246, 0.15);
+    }
+
+    /* ========== GLASS CARD ========== */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      transition: all 0.3s ease-out;
+    }
+    .glass-card:hover {
+      border-color: var(--border-hover);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
+    }
+    @media (min-width: 768px) {
+      .glass-card { border-radius: 14px; }
+    }
+
+    /* ========== GRADIENT TEXT ========== */
+    .gradient-text {
+      background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* Reference is monochrome: accent color reserved for glows only */
+    .gradient-text-blue {
+      background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ========== BUTTONS ========== */
+    .btn {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 44px; /* touch target */
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+    /* Subtle hover: 1px lift + soft light sweep across the pill; press = slight shrink */
+    .btn::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.45) 50%, transparent 70%);
+      transform: translateX(-120%);
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:hover::after { transform: translateX(120%); }
+    .btn:active { transform: translateY(0) scale(0.97); transition-duration: 0.1s; }
+    .btn:focus-visible { outline: 2px solid rgba(255, 255, 255, 0.6); outline-offset: 2px; }
+    .btn-primary {
+      background: #fff;
+      color: #000;
+    }
+    .btn-primary:hover {
+      background: #f4f4f5;
+      box-shadow: 0 6px 24px rgba(255, 255, 255, 0.12), 0 0 0 4px rgba(255, 255, 255, 0.06);
+    }
+    .btn-primary::after {
+      background: linear-gradient(105deg, transparent 35%, rgba(113, 113, 122, 0.18) 50%, transparent 65%);
+    }
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      border: 1px solid transparent;
+    }
+    .btn-outline::after {
+      background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.12) 50%, transparent 70%);
+    }
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+    .btn-large {
+      padding: 12px 24px;
+      font-size: 15px;
+    }
+    /* Same feel on chip / text-link style buttons */
+    .cta-chips a, .hero-side-link, .service-link, .footer-socials a {
+      transition: color 0.3s ease-out, background 0.3s ease-out, border-color 0.3s ease-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), gap 0.3s ease-out;
+    }
+    .cta-chips a:hover, .footer-socials a:hover { transform: translateY(-1px); }
+    .hero-side-link:hover { transform: translateX(3px); }
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .btn::after, .cta-chips a, .hero-side-link, .footer-socials a { transition: none; }
+      .btn:hover, .cta-chips a:hover, .hero-side-link:hover, .footer-socials a:hover { transform: none; }
+    }
+
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      padding: 12px 0;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .navbar.scrolled {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom-color: var(--border-subtle);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-logo {
+      font-size: 22px; /* +30% */
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+    .nav-links {
+      display: none;
+      gap: 24px;
+    }
+    .nav-links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .nav-phone {
+      display: none;
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+    .nav-cta {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .nav-links { display: flex; }
+      .nav-cta { display: inline-flex; }
+      .nav-phone { display: block; }
+      .hamburger { display: none !important; }
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+    }
+    .hamburger span {
+      width: 22px;
+      height: 2px;
+      background: #fff;
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color 0.3s;
+    }
+    .mobile-menu a:hover { color: #fff; }
+    .mobile-menu .btn { font-size: 16px; min-width: 220px; }
+    .mobile-menu .btn-primary, .mobile-menu .btn-primary:hover { color: #000; }
+    .mobile-menu .btn-outline { color: #fff; }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 120px 0 40px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 600px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.04) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 600;
+      line-height: 1.18; /* room for stacked Vietnamese diacritics (ệ, ồ, ữ) */
+      letter-spacing: -0.035em;
+      max-width: 760px;
+      margin: 0 0 16px;
+    }
+    .hero p {
+      font-size: clamp(15px, 1.6vw, 17px);
+      color: var(--text-secondary);
+      max-width: 560px;
+      margin: 0 0 28px;
+      line-height: 1.6;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .hero-side-link {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: color 0.3s ease-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hero-side-link:hover { color: #fff; }
+    .hero-visual {
+      margin-top: 40px;
+      position: relative;
+    }
+    /* Wide dark stage framing the glowing prompt card (reference hero) */
+    .hero-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      min-height: 320px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(ellipse 60% 55% at 50% 50%, rgba(37, 99, 235, 0.16) 0%, rgba(0, 0, 0, 0) 70%), #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 24px;
+    }
+    .hero-prompt-wrap {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .hero-prompt-top {
+      display: flex;
+      gap: 10px;
+    }
+    .hero-select, .hero-icon-btn {
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      font-size: 13px;
+      color: #e4e4e7;
+    }
+    .hero-select { flex: 1; justify-content: space-between; padding: 0 14px; }
+    .hero-select span { color: var(--text-muted); }
+    .hero-icon-btn { width: 40px; justify-content: center; color: var(--text-secondary); font-size: 18px; }
+    .hero-prompt {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 140px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1.5px solid rgba(96, 165, 250, 0.9);
+      background: linear-gradient(180deg, rgba(37, 99, 235, 0.45) 0%, rgba(30, 58, 138, 0.35) 100%);
+      box-shadow:
+        0 0 24px rgba(59, 130, 246, 0.7),
+        0 0 80px rgba(37, 99, 235, 0.45),
+        0 0 160px rgba(37, 99, 235, 0.25),
+        inset 0 0 30px rgba(96, 165, 250, 0.25);
+      transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
+    }
+    .hero-prompt:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 0 28px rgba(59, 130, 246, 0.8),
+        0 0 100px rgba(37, 99, 235, 0.5),
+        0 0 180px rgba(37, 99, 235, 0.3),
+        inset 0 0 30px rgba(96, 165, 250, 0.3);
+    }
+    .hero-prompt-text {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .hero-caret {
+      display: inline-block;
+      width: 2px;
+      height: 1.1em;
+      background: #fff;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+      animation: caretBlink 1s steps(1) infinite;
+    }
+    @keyframes caretBlink { 50% { opacity: 0; } }
+    .hero-prompt-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .hero-prompt-tools { display: flex; gap: 6px; }
+    .hero-prompt-tools span {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+    .hero-prompt-tools span:last-child { background: #fff; color: #000; }
+    @media (min-width: 768px) {
+      .hero { padding: 140px 0 48px; }
+    }
+
+    /* ========== SOCIAL PROOF ========== */
+    .social-proof {
+      padding: 24px 0 40px;
+    }
+    .logo-item {
+      font-size: 19px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.55);
+      transition: color 0.3s;
+    }
+    .logo-item:hover { color: #fff; }
+    .proof-row {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 8px 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .proof-sep {
+      width: 1px;
+      height: 12px;
+      background: var(--border-hover);
+    }
+
+    /* ========== SECTION COMMON ========== */
+    /* Top-only padding → one consistent gap between sections (reference: very large gaps) */
+    .section {
+      padding: 112px 0 0;
+    }
+    @media (min-width: 768px) {
+      .section { padding: 176px 0 0; }
+    }
+    .section-title {
+      font-size: clamp(28px, 3.6vw, 40px);
+      font-weight: 600;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+      margin-bottom: 12px;
+    }
+    .section-title:last-child { margin-bottom: 0; }
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      max-width: 520px;
+      line-height: 1.6;
+    }
+    /* Left-aligned header; optional small action pinned right (reference style) */
+    .section-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 0;
+      align-items: end;
+      margin-bottom: 40px;
+    }
+    .section-header > .section-action {
+      justify-self: start;
+      margin-top: 20px;
+    }
+    @media (min-width: 768px) {
+      .section-header { grid-template-columns: 1fr auto; column-gap: 24px; }
+      .section-header > .section-title,
+      .section-header > .section-desc { grid-column: 1; }
+      .section-header > .section-action { grid-column: 2; grid-row: 1 / span 2; margin-top: 0; justify-self: end; }
+    }
+    .section-action {
+      min-height: 32px;
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+
+    /* ========== SERVICES GRID ========== */
+    /* Large product mockup above the services strip */
+    .app-mock {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #111;
+      overflow: hidden;
+      margin-bottom: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      min-height: 360px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    @media (min-width: 768px) {
+      .app-mock { grid-template-columns: 180px 1fr 200px; min-height: 460px; }
+    }
+    .app-mock-side, .app-mock-panel { display: none; padding: 14px; background: #141414; }
+    @media (min-width: 768px) {
+      .app-mock-side { display: block; border-right: 1px solid var(--border-subtle); }
+      .app-mock-panel { display: block; border-left: 1px solid var(--border-subtle); }
+    }
+    .app-mock-title { color: #e4e4e7; font-weight: 600; font-size: 12px; margin-bottom: 14px; }
+    .app-mock-item { padding: 6px 8px; border-radius: 6px; margin-bottom: 2px; }
+    .app-mock-item.active { background: rgba(255,255,255,0.06); color: #e4e4e7; }
+    .app-mock-canvas { padding: 18px; display: flex; flex-direction: column; gap: 12px; }
+    .app-mock-bar { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px; background: #0c2a47; color: #bfdbfe; }
+    .app-mock-bar i { width: 8px; height: 8px; border-radius: 50%; background: #3b82f6; display: inline-block; }
+    .app-mock-hero { flex: 1; min-height: 160px; border-radius: 8px; background: linear-gradient(180deg, #0b3a66 0%, #08345c 60%, #0a2540 100%); display: flex; align-items: flex-end; padding: 16px; }
+    .app-mock-hero span { color: #e0f2fe; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+    .app-mock-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .app-mock-grid div { aspect-ratio: 1; border-radius: 6px; background: #1c1c1c; }
+    .app-mock-grid div:nth-child(2) { background: linear-gradient(135deg, #1e3a5f, #0b3a66); }
+    .app-mock-score { font-size: 32px; font-weight: 600; color: #fff; letter-spacing: -0.03em; line-height: 1; margin: 8px 0 4px; }
+    .app-mock-meter { height: 4px; border-radius: 4px; background: #262626; margin: 10px 0 16px; overflow: hidden; }
+    .app-mock-meter b { display: block; height: 100%; width: 92%; background: #fff; }
+    .app-mock-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-subtle); }
+    .app-mock-row em { font-style: normal; color: #e4e4e7; }
+
+    /* Services: one bordered block, cells divided by hairlines (no gaps) */
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .service-card {
+      padding: 28px;
+      background: #000;
+      transition: background 0.3s ease-out;
+    }
+    .service-card:hover { background: #0a0a0a; }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #e4e4e7;
+    }
+    .service-card h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .service-link {
+      font-size: 14px;
+      color: #fff;
+      font-weight: 500;
+      transition: gap 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .service-link:hover { gap: 8px; }
+
+    /* ========== FEATURE HIGHLIGHT ========== */
+    .feature-visual-box {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #0a0a0a;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      position: relative;
+    }
+
+    /* Reference layout: big visual on top, caption below with link on the right */
+    .feature-block { margin-bottom: 96px; }
+    .feature-block:last-child { margin-bottom: 0; }
+    .feature-block .feature-visual-box {
+      aspect-ratio: auto;
+      min-height: 280px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    @media (min-width: 768px) {
+      .feature-block .feature-visual-box { min-height: 400px; padding: 40px; }
+    }
+    .feature-caption {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 20px;
+    }
+    @media (min-width: 768px) {
+      .feature-caption { flex-direction: row; justify-content: space-between; align-items: flex-end; gap: 40px; }
+    }
+    .feature-caption h3 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .feature-caption p { font-size: 14px; color: var(--text-secondary); max-width: 480px; line-height: 1.6; }
+    .feature-caption .service-link { flex-shrink: 0; color: var(--text-secondary); }
+    .feature-caption .service-link:hover { color: #fff; }
+
+    /* Mock: keyword table (grayscale UI) */
+
+    /* Mock: tilted glowing tiles */
+
+    /* ========== COUPON GROUPS ========== */
+    .coupon-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    /* ========== TRUST (motto + rating + stats) ========== */
+    .trust-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 900px) { .trust-grid { grid-template-columns: 1.15fr 1fr; } }
+    .rating-card {
+      display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
+      padding: 32px; border-radius: 14px; border: 1px solid var(--border-subtle);
+      background: radial-gradient(ellipse 70% 60% at 20% 0%, rgba(251, 191, 36, 0.10), transparent 60%), #050505;
+    }
+    @media (min-width: 768px) { .rating-card { padding: 44px; } }
+    .rating-stars { position: relative; width: max-content; margin-bottom: 20px; }
+    .rs-row { display: flex; gap: 6px; }
+    .rs-row svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .rs-base svg { fill: #27272a; }
+    .rs-fill { position: absolute; inset: 0 auto 0 0; overflow: hidden; width: 0; transition: width 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.3s; }
+    .rs-fill svg { fill: #fbbf24; filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.45)); }
+    .reveal.visible .rs-fill, .no-motion .rs-fill { width: 98.3%; } /* 4.9 of 5 stars */
+    .no-motion .rs-fill { transition: none; }
+    .rating-score { font-size: clamp(72px, 10vw, 112px); font-weight: 600; letter-spacing: -0.06em; line-height: 1; }
+    .rating-score small { font-size: 0.32em; font-weight: 500; letter-spacing: -0.02em; color: var(--text-muted); margin-left: 6px; }
+    .rating-meta { margin-top: 14px; font-size: 15px; color: var(--text-secondary); max-width: 380px; line-height: 1.6; }
+    .rating-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rating-badges span {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #d4d4d8;
+      padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border-hover); background: rgba(255,255,255,0.03);
+    }
+    .values { display: grid; gap: 16px; }
+    .value-card { padding: 28px; border-radius: 14px; border: 1px solid var(--border-subtle); background: #050505; }
+    .value-card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .value-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
+    .trust-stats {
+      margin-top: 16px; display: grid; grid-template-columns: 1fr; gap: 1px;
+      background: var(--border-subtle); border: 1px solid var(--border-subtle); border-radius: 14px; overflow: hidden;
+    }
+    @media (min-width: 640px) { .trust-stats { grid-template-columns: repeat(3, 1fr); } }
+    .trust-stats .stat-item { background: #000; padding: 28px 20px; text-align: center; }
+    .stat-item .stat-number { font-size: clamp(32px, 4.5vw, 48px); font-weight: 600; letter-spacing: -0.045em; line-height: 1; margin-bottom: 8px; }
+    .stat-item .stat-label { font-size: 13px; color: var(--text-muted); }
+    /* ========== FAQ ========== */
+    .faq-list {
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .faq-question {
+      width: 100%;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: left;
+      min-height: 44px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+      transition: color 0.3s;
+    }
+    .faq-question:hover { color: var(--text-secondary); }
+    .faq-icon {
+      font-size: 20px;
+      transition: transform 0.3s ease;
+      color: var(--text-muted);
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+    .faq-answer p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ========== CTA BOTTOM ========== */
+    .cta-section {
+      padding: 128px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .cta-section { padding: 176px 0 160px; }
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      max-width: 100%;
+      height: 360px;
+      background: radial-gradient(ellipse, rgba(59,130,246,0.12) 0%, rgba(139,92,246,0.05) 40%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section h2 {
+      font-size: clamp(30px, 4vw, 44px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .cta-section p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+    .cta-prompt {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 560px;
+      min-height: 120px;
+      margin: 0 auto;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border-hover);
+      background: #161616;
+      text-align: left;
+      transition: border-color 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    .cta-prompt:hover {
+      border-color: rgba(255,255,255,0.25);
+      box-shadow: 0 0 60px rgba(59,130,246,0.12);
+    }
+    .cta-prompt-text { font-size: 15px; color: var(--text-muted); }
+    .cta-prompt-bar { display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--text-muted); }
+    .cta-send { width: 28px; height: 28px; border-radius: 8px; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; }
+    .cta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      max-width: 720px;
+      margin: 16px auto 0;
+    }
+    .cta-chips a {
+      font-size: 12px;
+      color: var(--text-secondary);
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255,255,255,0.03);
+      transition: all 0.3s ease-out;
+    }
+    .cta-chips a:hover { color: #fff; border-color: var(--border-hover); }
+    /* ========== FOOTER ========== */
+    .footer {
+      padding: 64px 0 32px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 24px;
+      margin-bottom: 64px;
+    }
+    @media (min-width: 768px) {
+      .footer-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .footer-col ul {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .footer-col a, .footer-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      line-height: 1.5;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      align-items: center;
+      text-align: center;
+    }
+    @media (min-width: 768px) {
+      .footer-bottom { flex-direction: row; justify-content: space-between; }
+    }
+    .footer-brandline { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .footer-copyright {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .footer-socials {
+      display: flex;
+      gap: 4px;
+    }
+    .footer-socials a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.3s;
+    }
+    .footer-socials a:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.05);
+    }
+    /* ========== ECOSYSTEM BENTO ========== */
+    .bento {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1px;
+      background: var(--border-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    @media (min-width: 768px) {
+      .bento { grid-template-columns: repeat(3, 1fr); }
+      .bento-span-2 { grid-column: span 2; }
+    }
+    .bento-cell {
+      background: #000;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      min-height: 260px;
+    }
+    .bento-visual {
+      flex: 1;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      overflow: hidden;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .bento-label { font-size: 13px; color: var(--text-secondary); }
+    .bv-list, .bv-feed, .bv-chat { width: 100%; }
+    .bv-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-subtle); }
+    .bv-item span { color: #e4e4e7; }
+    .bv-item em { font-style: normal; }
+    .bv-item em.on { color: #fff; }
+    .bv-feed-row { display: grid; grid-template-columns: 64px 1fr auto; gap: 12px; padding: 10px 12px; border-radius: 8px; }
+    .bv-feed-row b { font-size: 10px; letter-spacing: 0.08em; color: #71717a; font-weight: 600; }
+    .bv-feed-row span { color: #d4d4d8; }
+    .bv-feed-row i { font-style: normal; color: #52525b; }
+    .bv-hl { background: rgba(255,255,255,0.05); }
+    .bv-chat { display: flex; flex-direction: column; gap: 8px; }
+    .bv-msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; background: #1c1c1c; color: #d4d4d8; line-height: 1.45; }
+    .bv-me { align-self: flex-end; background: #fff; color: #000; }
+    .bv-clock, .bv-big { text-align: center; }
+    .bv-clock span { display: block; font-size: 40px; font-weight: 600; color: #fff; letter-spacing: -0.04em; line-height: 1; }
+    .bv-big { position: relative; }
+    .bento-big .bento-visual {
+      background: radial-gradient(ellipse 90% 70% at 70% 0%, rgba(255,255,255,0.14) 0%, rgba(255,255,255,0) 60%), #0a0a0a;
+    }
+    .bv-big span { display: block; font-size: 52px; font-weight: 600; color: #fff; letter-spacing: -0.05em; line-height: 1; }
+    .bv-clock small, .bv-big small { display: block; margin-top: 8px; font-size: 12px; }
+    /* ========== COMMUNITY ========== */
+    .community-actions { display: flex; gap: 8px; flex-wrap: wrap; padding: 0; min-height: 0; }
+    .community-shot {
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: #121212;
+      overflow: hidden;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .cs-topbar { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; padding: 10px 14px; border-bottom: 1px solid var(--border-subtle); }
+    .cs-dots { display: flex; gap: 6px; }
+    .cs-dots i { width: 9px; height: 9px; border-radius: 50%; background: #2a2a2a; }
+    .cs-url { padding: 4px 14px; border-radius: 6px; background: #1a1a1a; }
+    .cs-body { display: grid; grid-template-columns: 1fr; gap: 16px; padding: 16px; min-height: 360px; }
+    @media (min-width: 768px) { .cs-body { grid-template-columns: 1fr 260px; padding: 24px; } }
+    .cs-feed { display: flex; flex-direction: column; gap: 10px; }
+    .cs-post { padding: 12px 14px; border-radius: 10px; background: #181818; max-width: 520px; }
+    .cs-post b { display: block; color: #e4e4e7; font-weight: 600; margin-bottom: 4px; }
+    .cs-post p { color: #a1a1aa; line-height: 1.5; }
+    .cs-side { display: none; flex-direction: column; gap: 12px; }
+    @media (min-width: 768px) { .cs-side { display: flex; } }
+    .cs-card { padding: 14px; border-radius: 10px; background: #181818; border: 1px solid var(--border-subtle); }
+    .cs-card-title { color: #e4e4e7; font-weight: 600; margin-bottom: 10px; }
+    .cs-member, .cs-group { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 0; }
+    .cs-member { justify-content: flex-start; }
+    .cs-member i { width: 26px; height: 26px; border-radius: 50%; background: #262626; color: #e4e4e7; font-style: normal; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .cs-member span, .cs-group span { color: #d4d4d8; }
+    .cs-member small, .cs-group small { display: block; color: #71717a; font-size: 11px; }
+    .cs-group em { font-style: normal; padding: 3px 10px; border-radius: 999px; background: #262626; color: #d4d4d8; }
+    .cs-group em.on { background: #fff; color: #000; }
+
+    /* ========== RESPONSIVE HELPERS ========== */
+    @media (max-width: 767px) {
+      .hide-mobile { display: none !important; }
+    }
+    @media (min-width: 768px) {
+      .hide-desktop { display: none !important; }
+    }
+
+    /* =====================================================================
+       VISUAL & SCROLL EFFECTS (v3)
+       ===================================================================== */
+
+    /* Logo mark */
+    .nav-logo { display: inline-flex; align-items: center; gap: 10px; }
+    .nav-mark {
+      width: 30px; height: 30px;
+      border-radius: 9px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: #fff;
+      background: linear-gradient(135deg, #3b82f6 0%, #6366f1 55%, #06b6d4 100%);
+      box-shadow: 0 0 18px rgba(59, 130, 246, 0.45), inset 0 1px 0 rgba(255,255,255,0.35);
+    }
+
+    /* Scroll progress bar */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 1100;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+      transform-origin: 0 50%; transform: scaleX(0);
+      box-shadow: 0 0 10px rgba(59, 130, 246, 0.6);
+      pointer-events: none;
+    }
+
+    /* Reveal variants */
+    .reveal-blur { filter: blur(10px); transition-property: opacity, transform, filter; transition-duration: 0.9s; } /* keeps .reveal-delay-* */
+    .reveal-blur.visible { filter: blur(0); }
+    .reveal-scale { transform: translateY(40px) scale(0.96); }
+    .reveal-scale.visible { transform: none; }
+    .no-motion .reveal-blur, .no-motion .reveal-scale { filter: none; transform: none; }
+
+    /* Hero aurora: slowly drifting colour blobs behind the hero */
+    .hero-aurora { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .hero-aurora i {
+      position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.35;
+      will-change: transform;
+    }
+    .hero-aurora i:nth-child(1) { width: 520px; height: 420px; left: -120px; top: -160px; background: #1d4ed8; animation: drift1 18s ease-in-out infinite alternate; }
+    .hero-aurora i:nth-child(2) { width: 460px; height: 380px; right: -140px; top: 40px; background: #6d28d9; opacity: 0.22; animation: drift2 22s ease-in-out infinite alternate; }
+    .hero-aurora i:nth-child(3) { width: 380px; height: 300px; left: 40%; top: 520px; background: #0891b2; opacity: 0.18; animation: drift3 20s ease-in-out infinite alternate; }
+    @keyframes drift1 { to { transform: translate(140px, 90px) scale(1.15); } }
+    @keyframes drift2 { to { transform: translate(-160px, 120px) scale(0.9); } }
+    @keyframes drift3 { to { transform: translate(-120px, -80px) scale(1.2); } }
+    .hero > .container { position: relative; z-index: 1; }
+
+    /* Hero badge live dot */
+    .badge-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
+      animation: livePulse 2s ease-out infinite;
+    }
+    @keyframes livePulse { 0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); } 100% { box-shadow: 0 0 0 8px rgba(34,197,94,0); } }
+
+    /* Shimmering second headline line */
+    .shimmer-text {
+      background: linear-gradient(100deg, #a1a1aa 0%, #ffffff 25%, #93c5fd 45%, #ffffff 60%, #a1a1aa 100%);
+      background-size: 250% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s ease-in-out infinite;
+    }
+    @keyframes shimmer { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0% 0; } }
+
+    /* Hero parallax: --hp goes 0 → 1 as the hero scrolls away */
+    .hero { --hp: 0; }
+    .hero-stage .hero-prompt-wrap {
+      transform: translateY(calc(var(--hp) * -60px)) scale(calc(1 + var(--hp) * 0.06));
+      transition: transform 0.1s linear;
+    }
+    .hero-stage { background-position: 50% calc(50% + var(--hp) * 40px); }
+    .hero-aurora { transform: translateY(calc(var(--hp) * 120px)); }
+
+    /* Infinite logo marquee */
+    .marquee {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+              mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+      max-width: 1104px; margin: 0 auto;
+    }
+    .marquee-track { display: flex; align-items: center; gap: 64px; width: max-content; animation: marquee 28s linear infinite; padding: 8px 0; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee { to { transform: translateX(calc(-50% - 32px)); } }
+    .no-motion .marquee-track { animation: none; flex-wrap: wrap; justify-content: center; width: auto; gap: 20px 48px; }
+    .no-motion .marquee-track [aria-hidden="true"] { display: none; }
+
+    /* Services: 3 + 2 layout on desktop */
+    @media (min-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(6, 1fr); }
+      .svc-third { grid-column: span 2; }
+      .svc-half { grid-column: span 3; }
+    }
+    .service-card { position: relative; }
+    .svc-highlight { background: linear-gradient(160deg, rgba(37, 99, 235, 0.14) 0%, #000 55%); }
+    .svc-badge {
+      position: absolute; top: 24px; right: 24px;
+      font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
+      background: #fff; color: #000;
+    }
+
+    /* Cursor spotlight */
+    .spot { position: relative; isolation: isolate; }
+    .spot::before {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: -1;
+      background: radial-gradient(360px circle at var(--mx, 50%) var(--my, -200px), rgba(96, 165, 250, 0.10), transparent 60%);
+      opacity: 0; transition: opacity 0.4s ease-out; pointer-events: none;
+    }
+    .spot:hover::before { opacity: 1; }
+
+    /* Feature 1: setup steps that light up sequentially */
+    .fv-steps { list-style: none; width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 6px; counter-reset: s; }
+    .fv-steps li {
+      display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 10px;
+      font-size: 14px; color: #52525b; border: 1px solid transparent;
+      transition: color 0.5s ease-out, background 0.5s ease-out, border-color 0.5s ease-out;
+    }
+    .fv-steps li em { margin-left: auto; padding-left: 8px; font-style: normal; font-size: 12px; white-space: nowrap; opacity: 0; transition: opacity 0.5s ease-out; }
+    .fv-step-dot { width: 10px; height: 10px; border-radius: 50%; background: #27272a; flex-shrink: 0; transition: background 0.5s ease-out, box-shadow 0.5s ease-out; }
+    .fv-steps.run li { color: #e4e4e7; background: rgba(255,255,255,0.03); border-color: var(--border-subtle); }
+    .fv-steps.run li em { opacity: 1; color: var(--text-muted); }
+    .fv-steps.run .fv-step-dot { background: #fff; }
+    .fv-steps.run .fv-step-live { background: rgba(34, 197, 94, 0.08); border-color: rgba(34, 197, 94, 0.25); }
+    .fv-steps.run .fv-step-live .fv-step-dot { background: #22c55e; box-shadow: 0 0 12px rgba(34, 197, 94, 0.8); }
+    .fv-steps.run .fv-step-live em { color: #4ade80; }
+    .fv-steps li:nth-child(1), .fv-steps li:nth-child(1) * { transition-delay: 0.1s; }
+    .fv-steps li:nth-child(2), .fv-steps li:nth-child(2) * { transition-delay: 0.45s; }
+    .fv-steps li:nth-child(3), .fv-steps li:nth-child(3) * { transition-delay: 0.8s; }
+    .fv-steps li:nth-child(4), .fv-steps li:nth-child(4) * { transition-delay: 1.15s; }
+    .fv-steps li:nth-child(5), .fv-steps li:nth-child(5) * { transition-delay: 1.5s; }
+    .no-motion .fv-steps li, .no-motion .fv-steps li * { transition: none; }
+
+    /* Feature 2: exchange widget with hero-style glow */
+    .fv-glow { background: radial-gradient(ellipse 55% 60% at 50% 50%, rgba(37, 99, 235, 0.18) 0%, transparent 70%), #0a0a0a; }
+    .fx-card {
+      width: 100%; max-width: 400px; padding: 16px; border-radius: 16px;
+      border: 1px solid rgba(96, 165, 250, 0.6);
+      background: linear-gradient(180deg, rgba(30, 58, 138, 0.45), rgba(15, 23, 42, 0.6));
+      box-shadow: 0 0 24px rgba(59, 130, 246, 0.45), 0 0 90px rgba(37, 99, 235, 0.25);
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .fx-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; border-radius: 12px; background: rgba(0, 0, 0, 0.35); }
+    .fx-row small { display: block; font-size: 11px; color: rgba(255,255,255,0.55); margin-bottom: 2px; }
+    .fx-row strong { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; color: #fff; }
+    .fx-row strong.fx-muted { font-size: 17px; color: #bfdbfe; }
+    .fx-cur { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(255,255,255,0.1); color: #e4e4e7; white-space: nowrap; }
+    .fx-swap { align-self: center; width: 32px; height: 32px; margin: -14px 0; z-index: 1; border-radius: 10px; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; }
+    .fx-foot { display: flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(255,255,255,0.6); padding: 4px 4px 0; }
+
+    /* Single community deal card with animated gradient border */
+    @property --angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+    .deal-card {
+      position: relative; padding: 1px; border-radius: 16px;
+      background: conic-gradient(from var(--angle), rgba(255,255,255,0.08) 0%, rgba(96,165,250,0.9) 12%, rgba(139,92,246,0.6) 22%, rgba(255,255,255,0.08) 35%, rgba(255,255,255,0.08) 100%);
+      animation: spinBorder 6s linear infinite;
+      box-shadow: 0 0 80px rgba(59, 130, 246, 0.10);
+    }
+    @keyframes spinBorder { to { --angle: 360deg; } }
+    .deal-inner {
+      border-radius: 15px;
+      background: radial-gradient(ellipse 60% 80% at 0% 0%, rgba(37, 99, 235, 0.14), transparent 60%), #050505;
+      display: grid; grid-template-columns: 1fr; gap: 32px; padding: 28px;
+    }
+    @media (min-width: 900px) { .deal-inner { grid-template-columns: 320px 1fr; gap: 40px; padding: 40px; } }
+    .deal-main { display: flex; flex-direction: column; align-items: flex-start; }
+    .deal-main h3 { font-size: 30px; font-weight: 600; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 8px; }
+    .deal-main .members { font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+    .deal-main .btn { margin-top: auto; }
+    .deal-cats { display: grid; grid-template-columns: 1fr; gap: 1px; background: var(--border-subtle); border: 1px solid var(--border-subtle); border-radius: 12px; overflow: hidden; }
+    .deal-cat { background: #000; padding: 20px; display: grid; grid-template-columns: 48px 1fr; gap: 16px; align-items: start; transition: background 0.3s ease-out; }
+    .deal-cat:hover { background: #0a0a0a; }
+    .deal-cat .service-icon { margin-bottom: 0; }
+    .deal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .deal-tags span { font-size: 11px; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--border-hover); color: #d4d4d8; background: rgba(255,255,255,0.03); }
+    .deal-cat h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+    .deal-cat p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-aurora i, .marquee-track, .deal-card, .shimmer-text, .badge-dot { animation: none !important; }
+      .hero-stage .hero-prompt-wrap, .hero-aurora { transform: none !important; }
+    }
+    .no-motion .hero-stage .hero-prompt-wrap, .no-motion .hero-aurora { transform: none; }
+    /* Cards that also animate background on hover must keep the reveal transition */
+    .reveal.service-card, .reveal.deal-cat {
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease-out;
+    }
+    .no-motion .reveal.service-card, .no-motion .reveal.deal-cat { transition: background 0.3s ease-out; }
+    /* =====================================================================
+       DHDglobal brand + contact distribution (v4)
+       ===================================================================== */
+    .nav-mark svg { display: block; }
+    .logo-word { font-weight: 800; letter-spacing: -0.035em; }
+    .logo-word span { font-weight: 500; color: #a1a1aa; }
+
+    /* Navbar social icons */
+    .nav-social { display: none; align-items: center; gap: 2px; }
+    @media (min-width: 1024px) { .nav-social { display: flex; } }
+    .nav-social a {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary);
+      transition: color 0.3s ease-out, background 0.3s ease-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-social a:hover { color: #fff; background: rgba(255, 255, 255, 0.08); transform: translateY(-1px); }
+    .zalo-txt { font-size: 10px; font-weight: 800; letter-spacing: -0.02em; }
+
+    /* Links inside running text */
+    .inline-link { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.35); text-underline-offset: 3px; transition: text-decoration-color 0.3s; }
+    .inline-link:hover { text-decoration-color: #fff; }
+    a.bento-label { align-self: flex-start; transition: color 0.3s ease-out, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    a.bento-label:hover { color: #fff; transform: translateX(3px); }
+
+    /* Contact cards under the final CTA */
+    .contact-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; max-width: 760px; margin: 36px auto 0; }
+    @media (min-width: 768px) { .contact-cards { grid-template-columns: repeat(4, 1fr); } }
+    .contact-card {
+      display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 12px;
+      border: 1px solid var(--border-subtle); background: rgba(255, 255, 255, 0.03); text-align: left;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease-out, background 0.3s ease-out;
+    }
+    .contact-card:hover { transform: translateY(-2px); border-color: var(--border-hover); background: rgba(255, 255, 255, 0.06); }
+    .contact-card b { display: block; font-size: 14px; font-weight: 600; color: #fff; }
+    .contact-card small { display: block; font-size: 11px; color: var(--text-muted); line-height: 1.4; }
+    .cc-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+    .cc-fb .cc-icon { background: #1877f2; }
+    .cc-tg .cc-icon { background: #229ed9; }
+    .cc-zl .cc-icon { background: #0068ff; font-size: 10px; font-weight: 800; }
+    .cc-ph .cc-icon { background: #16a34a; }
+
+    /* Floating contact dock (appears after scrolling past the hero top) */
+    .dock {
+      position: fixed; right: 20px; bottom: 20px; z-index: 1050;
+      display: flex; flex-direction: column; gap: 10px;
+      opacity: 0; transform: translateY(16px); pointer-events: none;
+      transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dock.show { opacity: 1; transform: none; pointer-events: auto; }
+    .dock-btn {
+      position: relative; width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; color: #fff;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dock-btn:hover { transform: translateY(-2px) scale(1.06); }
+    .dk-zl { background: #0068ff; }
+    .dk-zl b { font-size: 11px; font-weight: 800; letter-spacing: -0.02em; }
+    .dk-tg { background: #229ed9; }
+    .dk-fb { background: #1877f2; }
+    .dk-ph { background: #16a34a; }
+    .dk-fb::after {
+      content: ''; position: absolute; inset: 0; border-radius: 50%;
+      animation: dockPulse 2.2s ease-out infinite; pointer-events: none;
+    }
+    @keyframes dockPulse { 0% { box-shadow: 0 0 0 0 rgba(24, 119, 242, 0.6); } 100% { box-shadow: 0 0 0 14px rgba(24, 119, 242, 0); } }
+    .dock-tip {
+      position: absolute; right: 60px; white-space: nowrap;
+      font-size: 12px; padding: 6px 10px; border-radius: 8px;
+      background: #111; border: 1px solid var(--border-hover); color: #e4e4e7;
+      opacity: 0; transform: translateX(6px); pointer-events: none;
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .dock-btn:hover .dock-tip, .dock-btn:focus-visible .dock-tip { opacity: 1; transform: none; }
+    /* Mobile: dock becomes a bottom contact bar so it never covers text */
+    @media (max-width: 767px) {
+      body { padding-bottom: 68px; }
+      .dock {
+        left: 0; right: 0; bottom: 0; flex-direction: row; justify-content: space-around; gap: 0;
+        padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+        background: rgba(0, 0, 0, 0.82); border-top: 1px solid var(--border-subtle);
+        backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      }
+      .dock-btn { width: 44px; height: 44px; box-shadow: none; }
+      .dock-tip { display: none; }
+    }
+    /* Balanced line breaks for big headings (avoids one-word orphan lines) */
+    .hero h1, .section-title, .cta-section h2 { text-wrap: balance; }
+    @media (prefers-reduced-motion: reduce) { .dk-fb::after { animation: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- ======== NAVBAR ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <div class="nav-left">
+        <a href="#" class="nav-logo" aria-label="DHDglobal — về đầu trang">
+          <span class="nav-mark" aria-hidden="true"><svg viewBox="5 4.5 23 23" width="22" height="22" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7.5h6.5a8.5 8.5 0 010 17H9z" stroke-width="2.4"/><path d="M9 16h14.6" stroke-width="1.5" opacity=".85"/><path d="M15.5 7.6c2.6 2.2 3.9 5 3.9 8.4s-1.3 6.2-3.9 8.4" stroke-width="1.5" opacity=".85"/></svg></span>
+          <span class="logo-word">DHD<span>global</span></span>
+        </a>
+        <div class="nav-links">
+          <a href="#services">Dịch Vụ Etsy</a>
+          <a href="#pingpong">Thu PingPong</a>
+          <a href="#coupons">Nhóm Deal Hời</a>
+          <a href="#contact">Liên Hệ</a>
+        </div>
+      </div>
+      <div class="nav-right">
+        <div class="nav-social">
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.4-1.3H17V2.2C16.6 2.1 15.5 2 14.3 2 11.6 2 10 3.6 10 6.4v2.1H7v3.6h3V22h4v-9.9h3l.5-3.6H14z"/></svg></a>
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" aria-label="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3 14.3c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.5.4-1 .4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.1 12.5 2.6 11c-1-.3-1-1 .2-1.5L20.5 2.7c.8-.3 1.6.2 1.4 1.6z"/></svg></a>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" aria-label="Nhóm Zalo deal hời" class="zalo-txt">Zalo</a>
+        </div>
+        <a href="tel:0877569869" class="nav-phone">0877.569.869</a>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary nav-cta" style="min-height: 34px; padding: 6px 16px; font-size: 13px;">Liên Hệ Ngay</a>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()" role="button" aria-label="Mở menu" tabindex="0">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" onclick="closeMenu()">Dịch Vụ Etsy</a>
+    <a href="#pingpong" onclick="closeMenu()">Thu PingPong</a>
+    <a href="#coupons" onclick="closeMenu()">Nhóm Deal Hời</a>
+    <a href="#contact" onclick="closeMenu()">Liên Hệ</a>
+    <a href="tel:0877569869" style="color: var(--text-muted); font-size: 16px;">0877.569.869</a>
+    <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary" onclick="closeMenu()">Liên Hệ Ngay</a>
+    <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="btn btn-outline" onclick="closeMenu()">Telegram @jamescr123</a>
+    <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-outline" onclick="closeMenu()">Nhóm Zalo deal hời</a>
+  </div>
+
+  <!-- ======== HERO ======== -->
+  <section class="hero" id="hero">
+    <div class="hero-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="container">
+      <div class="reveal">
+        <div class="hero-badge"><span class="badge-dot"></span>Trusted by 500+ sellers trên Etsy</div>
+      </div>
+      <h1 class="reveal reveal-blur reveal-delay-1">
+        Dịch vụ Etsy chuyên nghiệp<br>
+        <span class="shimmer-text">&amp; thu PingPong giá&nbsp;tốt</span>
+      </h1>
+      <p class="reveal reveal-delay-2">
+        DHDglobal đồng hành cùng seller Việt: mở shop Etsy tỷ lệ live cao, bảo hành lâu dài — và thu $ PingPong (Pipo) giá tốt, nhanh gọn, minh bạch.
+      </p>
+      <div class="hero-actions reveal reveal-delay-3">
+        <div class="hero-buttons">
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary">Mở Shop Etsy</a>
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="btn btn-outline">Bán PingPong</a>
+        </div>
+        <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="hero-side-link">Nhóm deal hời miễn phí trên Zalo →</a>
+      </div>
+
+      <!-- Hero Visual (parallax on scroll) -->
+      <div class="hero-visual reveal reveal-delay-4">
+        <div class="hero-stage" id="heroStage">
+          <div class="hero-prompt-wrap">
+            <div class="hero-prompt-top" aria-hidden="true">
+              <div class="hero-select">Etsy · PingPong <span>▾</span></div>
+              <div class="hero-icon-btn">+</div>
+            </div>
+            <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="hero-prompt" aria-label="Nhắn DHDglobal qua Telegram để được tư vấn">
+              <div class="hero-prompt-text"><span id="typeText">Mình muốn mở shop Etsy bán digital art</span><span class="hero-caret"></span></div>
+              <div class="hero-prompt-bar">
+                <span>Nhắn Telegram · Tư vấn miễn phí ▾</span>
+                <span class="hero-prompt-tools" aria-hidden="true">
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span>
+                  <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SOCIAL PROOF (infinite marquee) ======== -->
+  <section class="social-proof reveal" aria-label="Nền tảng hỗ trợ">
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="logo-item" style="font-family: Georgia, serif; font-style: italic; font-size: 22px;">Etsy</span>
+        <span class="logo-item" style="font-weight: 700; letter-spacing: -0.02em;">PingPong</span>
+        <span class="logo-item" style="letter-spacing: 0.02em;">Shopee</span>
+        <span class="logo-item">TikTok&nbsp;Shop</span>
+        <span class="logo-item" style="font-weight: 800; letter-spacing: -0.04em;">Lazada</span>
+        <span class="logo-item" style="font-weight: 700;">Zalo</span>
+        <span class="logo-item" style="font-family: Georgia, serif; font-style: italic; font-size: 22px;" aria-hidden="true">Etsy</span>
+        <span class="logo-item" style="font-weight: 700; letter-spacing: -0.02em;" aria-hidden="true">PingPong</span>
+        <span class="logo-item" style="letter-spacing: 0.02em;" aria-hidden="true">Shopee</span>
+        <span class="logo-item" aria-hidden="true">TikTok&nbsp;Shop</span>
+        <span class="logo-item" style="font-weight: 800; letter-spacing: -0.04em;" aria-hidden="true">Lazada</span>
+        <span class="logo-item" style="font-weight: 700;" aria-hidden="true">Zalo</span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="proof-row">
+        <span>Đã hỗ trợ 500+ sellers</span>
+        <span class="proof-sep" aria-hidden="true"></span>
+        <span>4.9★ đánh giá</span>
+        <span class="proof-sep" aria-hidden="true"></span>
+        <span>3 năm kinh nghiệm</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== SERVICES (Etsy + PingPong first) ======== -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Dịch vụ Etsy<br>&amp; thu PingPong</h2>
+        <p class="section-desc">Mở shop Etsy, thu PingPong giá tốt và các dịch vụ hỗ trợ vận hành shop trọn vẹn.</p>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Nhận tư vấn</a>
+      </div>
+      <div class="app-mock reveal reveal-scale" aria-hidden="true">
+        <div class="app-mock-side">
+          <div class="app-mock-title">DHDglobal Studio</div>
+          <div class="app-mock-item active">Tổng quan shop</div>
+          <div class="app-mock-item">Thu PingPong</div>
+          <div class="app-mock-item">Đơn hàng</div>
+          <div class="app-mock-item">Chăm sóc khách</div>
+          <div class="app-mock-item">Bảo hành shop</div>
+          <div class="app-mock-item">Báo cáo</div>
+        </div>
+        <div class="app-mock-canvas">
+          <div class="app-mock-bar"><i></i> yourshop.etsy.com · Đang hoạt động</div>
+          <div class="app-mock-hero"><span>Handmade Digital Art Prints</span></div>
+          <div class="app-mock-grid"><div></div><div></div><div></div><div></div></div>
+        </div>
+        <div class="app-mock-panel">
+          <div class="app-mock-title">Sức khỏe shop</div>
+          <div class="app-mock-score">Live</div>
+          <div>Ổn định · Đang bảo hành</div>
+          <div class="app-mock-meter"><b></b></div>
+          <div class="app-mock-row">Xác minh <em>✓</em></div>
+          <div class="app-mock-row">Thanh toán <em>✓</em></div>
+          <div class="app-mock-row">Policies <em>✓</em></div>
+          <div class="app-mock-row">Bảo hành <em>Dài hạn</em></div>
+        </div>
+      </div>
+      <div class="services-grid" data-stagger>
+        <div class="service-card svc-half svc-highlight spot reveal">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg></div>
+          <h3>Mở Shop Etsy</h3>
+          <p>Hỗ trợ đăng ký shop có tỷ lệ live cao, cấu hình shop hoàn chỉnh. Tối ưu profile, banner, policies. Bảo hành shop lâu dài, hỗ trợ hết công suất.</p>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="service-link">Nhắn Facebook tư vấn →</a>
+        </div>
+        <div class="service-card svc-half svc-highlight spot reveal">
+          <span class="svc-badge">Giá tốt</span>
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
+          <h3>Thu PingPong Giá Tốt</h3>
+          <p>Thu $ PingPong (Pipo) với giá tốt, quy đổi nhanh chóng và minh bạch về VNĐ. Báo giá trực tiếp theo ngày.</p>
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="service-link">Nhận báo giá qua Telegram →</a>
+        </div>
+        <div class="service-card svc-third spot reveal">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 11-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 11-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 112.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 112.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 110 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg></div>
+          <h3>Quản Lý &amp; Vận Hành Shop</h3>
+          <p>Quản lý đơn hàng, chăm sóc khách hàng, xử lý review. Đảm bảo shop hoạt động trơn tru và tăng trưởng bền vững.</p>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+        <div class="service-card svc-third spot reveal">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M8 17v-5M13 17V8M18 17v-9"/></svg></div>
+          <h3>Tư Vấn Chiến Lược Etsy</h3>
+          <p>Phân tích data, đề xuất chiến lược giá, sản phẩm và marketing. Giúp shop tăng doanh thu một cách chiến lược.</p>
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="service-link">Hỏi qua Telegram →</a>
+        </div>
+        <div class="service-card svc-third spot reveal">
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Xử Lý Vi Phạm &amp; Kháng Cáo</h3>
+          <p>Hỗ trợ xử lý khi shop bị vi phạm chính sách, bị suspend. Tư vấn kháng cáo và khôi phục shop nhanh chóng.</p>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="service-link">Tìm hiểu thêm →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FEATURE HIGHLIGHTS (the two core services) ======== -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Làm thật, uy tín thật<br>cùng DHDglobal</h2>
+        <a href="#services" class="btn btn-outline section-action">Xem tất cả dịch vụ</a>
+      </div>
+
+      <!-- Feature 1: Shop setup steps (light up one by one on scroll) -->
+      <div class="feature-block reveal">
+        <div class="feature-visual-box" aria-hidden="true">
+          <ol class="fv-steps" id="fvSteps">
+            <li><span class="fv-step-dot"></span>Đăng ký tài khoản<em>Hoàn tất</em></li>
+            <li><span class="fv-step-dot"></span>Xác minh thông tin<em>Hoàn tất</em></li>
+            <li><span class="fv-step-dot"></span>Cấu hình thanh toán<em>Hoàn tất</em></li>
+            <li><span class="fv-step-dot"></span>Profile, banner &amp; policies<em>Hoàn tất</em></li>
+            <li class="fv-step-live"><span class="fv-step-dot"></span>Shop live · Bảo hành dài hạn<em>Đang hoạt động</em></li>
+          </ol>
+        </div>
+        <div class="feature-caption">
+          <div>
+            <h3>Mở shop Etsy tỷ lệ live cao, bảo hành lâu dài</h3>
+            <p>Quy trình đăng ký và cấu hình bài bản giúp shop hoạt động ổn định ngay từ đầu. Bảo hành shop lâu dài, đội ngũ hỗ trợ hết công suất khi bạn cần.</p>
+          </div>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="service-link">Nhắn Facebook →</a>
+        </div>
+      </div>
+
+      <!-- Feature 2: PingPong USD exchange -->
+      <div class="feature-block reveal" id="pingpong">
+        <div class="feature-visual-box fv-glow" aria-hidden="true">
+          <div class="fx-card">
+            <div class="fx-row">
+              <div><small>Bạn bán</small><strong>1,000.00</strong></div>
+              <span class="fx-cur">USD · PingPong</span>
+            </div>
+            <div class="fx-swap"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16M3 16l4 4 4-4M17 20V4M21 8l-4-4-4 4"/></svg></div>
+            <div class="fx-row">
+              <div><small>Bạn nhận</small><strong class="fx-muted">Báo giá trực tiếp</strong></div>
+              <span class="fx-cur">VNĐ · Ngân hàng</span>
+            </div>
+            <div class="fx-foot"><span class="badge-dot"></span>Tỷ giá cạnh tranh · Cập nhật theo ngày</div>
+          </div>
+        </div>
+        <div class="feature-caption">
+          <div>
+            <h3>Thu $ PingPong (Pipo) giá tốt</h3>
+            <p>Bán USD từ PingPong với tỷ giá cạnh tranh, quy trình nhanh gọn, minh bạch. Nhắn Telegram hoặc Facebook để nhận báo giá trong ngày.</p>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="service-link">Nhận báo giá Telegram →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== ECOSYSTEM BENTO ======== -->
+  <section class="section" id="platforms">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Không chỉ Etsy,<br>một hệ sinh thái trọn vẹn</h2>
+        <p class="section-desc">Từ shop Etsy, thu PingPong đến săn deal trên Shopee, TikTok Shop, Lazada — mọi thứ bạn cần ở cùng một nơi.</p>
+      </div>
+      <div class="bento" data-stagger>
+        <div class="bento-cell spot reveal">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-list">
+              <div class="bv-item"><span>Etsy</span><em class="on">Mở shop</em></div>
+              <div class="bv-item"><span>PingPong</span><em class="on">Thu giá tốt</em></div>
+              <div class="bv-item"><span>Shopee</span><em>Deal mới</em></div>
+              <div class="bv-item"><span>TikTok Shop</span><em>Deal mới</em></div>
+              <div class="bv-item"><span>Lazada</span><em>Deal mới</em></div>
+            </div>
+          </div>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="bento-label">Đa nền tảng →</a>
+        </div>
+        <div class="bento-cell bento-span-2 spot reveal">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-feed">
+              <div class="bv-feed-row"><b>SHOPEE</b><span>Voucher giảm sâu đơn từ 299K</span><i>2 phút trước</i></div>
+              <div class="bv-feed-row bv-hl"><b>BÓC HỘP</b><span>AirPods, điện thoại, Mac giá hời</span><i>5 phút trước</i></div>
+              <div class="bv-feed-row"><b>TIKTOK</b><span>Mã giảm 30% cho đơn đầu</span><i>12 phút trước</i></div>
+              <div class="bv-feed-row"><b>ĐỒ UỐNG</b><span>Voucher trà sữa, cà phê 0đ</span><i>20 phút trước</i></div>
+            </div>
+          </div>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="bento-label">Deal hời trên nhóm Zalo →</a>
+        </div>
+        <div class="bento-cell spot reveal">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-chat">
+              <div class="bv-msg">Mình cần bán $ PingPong, báo giá giúp mình?</div>
+              <div class="bv-msg bv-me">Bạn gửi số tiền, mình báo giá ngay trong ngày nhé.</div>
+            </div>
+          </div>
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="bento-label">Tư vấn 1-on-1 qua Telegram →</a>
+        </div>
+        <div class="bento-cell spot reveal">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-clock"><span>24/7</span><small>Hỗ trợ liên tục</small></div>
+          </div>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="bento-label">Nhắn Facebook →</a>
+        </div>
+        <div class="bento-cell bento-big spot reveal">
+          <div class="bento-visual" aria-hidden="true">
+            <div class="bv-big"><span>99.9%</span><small>Khách hàng hài lòng</small></div>
+          </div>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="bento-label">Xem phản hồi →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== COUPON GROUP (single community group) ======== -->
+  <section class="section" id="coupons">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Nhóm Săn Mã Giảm Giá<br>Độc Quyền</h2>
+        <p class="section-desc">Tham gia nhóm cộng đồng miễn phí, cập nhật liên tục mã giảm giá và deal hời mới nhất.</p>
+      </div>
+      <div class="deal-card reveal reveal-scale">
+        <div class="deal-inner">
+          <div class="deal-main">
+            <span class="coupon-badge">Miễn phí</span>
+            <h3>Nhóm Cộng Đồng<br>Deal Hời</h3>
+            <div class="members">2,000+ thành viên · Hoạt động trên Zalo</div>
+            <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-primary">Tham Gia Nhóm Zalo</a>
+          </div>
+          <div class="deal-cats" data-stagger>
+            <div class="deal-cat reveal">
+              <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4l-7.2 7.2a2 2 0 01-2.8 0L2 12V2h10l8.6 8.6a2 2 0 010 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg></div>
+              <div>
+                <h4>Mã giảm giá sàn TMĐT</h4>
+                <p>Mã giảm giá tốt trên các sàn thương mại điện tử, cập nhật liên tục mỗi ngày.</p>
+                <div class="deal-tags"><span>Shopee</span><span>TikTok Shop</span><span>Lazada</span></div>
+              </div>
+            </div>
+            <div class="deal-cat reveal">
+              <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+              <div>
+                <h4>Đồ điện tử bóc hộp</h4>
+                <p>Deal hời thiết bị điện tử bóc hộp, giá tốt hơn hẳn mua mới.</p>
+                <div class="deal-tags"><span>Điện thoại</span><span>Mac</span><span>AirPods</span></div>
+              </div>
+            </div>
+            <div class="deal-cat reveal">
+              <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 8h1a4 4 0 010 8h-1"/><path d="M3 8h14v9a4 4 0 01-4 4H7a4 4 0 01-4-4z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg></div>
+              <div>
+                <h4>Voucher đồ ăn &amp; đồ uống</h4>
+                <p>Voucher miễn phí hoặc mua với giá chiết khấu cao.</p>
+                <div class="deal-tags"><span>Free</span><span>Chiết khấu cao</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== TRUST: motto + rating + stats ======== -->
+  <section class="section" id="trust">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Nhiệt tình &amp; Tử tế</h2>
+        <p class="section-desc">Châm ngôn làm việc của DHDglobal — với từng shop Etsy, từng giao dịch PingPong và từng thành viên trong nhóm.</p>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Trò chuyện với DHDglobal</a>
+      </div>
+      <div class="trust-grid">
+        <div class="rating-card spot reveal reveal-scale">
+          <div>
+            <div class="rating-stars" role="img" aria-label="Đánh giá 4.9 trên 5 sao">
+              <div class="rs-row rs-base"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg></div>
+              <div class="rs-row rs-fill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.4 7 .7-5.3 4.7 1.5 6.9L12 17.6l-6.1 3.6 1.5-6.9L2.1 9.6l7-.7z"/></svg></div>
+            </div>
+            <div class="rating-score">4.9<small>/5</small></div>
+            <p class="rating-meta">Điểm đánh giá trung bình từ hơn 500 sellers đã đồng hành cùng DHDglobal.</p>
+          </div>
+          <div class="rating-badges">
+            <span><i class="badge-dot"></i>Phản hồi trong 30 phút</span>
+            <span>Hỗ trợ 8h – 22h hằng ngày</span>
+          </div>
+        </div>
+        <div class="values" data-stagger>
+          <div class="value-card spot reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.2.4-2.3 1-3.3.3 1.5 1.3 2.8 2.5 2.8z"/></svg></div>
+            <h3>Nhiệt tình</h3>
+            <p>Nhắn là trả lời, hỗ trợ hết công suất. Đồng hành đến khi shop chạy ổn và giao dịch hoàn tất.</p>
+          </div>
+          <div class="value-card spot reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/></svg></div>
+            <h3>Tử tế</h3>
+            <p>Minh bạch từ báo giá đến quy trình. Nói rõ trước khi làm, giữ đúng lời hứa với khách.</p>
+          </div>
+        </div>
+      </div>
+      <div class="trust-stats stats-section reveal" data-stagger>
+        <div class="stat-item"><div class="stat-number" data-count="2000" data-suffix="+">2,000+</div><div class="stat-label">Shops Etsy đã mở</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="10000" data-suffix="+">10,000+</div><div class="stat-label">Mã giảm giá đã chia sẻ</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="3" data-suffix="+">3+</div><div class="stat-label">Năm kinh nghiệm</div></div>
+      </div>
+    </div>
+  </section>
+  <!-- ======== COMMUNITY ======== -->
+  <section class="section" id="community">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Một cộng đồng<br>luôn đồng hành cùng bạn</h2>
+        <p class="section-desc">Hàng nghìn sellers và người mua sắm thông minh cùng chia sẻ kinh nghiệm, hỗ trợ nhau phát triển.</p>
+        <div class="section-action community-actions">
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="btn btn-outline section-action">Nhắn Telegram</a>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-primary section-action">Tham gia nhóm Zalo</a>
+        </div>
+      </div>
+      <div class="community-shot reveal reveal-scale" aria-hidden="true">
+        <div class="cs-topbar"><span class="cs-dots"><i></i><i></i><i></i></span><span class="cs-url">Nhóm Zalo · Deal Hời</span><span></span></div>
+        <div class="cs-body">
+          <div class="cs-feed">
+            <div class="cs-post"><b>DHDglobal</b><p>📌 Tổng hợp mã giảm giá Shopee, TikTok Shop, Lazada hôm nay — cập nhật liên tục.</p></div>
+            <div class="cs-post"><b>Minh Tuấn</b><p>Shop Etsy mới mở của mình live ổn định rồi 🎉 cảm ơn team!</p></div>
+            <div class="cs-post"><b>Thảo Linh</b><p>MacBook bóc hộp giá hời vừa lên nhóm kìa mọi người ơi.</p></div>
+          </div>
+          <div class="cs-side">
+            <div class="cs-card">
+              <div class="cs-card-title">Thành viên nổi bật</div>
+              <div class="cs-member"><i>T</i><span>Trần Minh Tuấn<small>Etsy Seller</small></span></div>
+              <div class="cs-member"><i>L</i><span>Lê Thị Hồng<small>Thành viên</small></span></div>
+              <div class="cs-member"><i>H</i><span>Hoàng Anh Khoa<small>Etsy Seller</small></span></div>
+            </div>
+            <div class="cs-card">
+              <div class="cs-card-title">Deal hôm nay</div>
+              <div class="cs-group"><span>Mã Shopee<small>Giảm sâu</small></span><em class="on">Xem</em></div>
+              <div class="cs-group"><span>AirPods bóc hộp<small>Giá hời</small></span><em>Xem</em></div>
+              <div class="cs-group"><span>Voucher đồ uống<small>0đ</small></span><em>Xem</em></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FAQ ======== -->
+  <section class="section" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Câu Hỏi Thường Gặp</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Dịch vụ mở shop Etsy bao gồm những gì?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Chúng tôi hỗ trợ đăng ký shop với tỷ lệ live cao, cấu hình shop hoàn chỉnh (thanh toán, vận chuyển), tối ưu profile, banner và policies. Shop được bảo hành lâu dài và đội ngũ hỗ trợ hết công suất trong suốt quá trình vận hành. <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="inline-link">Nhắn Facebook để được tư vấn</a>.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Thu PingPong (Pipo) diễn ra như thế nào?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Bạn nhắn <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="inline-link">Telegram @jamescr123</a> hoặc <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="inline-link">Facebook</a> để nhận báo giá trong ngày. Sau khi thống nhất số tiền và tỷ giá, bạn chuyển $ PingPong và nhận VNĐ về tài khoản ngân hàng. Quy trình nhanh gọn, minh bạch.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Tôi chưa biết gì về Etsy, có sử dụng dịch vụ được không?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Hoàn toàn được! Dịch vụ của chúng tôi phù hợp với cả người mới bắt đầu. Đội ngũ sẽ hướng dẫn bạn từ những bước cơ bản nhất, từ hiểu nền tảng Etsy đến cách vận hành shop hiệu quả.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Shop bị vi phạm/suspend thì xử lý được không?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Có, chúng tôi đã xử lý thành công hàng trăm trường hợp shop bị vi phạm hoặc suspend. Đội ngũ sẽ phân tích nguyên nhân, soạn thư kháng cáo chuyên nghiệp và hỗ trợ bạn trong toàn bộ quá trình khôi phục shop.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-4">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Nhóm săn mã giảm giá hoạt động như thế nào?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Nhóm cộng đồng hoạt động trên <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="inline-link">Zalo</a> và hoàn toàn miễn phí. Admin cập nhật liên tục mã giảm giá Shopee, TikTok Shop, Lazada; deal đồ điện tử bóc hộp như điện thoại, Mac, AirPods; cùng voucher đồ ăn, đồ uống miễn phí hoặc chiết khấu cao.</p>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-5">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Làm sao để liên hệ tư vấn?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Bạn có thể nhắn qua <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="inline-link">Facebook</a>, <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="inline-link">Telegram @jamescr123</a> hoặc gọi hotline <a href="tel:0877569869" class="inline-link">0877.569.869</a>. Muốn săn deal thì tham gia <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="inline-link">nhóm Zalo</a>. Đội ngũ phản hồi trong vòng 30 phút trong giờ làm việc (8h - 22h hàng ngày).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== CTA BOTTOM ======== -->
+  <section class="cta-section" id="contact">
+    <div class="container">
+      <h2 class="reveal reveal-blur">Sẵn sàng bắt đầu?</h2>
+      <p class="reveal reveal-delay-1">Đăng ký hôm nay, nhận ưu đãi đặc biệt cho khách hàng mới.</p>
+      <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="cta-prompt reveal reveal-delay-2" aria-label="Nhắn DHDglobal qua Facebook">
+        <span class="cta-prompt-text">Bạn cần mở shop Etsy hay bán PingPong?</span>
+        <span class="cta-prompt-bar">
+          <span>Nhắn Facebook · Phản hồi trong 30 phút</span>
+          <span class="cta-send" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></span>
+        </span>
+      </a>
+      <div class="cta-chips reveal reveal-delay-3">
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Mở shop Etsy</a>
+        <a href="https://t.me/jamescr123" target="_blank" rel="noopener">Bán PingPong giá tốt</a>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Kháng cáo shop bị suspend</a>
+        <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Tham gia nhóm deal hời</a>
+      </div>
+      <div class="contact-cards reveal reveal-delay-3">
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="contact-card cc-fb">
+          <span class="cc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.4-1.3H17V2.2C16.6 2.1 15.5 2 14.3 2 11.6 2 10 3.6 10 6.4v2.1H7v3.6h3V22h4v-9.9h3l.5-3.6H14z"/></svg></span>
+          <span><b>Facebook</b><small>Tư vấn Etsy &amp; PingPong</small></span>
+        </a>
+        <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="contact-card cc-tg">
+          <span class="cc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3 14.3c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.5.4-1 .4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.1 12.5 2.6 11c-1-.3-1-1 .2-1.5L20.5 2.7c.8-.3 1.6.2 1.4 1.6z"/></svg></span>
+          <span><b>Telegram</b><small>@jamescr123 · Báo giá nhanh</small></span>
+        </a>
+        <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="contact-card cc-zl">
+          <span class="cc-icon cc-zalo">Zalo</span>
+          <span><b>Nhóm Zalo</b><small>Deal hời miễn phí</small></span>
+        </a>
+        <a href="tel:0877569869" class="contact-card cc-ph">
+          <span class="cc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></span>
+          <span><b>Hotline</b><small>0877.569.869</small></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== FOOTER ======== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Về DHDglobal</h4>
+          <ul>
+            <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#community">Cộng đồng</a></li>
+            <li><a href="#platforms">Hệ sinh thái</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Điều hành bởi<br>Nguyễn Hữu Duy</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Dịch Vụ</h4>
+          <ul>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Mở Shop Etsy</a></li>
+            <li><a href="https://t.me/jamescr123" target="_blank" rel="noopener">Thu PingPong Giá Tốt</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Quản Lý Shop</a></li>
+            <li><a href="https://t.me/jamescr123" target="_blank" rel="noopener">Tư Vấn Chiến Lược</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Xử Lý Vi Phạm</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Nhóm Deal Hời</h4>
+          <ul>
+            <li><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Nhóm Cộng Đồng</a></li>
+            <li><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Shopee · TikTok · Lazada</a></li>
+            <li><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Đồ điện tử bóc hộp</a></li>
+            <li><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Voucher đồ ăn &amp; uống</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Hỗ Trợ</h4>
+          <ul>
+            <li><a href="#faq">Câu hỏi thường gặp</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Nhận tư vấn</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Báo lỗi / Góp ý</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Liên Hệ</h4>
+          <ul>
+            <li><a href="tel:0877569869">0877.569.869</a></li>
+            <li><a href="https://t.me/jamescr123" target="_blank" rel="noopener">Telegram @jamescr123</a></li>
+            <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Facebook</a></li>
+            <li><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener">Nhóm Zalo deal hời</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-brandline">
+          <a href="#" class="nav-logo" aria-label="DHDglobal — về đầu trang">
+            <span class="nav-mark" aria-hidden="true"><svg viewBox="5 4.5 23 23" width="22" height="22" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7.5h6.5a8.5 8.5 0 010 17H9z" stroke-width="2.4"/><path d="M9 16h14.6" stroke-width="1.5" opacity=".85"/><path d="M15.5 7.6c2.6 2.2 3.9 5 3.9 8.4s-1.3 6.2-3.9 8.4" stroke-width="1.5" opacity=".85"/></svg></span>
+            <span class="logo-word">DHD<span>global</span></span>
+          </a>
+          <span class="footer-copyright">© 2026 DHDglobal. All rights reserved.</span>
+        </div>
+        <div class="footer-socials">
+          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" aria-label="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3 14.3c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.5.4-1 .4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.1 12.5 2.6 11c-1-.3-1-1 .2-1.5L20.5 2.7c.8-.3 1.6.2 1.4 1.6z"/></svg></a>
+          <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.5-1.3 1.4-1.3H17V2.2C16.6 2.1 15.5 2 14.3 2 11.6 2 10 3.6 10 6.4v2.1H7v3.6h3V22h4v-9.9h3l.5-3.6H14z"/></svg></a>
+          <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" aria-label="Nhóm Zalo" class="zalo-txt">Zalo</a>
+          <a href="tel:0877569869" aria-label="Gọi điện"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======== FLOATING CONTACT DOCK ======== -->
+  <div class="dock" id="dock" aria-label="Liên hệ nhanh">
+    <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="dock-btn dk-zl" aria-label="Nhóm Zalo deal hời"><span class="dock-tip">Nhóm Zalo deal hời</span><b>Zalo</b></a>
+    <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="dock-btn dk-tg" aria-label="Telegram"><span class="dock-tip">Telegram · Báo giá PingPong</span><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3 14.3c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.5.4-1 .4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.1 12.5 2.6 11c-1-.3-1-1 .2-1.5L20.5 2.7c.8-.3 1.6.2 1.4 1.6z"/></svg></a>
+    <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="dock-btn dk-fb" aria-label="Facebook"><span class="dock-tip">Facebook · Tư vấn Etsy</span><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.4-1.3H17V2.2C16.6 2.1 15.5 2 14.3 2 11.6 2 10 3.6 10 6.4v2.1H7v3.6h3V22h4v-9.9h3l.5-3.6H14z"/></svg></a>
+    <a href="tel:0877569869" class="dock-btn dk-ph" aria-label="Gọi 0877.569.869"><span class="dock-tip">Gọi 0877.569.869</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.4 1.8.7 2.7a2 2 0 01-.5 2.1L8 9.8a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.7.7a2 2 0 011.7 2z"/></svg></a>
+  </div>
+
+  <!-- ======== JAVASCRIPT ======== -->
+  <script>
+    // ?static in URL = disable motion (used for screenshot comparisons)
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]static\b/.test(location.search);
+    if (reduceMotion) document.documentElement.classList.add('no-motion');
+
+    // === Mobile Menu ===
+    function toggleMenu() {
+      document.getElementById('hamburger').classList.toggle('active');
+      document.getElementById('mobileMenu').classList.toggle('open');
+      document.body.style.overflow = document.getElementById('mobileMenu').classList.contains('open') ? 'hidden' : '';
+    }
+    function closeMenu() {
+      document.getElementById('hamburger').classList.remove('active');
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('hamburger').addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+
+    // === Scroll-driven effects (one rAF-throttled handler) ===
+    const navbar = document.getElementById('navbar');
+    const progress = document.getElementById('scrollProgress');
+    const hero = document.getElementById('hero');
+    const dock = document.getElementById('dock');
+    let ticking = false;
+    function onScroll() {
+      const y = window.scrollY;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      navbar.classList.toggle('scrolled', y > 50);
+      dock.classList.toggle('show', y > 400 || reduceMotion);
+      progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+      if (!reduceMotion) {
+        // 0 → 1 while the hero scrolls out of view
+        const p = Math.min(Math.max(y / (hero.offsetHeight || 1), 0), 1);
+        hero.style.setProperty('--hp', p.toFixed(3));
+      }
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+    onScroll();
+
+    // === Stagger: children of [data-stagger] reveal one after another ===
+    document.querySelectorAll('[data-stagger]').forEach(group => {
+      group.querySelectorAll(':scope > .reveal').forEach((el, i) => {
+        el.style.transitionDelay = (i * 0.08) + 's';
+      });
+    });
+
+    // === Scroll Reveal ===
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // === Shop-setup steps light up one by one ===
+    const steps = document.getElementById('fvSteps');
+    if (steps) {
+      if (reduceMotion) steps.classList.add('run');
+      else new IntersectionObserver((entries, obs) => {
+        if (entries[0].isIntersecting) { steps.classList.add('run'); obs.disconnect(); }
+      }, { threshold: 0.4 }).observe(steps);
+    }
+
+    // === Cursor spotlight on cards ===
+    if (!reduceMotion && matchMedia('(hover: hover)').matches) {
+      document.querySelectorAll('.spot').forEach(card => {
+        card.addEventListener('pointermove', e => {
+          const r = card.getBoundingClientRect();
+          card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+          card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+      });
+    }
+
+    // === Hero prompt: typewriter cycling through common requests ===
+    const typeEl = document.getElementById('typeText');
+    if (typeEl && !reduceMotion) {
+      const phrases = [
+        'Mình muốn mở shop Etsy bán digital art',
+        'Mình cần bán $ PingPong giá tốt',
+        'Shop Etsy mới cần bảo hành lâu dài',
+        'Shop mình bị suspend, cần kháng cáo'
+      ];
+      let pi = 0, ci = phrases[0].length, deleting = true;
+      setTimeout(function tick() {
+        const full = phrases[pi];
+        ci += deleting ? -1 : 1;
+        typeEl.textContent = full.slice(0, ci);
+        let delay = deleting ? 28 : 55;
+        if (!deleting && ci === full.length) { deleting = true; delay = 2200; }
+        else if (deleting && ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; delay = 300; }
+        setTimeout(tick, delay);
+      }, 2600);
+    }
+
+    // === Counter Animation ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(el => {
+        const target = parseInt(el.dataset.count);
+        const suffix = el.dataset.suffix || '';
+        if (reduceMotion) { el.textContent = target.toLocaleString('en-US') + suffix; return; }
+        const duration = 2000;
+        const start = performance.now();
+        function update(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target).toLocaleString('en-US') + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+        requestAnimationFrame(update);
+      });
+    }
+    // Real numbers are in the HTML (no-JS / SEO safe); reset to 0 only when we will animate them.
+    const statsSection = document.querySelector('.stats-section');
+    if (statsSection && !reduceMotion) {
+      document.querySelectorAll('[data-count]').forEach(el => { el.textContent = '0' + (el.dataset.suffix || ''); });
+      const statsObserver = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) { animateCounters(); statsObserver.disconnect(); }
+      }, { threshold: 0.3 });
+      statsObserver.observe(statsSection);
+    }
+
+    // === FAQ Toggle ===
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    }
+  </script>
+</body>
+</html>

@@ -236,19 +236,12 @@
       align-items: center;
       gap: 16px;
     }
-    .nav-phone {
-      display: none;
-      font-size: 14px;
-      color: var(--text-secondary);
-      font-weight: 500;
-    }
     .nav-cta {
       display: none;
     }
     @media (min-width: 1024px) {
       .nav-links { display: flex; }
       .nav-cta { display: inline-flex; }
-      .nav-phone { display: block; }
       .hamburger { display: none !important; }
     }
 
@@ -728,9 +721,12 @@
       display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: #d4d4d8;
       padding: 6px 12px; border-radius: 999px; border: 1px solid var(--border-hover); background: rgba(255,255,255,0.03);
     }
-    .values { display: grid; gap: 16px; }
-    .value-card { padding: 28px; border-radius: 14px; border: 1px solid var(--border-subtle); background: #050505; }
-    .value-card h3 { font-size: 24px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .values { display: grid; gap: 12px; }
+    .value-card { padding: 22px 24px; border-radius: 14px; border: 1px solid var(--border-subtle); background: #050505; }
+    .value-card h3 { font-size: 20px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .value-card { display: grid; grid-template-columns: 48px 1fr; column-gap: 16px; align-items: start; }
+    .value-card .service-icon { grid-row: span 2; margin-bottom: 0; }
+    .value-card h3 { margin-bottom: 4px; }
     .value-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.65; }
     .trust-stats {
       margin-top: 16px; display: grid; grid-template-columns: 1fr; gap: 1px;
@@ -1303,7 +1299,122 @@
     /* Balanced line breaks for big headings (avoids one-word orphan lines) */
     .hero h1, .section-title, .cta-section h2 { text-wrap: balance; }
     @media (prefers-reduced-motion: reduce) { .dk-fb::after { animation: none; } }
-  </style>
+
+    /* =====================================================================
+       FEEDBACK GALLERY + LIGHTBOX
+       ===================================================================== */
+    .caption-links { display: flex; gap: 20px; flex-wrap: wrap; flex-shrink: 0; }
+    .fb-tabs {
+      display: inline-flex; gap: 4px; padding: 4px; margin-bottom: 20px; border-radius: 999px;
+      border: 1px solid var(--border-subtle); background: rgba(255, 255, 255, 0.03);
+    }
+    .fb-tab {
+      font: inherit; font-size: 13px; font-weight: 500; min-height: 36px; padding: 8px 18px;
+      border: 0; border-radius: 999px; background: transparent; color: var(--text-secondary); cursor: pointer;
+      transition: background 0.3s ease-out, color 0.3s ease-out;
+    }
+    .fb-tab:hover { color: #fff; }
+    .fb-tab.active { background: #fff; color: #000; }
+    .fb-tab:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 2px; }
+    .fb-group[hidden] { display: none; }
+    .fb-group.fb-enter { animation: fbEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes fbEnter { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }    .fb-grid { display: grid; grid-auto-flow: dense; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) {
+      .fb-grid { grid-template-columns: repeat(2, 1fr); }
+      .fb-feature, .fb-wide { grid-column: span 2; }
+    }
+    @media (min-width: 1024px) {
+      .fb-grid { grid-template-columns: repeat(3, 1fr); }
+      .fb-feature { grid-column: span 2; grid-row: span 2; }
+      .fb-wide { grid-column: span 2; }
+    }
+    .fb-item {
+      position: relative; display: flex; flex-direction: column;
+      border-radius: 14px; border: 1px solid var(--border-subtle); background: #050505;
+      overflow: hidden; cursor: zoom-in;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease-out, box-shadow 0.4s ease-out;
+    }
+    .fb-item:hover { transform: translateY(-4px); border-color: var(--border-hover); box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(59,130,246,0.10); }
+    .fb-item:focus-visible { outline: 2px solid rgba(255,255,255,0.7); outline-offset: 3px; }
+    .reveal.fb-item { transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease-out, box-shadow 0.4s ease-out; }
+    .fb-thumb {
+      position: relative; flex: 1; aspect-ratio: 16 / 10;
+      background: #f6f6f4; display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    @media (min-width: 640px) { .fb-thumb { min-height: 200px; } }
+    @media (min-width: 1024px) { .fb-feature .fb-thumb { aspect-ratio: auto; min-height: 360px; } }
+    .fb-dark .fb-thumb { background: #1c1c1e; }
+    @media (min-width: 640px) and (max-width: 1023px) { .fb-tab-wide { grid-column: span 2; } }
+    .fb-thumb img {
+      width: 100%; height: 100%; object-fit: contain; display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fb-item:hover .fb-thumb img { transform: scale(1.03); }
+    .fb-zoom {
+      position: absolute; right: 12px; bottom: 12px; width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(0,0,0,0.75); color: #fff; display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: scale(0.8); transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+      backdrop-filter: blur(6px);
+    }
+    .fb-item:hover .fb-zoom, .fb-item:focus-visible .fb-zoom { opacity: 1; transform: none; }
+    @media (hover: none) { .fb-zoom { opacity: 1; transform: none; } }
+
+    /* Lightbox */
+    .lb {
+      position: fixed; inset: 0; z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0, 0, 0, 0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      opacity: 0; transition: opacity 0.3s ease-out;
+    }
+    .lb[hidden] { display: none; }
+    .lb.open { opacity: 1; }
+    .lb-fig { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; max-width: 94vw; }
+    .lb-stage {
+      max-width: 94vw; max-height: 80vh; border-radius: 12px; overflow: hidden; background: #f6f6f4;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+      transform: scale(0.96); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease-out;
+    }
+    .lb.open .lb-stage { transform: none; }
+    .lb-stage.swap { opacity: 0; }
+    .lb-stage img { display: block; max-width: 94vw; max-height: 80vh; width: auto; height: auto; cursor: zoom-in; }
+    .lb.zoomed .lb-stage { overflow: auto; width: 94vw; height: 80vh; }
+    .lb.zoomed .lb-stage img { max-width: none; max-height: none; cursor: zoom-out; }
+    .lb-fig figcaption { text-align: center; color: var(--text-secondary); font-size: 14px; max-width: 640px; padding: 0 56px; }
+    .lb-count { display: block; margin-top: 4px; font-size: 12px; color: var(--text-muted); font-style: normal; }
+    .lb-btn {
+      position: absolute; width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--border-hover);
+      background: rgba(20,20,20,0.85); color: #fff; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background 0.3s ease-out, transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+    .lb-btn:hover { background: rgba(60,60,60,0.9); transform: scale(1.06); }
+    .lb-btn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+    .lb-close { top: 16px; right: 16px; }
+    .lb-prev { left: 16px; top: 50%; margin-top: -24px; }
+    .lb-next { right: 16px; top: 50%; margin-top: -24px; }
+    @media (max-width: 767px) {
+      .lb-prev, .lb-next { top: auto; bottom: 16px; margin-top: 0; }
+      .lb-fig figcaption { padding: 0 12px 64px; }
+    }
+    .no-motion .lb, .no-motion .lb-stage, .no-motion .fb-item, .no-motion .fb-thumb img { transition: none; }
+    #cong-nhan-tien { scroll-margin-top: 96px; }
+    .nav-links a { white-space: nowrap; }
+    @media (min-width: 1024px) { .nav-links { gap: 20px; } }
+    @media (min-width: 1024px) and (max-width: 1279px) { .nav-social { display: none !important; } }
+    @media (min-width: 640px) { .fb-grid.fb-cols-2 { grid-template-columns: repeat(2, 1fr); } }
+    .fb-cols-2 .fb-thumb { aspect-ratio: 5 / 4; }
+    .fb-cta { display: flex; justify-content: center; margin-top: 24px; }
+    .fb-cta-btn { gap: 10px; padding: 10px 22px 10px 10px; font-size: 15px; }
+    .fb-cta-ic { width: 28px; height: 28px; border-radius: 50%; background: #1877f2; color: #fff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .svc-fb { display: inline-flex; align-items: center; gap: 6px; }
+    .svc-fb svg { color: #1877f2; }    @media (min-width: 640px) { .fb-grid.fb-cols-3 { grid-template-columns: repeat(3, 1fr); } }
+    .fb-photo .fb-thumb { aspect-ratio: 3 / 4; background: #111; }
+    .fb-photo .fb-thumb img { object-fit: cover; }
+    .fb-cta-ic.zl { background: #0068ff; font-size: 9px; font-weight: 800; letter-spacing: -0.02em; }
+    .deal-fb-link { margin-top: 14px; color: var(--text-secondary); }
+    .deal-fb-link:hover { color: #fff; }    .fb-tabs { max-width: 100%; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+    .fb-tabs::-webkit-scrollbar { display: none; }
+    .fb-tab { white-space: nowrap; flex-shrink: 0; }
+    @media (max-width: 639px) { .fb-tab { padding: 8px 14px; } }  </style>
 </head>
 <body>
 
@@ -1320,9 +1431,10 @@
         </a>
         <div class="nav-links">
           <a href="#services">Dịch Vụ Etsy</a>
+          <a href="#feedback-gateway">Cổng Nhận Tiền</a>
           <a href="#pingpong">Thu PingPong</a>
+          <a href="#feedback">Feedback</a>
           <a href="#coupons">Nhóm Deal Hời</a>
-          <a href="#contact">Liên Hệ</a>
         </div>
       </div>
       <div class="nav-right">
@@ -1331,7 +1443,6 @@
           <a href="https://t.me/jamescr123" target="_blank" rel="noopener" aria-label="Telegram"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.9 4.3l-3 14.3c-.2 1-.8 1.3-1.7.8l-4.6-3.4-2.2 2.1c-.2.2-.5.4-1 .4l.3-4.7 8.5-7.7c.4-.3-.1-.5-.6-.2L7.1 12.5 2.6 11c-1-.3-1-1 .2-1.5L20.5 2.7c.8-.3 1.6.2 1.4 1.6z"/></svg></a>
           <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" aria-label="Nhóm Zalo deal hời" class="zalo-txt">Zalo</a>
         </div>
-        <a href="tel:0877569869" class="nav-phone">0877.569.869</a>
         <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary nav-cta" style="min-height: 34px; padding: 6px 16px; font-size: 13px;">Liên Hệ Ngay</a>
         <div class="hamburger" id="hamburger" onclick="toggleMenu()" role="button" aria-label="Mở menu" tabindex="0">
           <span></span>
@@ -1345,7 +1456,9 @@
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <a href="#services" onclick="closeMenu()">Dịch Vụ Etsy</a>
+    <a href="#feedback-gateway" onclick="closeMenu()">Cổng Nhận Tiền</a>
     <a href="#pingpong" onclick="closeMenu()">Thu PingPong</a>
+    <a href="#feedback" onclick="closeMenu()">Feedback</a>
     <a href="#coupons" onclick="closeMenu()">Nhóm Deal Hời</a>
     <a href="#contact" onclick="closeMenu()">Liên Hệ</a>
     <a href="tel:0877569869" style="color: var(--text-muted); font-size: 16px;">0877.569.869</a>
@@ -1366,7 +1479,7 @@
         <span class="shimmer-text">&amp; thu PingPong giá&nbsp;tốt</span>
       </h1>
       <p class="reveal reveal-delay-2">
-        DHDglobal đồng hành cùng seller Việt: mở shop Etsy tỷ lệ live cao, bảo hành lâu dài — và thu $ PingPong (Pipo) giá tốt, nhanh gọn, minh bạch.
+        DHDglobal đồng hành cùng seller Việt: mở shop Etsy tỷ lệ live cao, bảo hành lâu dài, cổng nhận tiền chính chủ phí thấp — và thu $ PingPong (Pipo) giá tốt, nhanh gọn, minh bạch.
       </p>
       <div class="hero-actions reveal reveal-delay-3">
         <div class="hero-buttons">
@@ -1425,7 +1538,7 @@
         <span class="proof-sep" aria-hidden="true"></span>
         <span>4.9★ đánh giá</span>
         <span class="proof-sep" aria-hidden="true"></span>
-        <span>3 năm kinh nghiệm</span>
+        <span>1,000+ shops live thành công</span>
       </div>
     </div>
   </section>
@@ -1434,8 +1547,8 @@
   <section class="section" id="services">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Dịch vụ Etsy<br>&amp; thu PingPong</h2>
-        <p class="section-desc">Mở shop Etsy, thu PingPong giá tốt và các dịch vụ hỗ trợ vận hành shop trọn vẹn.</p>
+        <h2 class="section-title">Dịch vụ Etsy<br>&amp; thanh toán quốc tế</h2>
+        <p class="section-desc">Mở shop Etsy, cổng nhận tiền chính chủ, thu PingPong giá tốt và các dịch vụ hỗ trợ vận hành shop trọn vẹn.</p>
         <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Nhận tư vấn</a>
       </div>
       <div class="app-mock reveal reveal-scale" aria-hidden="true">
@@ -1465,13 +1578,20 @@
         </div>
       </div>
       <div class="services-grid" data-stagger>
-        <div class="service-card svc-half svc-highlight spot reveal">
+        <div class="service-card svc-third svc-highlight spot reveal">
           <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M3 9a3 3 0 006 0 3 3 0 006 0 3 3 0 006 0"/><path d="M5 12v8h14v-8"/><path d="M10 20v-5h4v5"/></svg></div>
           <h3>Mở Shop Etsy</h3>
           <p>Hỗ trợ đăng ký shop có tỷ lệ live cao, cấu hình shop hoàn chỉnh. Tối ưu profile, banner, policies. Bảo hành shop lâu dài, hỗ trợ hết công suất.</p>
           <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="service-link">Nhắn Facebook tư vấn →</a>
         </div>
-        <div class="service-card svc-half svc-highlight spot reveal">
+        <div class="service-card svc-third svc-highlight spot reveal" id="cong-nhan-tien">
+          <span class="svc-badge">Phí thấp</span>
+          <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
+          <h3>Cổng Nhận Tiền Chính Chủ</h3>
+          <p>Hỗ trợ đăng ký và xác minh cổng nhận tiền đứng tên chính bạn, kết nối với shop Etsy. Nhận tiền ổn định, phí thấp, quy trình rõ ràng.</p>
+          <div class="caption-links"><a href="#feedback-gateway" class="service-link">Xem feedback →</a><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="service-link svc-fb"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.4-1.3H17V2.2C16.6 2.1 15.5 2 14.3 2 11.6 2 10 3.6 10 6.4v2.1H7v3.6h3V22h4v-9.9h3l.5-3.6H14z"/></svg> Nhắn Facebook</a></div>
+        </div>
+        <div class="service-card svc-third svc-highlight spot reveal">
           <span class="svc-badge">Giá tốt</span>
           <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg></div>
           <h3>Thu PingPong Giá Tốt</h3>
@@ -1549,12 +1669,117 @@
             <h3>Thu $ PingPong (Pipo) giá tốt</h3>
             <p>Bán USD từ PingPong với tỷ giá cạnh tranh, quy trình nhanh gọn, minh bạch. Nhắn Telegram hoặc Facebook để nhận báo giá trong ngày.</p>
           </div>
-          <a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="service-link">Nhận báo giá Telegram →</a>
+          <div class="caption-links"><a href="#feedback-pingpong" class="service-link">Xem feedback →</a><a href="https://t.me/jamescr123" target="_blank" rel="noopener" class="service-link">Nhận báo giá Telegram →</a></div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ======== FEEDBACK (real screenshots, sorted by revenue) ======== -->
+  <section class="section" id="feedback">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Kết quả thật<br>từ khách hàng</h2>
+        <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Nhận tư vấn</a>
+      </div>
+      <div class="fb-tabs reveal" role="tablist" aria-label="Chọn nhóm feedback">
+        <button class="fb-tab active" role="tab" aria-selected="true" aria-controls="feedback-etsy" data-cat="etsy">Dịch vụ Etsy</button>
+        <button class="fb-tab" role="tab" aria-selected="false" aria-controls="feedback-gateway" data-cat="gateway">Cổng nhận tiền</button>
+        <button class="fb-tab" role="tab" aria-selected="false" aria-controls="feedback-pingpong" data-cat="pingpong">Thu PingPong</button>
+        <button class="fb-tab" role="tab" aria-selected="false" aria-controls="feedback-deal" data-cat="deal">Nhóm deal hời</button>
+      </div>
+      <div class="fb-group" data-cat="etsy" id="feedback-etsy">
+        <div class="fb-grid" data-stagger>
+          <a href="images/feedback/etsy-01.png" class="fb-item fb-feature spot reveal" aria-label="Phóng to ảnh: doanh thu toàn thời gian 79,7K US$, 2.322 đơn">
+            <div class="fb-thumb"><img src="images/feedback/etsy-01.png" width="1280" height="989" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: doanh thu toàn thời gian 79,7K US$, 2.322 đơn"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-02.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: doanh thu US$4,330 trong 1 tháng, 97 đơn">
+            <div class="fb-thumb"><img src="images/feedback/etsy-02.png" width="1280" height="532" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: doanh thu US$4,330 trong 1 tháng, 97 đơn"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-03.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: doanh thu 3.397 US$ trong tháng, 104 đơn">
+            <div class="fb-thumb"><img src="images/feedback/etsy-03.png" width="1064" height="765" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: doanh thu 3.397 US$ trong tháng, 104 đơn"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-04.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: doanh thu US$874 trong 7 ngày, 15 đơn">
+            <div class="fb-thumb"><img src="images/feedback/etsy-04.png" width="1280" height="767" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: doanh thu US$874 trong 7 ngày, 15 đơn"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-05.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: doanh thu $203, cán mốc 30 sales">
+            <div class="fb-thumb"><img src="images/feedback/etsy-05.png" width="898" height="426" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: doanh thu $203, cán mốc 30 sales"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-06.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: hàng loạt email You made a sale on Etsy">
+            <div class="fb-thumb"><img src="images/feedback/etsy-06.png" width="887" height="733" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: hàng loạt email You made a sale on Etsy"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-07.png" class="fb-item fb-dark spot reveal" aria-label="Phóng to ảnh: email xác nhận đơn Etsy liên tục">
+            <div class="fb-thumb"><img src="images/feedback/etsy-07.png" width="591" height="1280" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: email xác nhận đơn Etsy liên tục"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-08.png" class="fb-item fb-dark spot reveal" aria-label="Phóng to ảnh: email Order confirmation trong ngày">
+            <div class="fb-thumb"><img src="images/feedback/etsy-08.png" width="591" height="1280" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: email Order confirmation trong ngày"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-09.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: nhiều shop Alive, có shop đạt 178 sales">
+            <div class="fb-thumb"><img src="images/feedback/etsy-09.png" width="539" height="849" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: nhiều shop Alive, có shop đạt 178 sales"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-10.png" class="fb-item fb-wide spot reveal" aria-label="Phóng to ảnh: hàng loạt email Etsy khiếu nại thành công, tài khoản đã được khôi phục">
+            <div class="fb-thumb"><img src="images/feedback/etsy-10.png" width="1280" height="646" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: hàng loạt email Etsy khiếu nại thành công, tài khoản đã được khôi phục"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-11.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: shop Alive, có shop đạt 113 – 142 sales">
+            <div class="fb-thumb"><img src="images/feedback/etsy-11.png" width="472" height="607" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: shop Alive, có shop đạt 113 – 142 sales"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-12.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: hàng loạt shop ở trạng thái Alive">
+            <div class="fb-thumb"><img src="images/feedback/etsy-12.png" width="517" height="342" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: hàng loạt shop ở trạng thái Alive"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-13.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: hoàn tất xác minh, sẵn sàng bán trên Etsy">
+            <div class="fb-thumb"><img src="images/feedback/etsy-13.png" width="1280" height="697" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: hoàn tất xác minh, sẵn sàng bán trên Etsy"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/etsy-14.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: Identity, Bank account, Production partners đều Verified">
+            <div class="fb-thumb"><img src="images/feedback/etsy-14.png" width="1280" height="522" loading="lazy" decoding="async" alt="Ảnh chụp Etsy của khách: Identity, Bank account, Production partners đều Verified"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+        </div>
+      </div>
+      <div class="fb-group" data-cat="gateway" id="feedback-gateway" hidden>
+        <div class="fb-grid fb-cols-2" data-stagger>
+          <a href="images/feedback/gateway-01.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: Etsy chuyển €1.216,83 về tài khoản nhận tiền">
+            <div class="fb-thumb"><img src="images/feedback/gateway-01.png" width="679" height="681" loading="lazy" decoding="async" alt="Ảnh chụp cổng nhận tiền: Etsy chuyển €1.216,83 về tài khoản nhận tiền"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/gateway-02.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: Etsy chuyển €1.206,27 về tài khoản nhận tiền">
+            <div class="fb-thumb"><img src="images/feedback/gateway-02.png" width="662" height="550" loading="lazy" decoding="async" alt="Ảnh chụp cổng nhận tiền: Etsy chuyển €1.206,27 về tài khoản nhận tiền"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/gateway-03.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: Etsy chuyển €916,02 về tài khoản nhận tiền">
+            <div class="fb-thumb"><img src="images/feedback/gateway-03.png" width="810" height="704" loading="lazy" decoding="async" alt="Ảnh chụp cổng nhận tiền: Etsy chuyển €916,02 về tài khoản nhận tiền"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/gateway-04.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: Etsy chuyển €798,72 về tài khoản nhận tiền">
+            <div class="fb-thumb"><img src="images/feedback/gateway-04.png" width="857" height="735" loading="lazy" decoding="async" alt="Ảnh chụp cổng nhận tiền: Etsy chuyển €798,72 về tài khoản nhận tiền"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+        </div>
+        <div class="fb-cta"><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-primary fb-cta-btn"><span class="fb-cta-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14 8.5V6.8c0-.8.5-1.3 1.4-1.3H17V2.2C16.6 2.1 15.5 2 14.3 2 11.6 2 10 3.6 10 6.4v2.1H7v3.6h3V22h4v-9.9h3l.5-3.6H14z"/></svg></span>Nhắn Facebook tư vấn cổng nhận tiền</a></div>
+      </div>
+      <div class="fb-group" data-cat="pingpong" id="feedback-pingpong" hidden>
+        <div class="fb-grid" data-stagger>
+          <a href="images/feedback/pingpong-01.png" class="fb-item fb-feature spot reveal" aria-label="Phóng to ảnh: lịch sử chuyển tiền PingPong, 8 giao dịch Success">
+            <div class="fb-thumb"><img src="images/feedback/pingpong-01.png" width="1190" height="672" loading="lazy" decoding="async" alt="Ảnh chụp PingPong: lịch sử chuyển tiền PingPong, 8 giao dịch Success"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/pingpong-02.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: thanh toán 3,300.00 USD đã được gửi">
+            <div class="fb-thumb"><img src="images/feedback/pingpong-02.png" width="589" height="1280" loading="lazy" decoding="async" alt="Ảnh chụp PingPong: thanh toán 3,300.00 USD đã được gửi"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/pingpong-03.png" class="fb-item  spot reveal" aria-label="Phóng to ảnh: thanh toán 2,000.00 USD đã được gửi">
+            <div class="fb-thumb"><img src="images/feedback/pingpong-03.png" width="726" height="1280" loading="lazy" decoding="async" alt="Ảnh chụp PingPong: thanh toán 2,000.00 USD đã được gửi"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+        </div>
+      </div>
+      <div class="fb-group" data-cat="deal" id="feedback-deal" hidden>
+        <div class="fb-grid fb-cols-3" data-stagger>
+          <a href="images/feedback/deal-01.jpg" class="fb-item fb-photo spot reveal" aria-label="Phóng to ảnh: 4 iPhone mới nguyên hộp săn được từ nhóm">
+            <div class="fb-thumb"><img src="images/feedback/deal-01.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Ảnh thành viên nhóm deal hời: 4 iPhone mới nguyên hộp săn được từ nhóm"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/deal-02.jpg" class="fb-item fb-photo spot reveal" aria-label="Phóng to ảnh: iPhone nguyên hộp mua qua deal của nhóm">
+            <div class="fb-thumb"><img src="images/feedback/deal-02.jpg" width="590" height="1280" loading="lazy" decoding="async" alt="Ảnh thành viên nhóm deal hời: iPhone nguyên hộp mua qua deal của nhóm"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+          <a href="images/feedback/deal-03.jpg" class="fb-item fb-photo spot reveal" aria-label="Phóng to ảnh: vé chung kết ASEAN Hyundai Cup 2026 săn được từ nhóm">
+            <div class="fb-thumb"><img src="images/feedback/deal-03.jpg" width="960" height="1280" loading="lazy" decoding="async" alt="Ảnh thành viên nhóm deal hời: vé chung kết ASEAN Hyundai Cup 2026 săn được từ nhóm"><span class="fb-zoom" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg></span></div>
+          </a>
+        </div>
+        <div class="fb-cta"><a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-primary fb-cta-btn"><span class="fb-cta-ic zl">Zalo</span>Tham gia nhóm Zalo deal hời</a></div>
+      </div>
+    </div>
+  </section>
   <!-- ======== ECOSYSTEM BENTO ======== -->
   <section class="section" id="platforms">
     <div class="container">
@@ -1625,6 +1850,7 @@
             <h3>Nhóm Cộng Đồng<br>Deal Hời</h3>
             <div class="members">2,000+ thành viên · Hoạt động trên Zalo</div>
             <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="btn btn-primary">Tham Gia Nhóm Zalo</a>
+            <a href="#feedback-deal" class="service-link deal-fb-link">Xem feedback thành viên →</a>
           </div>
           <div class="deal-cats" data-stagger>
             <div class="deal-cat reveal">
@@ -1661,8 +1887,8 @@
   <section class="section" id="trust">
     <div class="container">
       <div class="section-header reveal">
-        <h2 class="section-title">Nhiệt tình &amp; Tử tế</h2>
-        <p class="section-desc">Châm ngôn làm việc của DHDglobal — với từng shop Etsy, từng giao dịch PingPong và từng thành viên trong nhóm.</p>
+        <h2 class="section-title">Trách nhiệm, Nhiệt tình<br>&amp; Tử tế</h2>
+        <p class="section-desc">Phương châm làm việc của DHDglobal — với từng shop Etsy, từng giao dịch PingPong và từng thành viên trong nhóm.</p>
         <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="btn btn-outline section-action">Trò chuyện với DHDglobal</a>
       </div>
       <div class="trust-grid">
@@ -1682,9 +1908,14 @@
         </div>
         <div class="values" data-stagger>
           <div class="value-card spot reveal">
+            <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <h3>Trách nhiệm</h3>
+            <p>Làm đúng cam kết, theo sát từng shop và từng giao dịch. Có vấn đề phát sinh là cùng bạn xử lý đến cùng.</p>
+          </div>
+          <div class="value-card spot reveal">
             <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.4-.5-2-1-3-1.1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.2.4-2.3 1-3.3.3 1.5 1.3 2.8 2.5 2.8z"/></svg></div>
             <h3>Nhiệt tình</h3>
-            <p>Nhắn là trả lời, hỗ trợ hết công suất. Đồng hành đến khi shop chạy ổn và giao dịch hoàn tất.</p>
+            <p>Nhắn là trả lời, hỗ trợ hết công suất, luôn sẵn sàng giải đáp mọi thắc mắc.</p>
           </div>
           <div class="value-card spot reveal">
             <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21.2l7.8-7.7 1-1.1a5.5 5.5 0 000-7.8z"/></svg></div>
@@ -1694,9 +1925,9 @@
         </div>
       </div>
       <div class="trust-stats stats-section reveal" data-stagger>
-        <div class="stat-item"><div class="stat-number" data-count="2000" data-suffix="+">2,000+</div><div class="stat-label">Shops Etsy đã mở</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="5000" data-suffix="+">5,000+</div><div class="stat-label">Shops Etsy đã mở</div></div>
+        <div class="stat-item"><div class="stat-number" data-count="1000" data-suffix="+">1,000+</div><div class="stat-label">Shops live thành công</div></div>
         <div class="stat-item"><div class="stat-number" data-count="10000" data-suffix="+">10,000+</div><div class="stat-label">Mã giảm giá đã chia sẻ</div></div>
-        <div class="stat-item"><div class="stat-number" data-count="3" data-suffix="+">3+</div><div class="stat-label">Năm kinh nghiệm</div></div>
       </div>
     </div>
   </section>
@@ -1755,6 +1986,14 @@
           </div>
         </div>
         <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Hỗ trợ cổng nhận tiền chính chủ gồm những gì?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Chúng tôi hướng dẫn và hỗ trợ bạn đăng ký, xác minh cổng nhận tiền đứng tên chính bạn, rồi kết nối với shop Etsy để nhận tiền ổn định với mức phí thấp. Tài khoản do bạn sở hữu và toàn quyền quản lý. <a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener" class="inline-link">Nhắn Facebook để được tư vấn</a>.</p>
+          </div>
+        </div>        <div class="faq-item reveal reveal-delay-1">
           <button class="faq-question" onclick="toggleFaq(this)">
             Thu PingPong (Pipo) diễn ra như thế nào?
             <span class="faq-icon">+</span>
@@ -1850,6 +2089,7 @@
           <h4>Về DHDglobal</h4>
           <ul>
             <li><a href="#about">Giới thiệu</a></li>
+            <li><a href="#feedback">Feedback khách hàng</a></li>
             <li><a href="#community">Cộng đồng</a></li>
             <li><a href="#platforms">Hệ sinh thái</a></li>
             <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Điều hành bởi<br>Nguyễn Hữu Duy</a></li>
@@ -1859,6 +2099,7 @@
           <h4>Dịch Vụ</h4>
           <ul>
             <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Mở Shop Etsy</a></li>
+            <li><a href="#feedback-gateway">Cổng Nhận Tiền Chính Chủ</a></li>
             <li><a href="https://t.me/jamescr123" target="_blank" rel="noopener">Thu PingPong Giá Tốt</a></li>
             <li><a href="https://www.facebook.com/duy.nguyen.huu2000/" target="_blank" rel="noopener">Quản Lý Shop</a></li>
             <li><a href="https://t.me/jamescr123" target="_blank" rel="noopener">Tư Vấn Chiến Lược</a></li>
@@ -1910,6 +2151,16 @@
     </div>
   </footer>
 
+  <!-- ======== LIGHTBOX ======== -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Xem ảnh feedback" hidden>
+    <button class="lb-btn lb-close" aria-label="Đóng"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    <button class="lb-btn lb-prev" aria-label="Ảnh trước"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <figure class="lb-fig">
+      <div class="lb-stage"><img id="lbImg" alt=""></div>
+      <figcaption><em class="lb-count" id="lbCount"></em></figcaption>
+    </figure>
+    <button class="lb-btn lb-next" aria-label="Ảnh sau"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  </div>
   <!-- ======== FLOATING CONTACT DOCK ======== -->
   <div class="dock" id="dock" aria-label="Liên hệ nhanh">
     <a href="https://zalo.me/g/knabbpcj3ukhqaqrlwdr" target="_blank" rel="noopener" class="dock-btn dk-zl" aria-label="Nhóm Zalo deal hời"><span class="dock-tip">Nhóm Zalo deal hời</span><b>Zalo</b></a>
@@ -2006,6 +2257,7 @@
     if (typeEl && !reduceMotion) {
       const phrases = [
         'Mình muốn mở shop Etsy bán digital art',
+        'Mình cần mở cổng nhận tiền chính chủ',
         'Mình cần bán $ PingPong giá tốt',
         'Shop Etsy mới cần bảo hành lâu dài',
         'Shop mình bị suspend, cần kháng cáo'
@@ -2056,6 +2308,106 @@
       document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
       if (!wasOpen) item.classList.add('open');
     }
+
+    // === Feedback lightbox ===
+    (function () {
+      // Tabs: Etsy / PingPong
+      const tabs = Array.from(document.querySelectorAll('.fb-tab'));
+      function showCat(cat) {
+        tabs.forEach(b => { const on = b.dataset.cat === cat; b.classList.toggle('active', on); b.setAttribute('aria-selected', on); });
+        document.querySelectorAll('.fb-group').forEach(g => {
+          const on = g.dataset.cat === cat;
+          g.hidden = !on;
+          if (on && !reduceMotion) { g.classList.remove('fb-enter'); void g.offsetWidth; g.classList.add('fb-enter'); }
+          if (on) g.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        });
+      }
+      tabs.forEach(b => b.addEventListener('click', () => showCat(b.dataset.cat)));
+      // Links like #feedback-gateway open that tab and scroll to the feedback section
+      const cats = tabs.map(b => b.dataset.cat);
+      function openFromHref(href) {
+        if (!href || href.indexOf('#feedback-') !== 0) return false;
+        const cat = href.slice('#feedback-'.length);
+        if (cats.indexOf(cat) < 0) return false;
+        showCat(cat);
+        document.getElementById('feedback').scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+        return true;
+      }
+      document.addEventListener('click', e => {
+        const a = e.target.closest('a[href^="#feedback-"]');
+        if (a && openFromHref(a.getAttribute('href'))) { e.preventDefault(); history.replaceState(null, '', a.getAttribute('href')); }
+      });
+      window.addEventListener('hashchange', () => openFromHref(location.hash));
+      openFromHref(location.hash);
+
+      // Lightbox navigates only within the group of the clicked image
+      let items = [];
+      const lb = document.getElementById('lb');
+      if (!document.querySelector('.fb-item') || !lb) return;
+      const stage = lb.querySelector('.lb-stage');
+      const img = document.getElementById('lbImg');
+      const count = document.getElementById('lbCount');
+      const closeBtn = lb.querySelector('.lb-close');
+      let idx = 0, lastFocus = null, touchX = null;
+
+      function fill(i) {
+        const it = items[i];
+        img.src = it.getAttribute('href');
+        img.alt = it.querySelector('img').alt;
+        count.textContent = (i + 1) + ' / ' + items.length;
+        [i - 1, i + 1].forEach(j => { const n = items[(j + items.length) % items.length]; new Image().src = n.getAttribute('href'); });
+      }
+      function open(i) {
+        idx = i; lastFocus = document.activeElement;
+        lb.classList.remove('zoomed'); fill(idx);
+        lb.hidden = false; document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => lb.classList.add('open'));
+        closeBtn.focus();
+      }
+      function close() {
+        lb.classList.remove('open', 'zoomed');
+        setTimeout(() => { lb.hidden = true; }, reduceMotion ? 0 : 300);
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+      function go(d) {
+        idx = (idx + d + items.length) % items.length;
+        lb.classList.remove('zoomed');
+        if (reduceMotion) { fill(idx); return; }
+        stage.classList.add('swap');
+        setTimeout(() => { fill(idx); }, 160);
+      }
+      img.addEventListener('load', () => stage.classList.remove('swap'));
+
+      document.querySelectorAll('.fb-item').forEach(it => it.addEventListener('click', e => {
+        e.preventDefault();
+        items = Array.from(it.closest('.fb-group').querySelectorAll('.fb-item'));
+        open(items.indexOf(it));
+      }));
+      closeBtn.addEventListener('click', close);
+      lb.querySelector('.lb-prev').addEventListener('click', () => go(-1));
+      lb.querySelector('.lb-next').addEventListener('click', () => go(1));
+      img.addEventListener('click', () => lb.classList.toggle('zoomed'));
+      lb.addEventListener('click', e => { if (e.target === lb) close(); });
+      document.addEventListener('keydown', e => {
+        if (lb.hidden) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') go(-1);
+        else if (e.key === 'ArrowRight') go(1);
+        else if (e.key === 'Tab') { // keep focus inside the dialog
+          const f = Array.from(lb.querySelectorAll('button'));
+          const k = f.indexOf(document.activeElement);
+          e.preventDefault();
+          f[(k + (e.shiftKey ? -1 : 1) + f.length) % f.length].focus();
+        }
+      });
+      lb.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener('touchend', e => {
+        if (touchX === null || lb.classList.contains('zoomed')) return;
+        const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+        if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+      });
+    })();
   </script>
 </body>
 </html>
